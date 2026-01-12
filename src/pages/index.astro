@@ -1,24 +1,37 @@
 ---
+import Icon from '../components/Icon.astro';
+
 const profileData = {
   name: "Douglas Lassance",
-  bio: "Creative developer, open source enthusiast, and digital craftsman building tools and experiences for the web.",
-  avatar: "/avatar.jpg",
+  bio: "Raised in France, maturing in Los Angeles, I juxtapose brush strokes, connect vertices, drop keyframes, and chain instructions. Once in a while, others can enjoy the result.",
+  avatar: "/avatar.png",
   online: [
-    { name: "Bluesky", icon: "🦋", url: "https://bsky.app", handle: "@username.bsky.social" },
-    { name: "YouTube", icon: "▶️", url: "https://youtube.com/@channel", handle: "@channel" },
-    { name: "Spotify", icon: "🎵", url: "https://open.spotify.com/user/username", handle: "Artist/User" },
-    { name: "GitHub", icon: "💻", url: "https://github.com/douglaslassance", handle: "@douglaslassance" },
+    { name: "Bluesky", icon: "bluesky-brands-solid.svg", url: "https://bsky.app/profile/douglaslassance.bsky.social", count: "1.2K", action: "Follow", color: "#1185fe" },
+    { name: "YouTube", icon: "youtube-brands-solid.svg", url: "https://youtube.com/@douglaslassance", count: "856", action: "Subscribe", color: "#ff0000" },
+    { name: "Spotify", icon: "spotify-brands-solid.svg", url: "https://open.spotify.com/user/douglaslassance", count: "42", action: "Follow", color: "#1db954" },
+    { name: "GitHub", icon: "github-brands-solid.svg", url: "https://github.com/douglaslassance", count: "17", action: "Follow", color: "#333333" },
+    { name: "Mastodon", icon: "mastodon-brands-solid.svg", url: "https://mastodon.social/@douglaslassance", count: "94", action: "Follow", color: "#6364ff" },
+    { name: "Patreon", icon: "patreon-brands-solid.svg", url: "https://patreon.com/douglaslassance", count: "8", action: "Support", color: "#ff424d" },
+    { name: "LinkedIn", icon: "square-linkedin-brands-solid.svg", url: "https://linkedin.com/in/douglaslassance", count: "500+", action: "Connect", color: "#0a66c2" },
+    { name: "SoundCloud", icon: "soundcloud-brands-solid.svg", url: "https://soundcloud.com/douglaslassance", count: "127", action: "Follow", color: "#ff5500" },
+    { name: "Pinterest", icon: "pinterest-brands-solid.svg", url: "https://pinterest.com/douglaslassance", count: "215", action: "Follow", color: "#e60023" },
+    { name: "Fab.com", icon: "fab.svg", url: "https://fab.com/sellers/douglaslassance", count: "342", action: "View", color: "#00d4aa" },
+    { name: "Midjourney", icon: "midjourney.svg", url: "https://midjourney.com/app/users/douglaslassance", count: "1.5K", action: "View", color: "#000000" },
+    { name: "Itch.io", icon: "itch-io-brands-solid.svg", url: "https://douglaslassance.itch.io", count: "412", action: "Follow", color: "#fa5c5c" },
+    { name: "Gumroad", icon: "gumroad-logo_svgstack_com_50461768210639.svg", url: "https://douglaslassance.gumroad.com", count: "289", action: "Follow", color: "#ff90e8" },
+    { name: "Apple Music", icon: "itunes-note-brands-solid.svg", url: "https://music.apple.com/profile/douglaslassance", count: "34", action: "Follow", color: "#fa243c" },
+    { name: "Ko-fi", icon: "ko-fi.svg", url: "https://ko-fi.com/douglaslassance", count: "23", action: "Support", color: "#ff5e5b" },
   ],
   personal: [
     {
       title: "Personal Project One",
-      description: "A cool side project I built to solve a problem.",
+      description: "A cool side project I built to solve a problem I encountered in my daily workflow.",
       image: "/project1.jpg",
       url: "#"
     },
     {
       title: "Personal Project Two",
-      description: "Another interesting personal endeavor.",
+      description: "Another interesting personal endeavor exploring new technologies.",
       image: "/project2.jpg",
       url: "#"
     }
@@ -26,13 +39,13 @@ const profileData = {
   professional: [
     {
       title: "Professional Project One",
-      description: "An enterprise solution I contributed to.",
+      description: "An enterprise solution I contributed to, serving thousands of users.",
       image: "/project3.jpg",
       url: "#"
     },
     {
       title: "Professional Project Two",
-      description: "A commercial product I helped build.",
+      description: "A commercial product I helped build from the ground up.",
       image: "/project4.jpg",
       url: "#"
     }
@@ -45,263 +58,341 @@ const profileData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{profileData.name} - Online Presence</title>
+    <title>{profileData.name}</title>
     <meta name="description" content={profileData.bio} />
+    <link rel="icon" type="image/png" href="/avatar.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script is:inline>
+      // Detect system theme preference on load
+      const theme = localStorage.getItem('theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    </script>
     <style>
-      :root {
-        --bg: #0a0a0a;
-        --surface: #1a1a1a;
-        --border: #2a2a2a;
-        --text: #ffffff;
-        --text-secondary: #a0a0a0;
-        --accent: #3b82f6;
-        --radius: 16px;
-        --gap: 16px;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
       body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.6;
-        padding: 2rem;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      
+      /* Softer colors - no pure black or white */
+      [data-theme="dark"] {
+        --bg-primary: #0f1419;
+        --bg-secondary: #1a1f26;
+        --border-color: #2a3340;
+        --text-primary: #e8eaed;
+        --text-secondary: #9aa0a6;
+      }
+      
+      [data-theme="light"] {
+        --bg-primary: #fafafa;
+        --bg-secondary: #ffffff;
+        --border-color: #e5e7eb;
+        --text-primary: #1f2937;
+        --text-secondary: #6b7280;
       }
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
+      /* 3D hover effect for cards */
+      .card-3d {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
       }
-
-      .header {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        margin-bottom: 3rem;
-        padding-bottom: 2rem;
-        border-bottom: 1px solid var(--border);
+      
+      .card-3d:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
       }
-
-      .avatar {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background: var(--surface);
-        border: 3px solid var(--border);
-        object-fit: cover;
-      }
-
-      .header-info h1 {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-        font-weight: 700;
-      }
-
-      .header-info p {
-        color: var(--text-secondary);
-        font-size: 1.1rem;
-        max-width: 600px;
-      }
-
-      .section {
-        margin-bottom: 3rem;
-      }
-
-      .section-title {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-        font-weight: 600;
-        color: var(--text);
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: var(--gap);
-      }
-
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 1.5rem;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        min-height: 200px;
-      }
-
-      .card:hover {
-        transform: translateY(-4px);
-        border-color: var(--accent);
-        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
-      }
-
-      .social-card {
-        aspect-ratio: 1;
-        justify-content: space-between;
-        min-height: 0;
-      }
-
+      
+      /* Icon hover effect */
       .social-icon {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
-        display: block;
+        transition: all 0.3s ease;
+      }
+      
+      .presence-card:hover .social-icon {
+        filter: grayscale(0%) opacity(1) !important;
+      }
+      
+      /* Brand button styling */
+      .brand-button {
+        transition: all 0.3s ease;
+        background-color: transparent !important;
+        border-width: 1px !important;
+        border-style: solid !important;
+      }
+      
+      .brand-button:hover {
+        background-color: var(--brand-color) !important;
+        border-color: var(--brand-color) !important;
+        color: white !important;
+      }
+      
+      /* Monochrome buttons adaptation for dark theme */
+      [data-theme="dark"] .brand-button[data-monochrome="true"] {
+        border-color: #ffffff !important;
+        color: #ffffff !important;
+      }
+      
+      [data-theme="dark"] .brand-button[data-monochrome="true"]:hover {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      
+      .brand-button span {
+        display: inline;
+      }
+      
+      [data-theme="dark"] {
+        --accent-color: #3b82f6;
+      }
+      
+      [data-theme="light"] {
+        --accent-color: #3b82f6;
       }
 
-      .social-name {
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin-bottom: 0.25rem;
+      /* Monochrome icon tinting with brand colors */
+      .monochrome-icon {
+        position: relative;
+        display: inline-block;
       }
-
-      .social-handle {
-        color: var(--text-secondary);
-        font-size: 0.9rem;
+      
+      /* For light theme: make icons use brand color */
+      [data-theme="light"] .monochrome-icon {
+        filter: brightness(0) saturate(100%);
+        opacity: 0.8;
       }
-
-      .project-card {
-        grid-column: span 2;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
-        padding: 0;
-        overflow: hidden;
-        min-height: 250px;
+      
+      /* For dark theme: invert then apply brand color */
+      [data-theme="dark"] .monochrome-icon {
+        filter: brightness(0) saturate(100%) invert(1);
+        opacity: 0.8;
       }
-
-      .project-content {
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+      
+      /* Match project card height to presence cards */
+      .presence-card-height {
+        height: calc((100vw - 32rem - 2rem) / 4);
       }
-
-      .project-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 0.75rem;
-      }
-
-      .project-description {
-        color: var(--text-secondary);
-        font-size: 1rem;
-        line-height: 1.6;
-      }
-
-      .project-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        background: var(--border);
-      }
-
-      @media (max-width: 768px) {
-        body {
-          padding: 1rem;
-        }
-
-        .header {
-          flex-direction: column;
-          text-align: center;
-          gap: 1rem;
-        }
-
-        .header-info h1 {
-          font-size: 2rem;
-        }
-
-        .header-info p {
-          font-size: 1rem;
-        }
-
-        .grid {
-          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        }
-
-        .project-card {
-          grid-column: span 1;
-          grid-template-columns: 1fr;
-        }
-
-        .project-image {
-          min-height: 200px;
-        }
-      }
-
-      @media (min-width: 769px) and (max-width: 1024px) {
-        .grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-        
-        .project-card {
-          grid-column: span 3;
+      
+      @media (min-width: 768px) {
+        .presence-card-height {
+          height: auto;
+          aspect-ratio: 2 / 1;
         }
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <header class="header">
-        <img src={profileData.avatar} alt={profileData.name} class="avatar" />
-        <div class="header-info">
-          <h1>{profileData.name}</h1>
-          <p>{profileData.bio}</p>
+  <body class="min-h-screen overflow-hidden" style="background: var(--bg-primary); color: var(--text-primary);">
+    <!-- Mobile Header (visible only on mobile) -->
+    <header class="lg:hidden p-8" style="background: var(--bg-primary);">
+      <div class="flex items-center gap-4">
+        <div class="avatar">
+          <div class="w-24 rounded-full">
+            <img src={profileData.avatar} alt={profileData.name} />
+          </div>
         </div>
-      </header>
+        <div>
+          <h1 class="text-2xl font-bold">{profileData.name}</h1>
+          <p class="text-base" style="color: var(--text-secondary)">{profileData.bio}</p>
+        </div>
+      </div>
+    </header>
 
-      <section class="section">
-        <h2 class="section-title">Online Presence</h2>
-        <div class="grid">
+    <div class="flex h-screen lg:h-screen">
+      <!-- Left Column - Fixed Profile (hidden on mobile) -->
+      <aside class="hidden lg:flex lg:w-1/2 xl:w-2/5 px-16 py-12 flex-col justify-between" style="background: var(--bg-primary);">
+        <div class="flex flex-col space-y-8">
+          <!-- Top spacing -->
+          <div class="h-[50px]"></div>
+          
+          <div class="avatar">
+            <div class="w-48 rounded-full">
+              <img src={profileData.avatar} alt={profileData.name} />
+            </div>
+          </div>
+          <div>
+            <h1 class="text-4xl font-bold mb-4">{profileData.name}</h1>
+            <p class="text-lg leading-relaxed" style="color: var(--text-secondary)">{profileData.bio}</p>
+          </div>
+        </div>
+        
+        <!-- Theme Toggle at Bottom -->
+        <div class="mt-auto pt-8">
+          <button id="theme-toggle" class="btn btn-ghost btn-sm gap-2" aria-label="Toggle theme">
+            <svg id="theme-icon-light" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg id="theme-icon-dark" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <span class="text-sm">Toggle theme</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Right Column - Scrollable Content -->
+      <main class="flex-1 overflow-y-auto px-16 py-12" style="background: var(--bg-primary);">
+        <!-- Top spacing -->
+        <div class="h-[50px]"></div>
+        
+        <!-- Online Presence -->
+        <section class="mb-16">
+          <h2 class="text-xl font-semibold mb-8">Online presence</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           {profileData.online.map((social) => (
-            <a href={social.url} class="card social-card" target="_blank" rel="noopener noreferrer">
-              <div>
-                <span class="social-icon">{social.icon}</span>
-                <div class="social-name">{social.name}</div>
-                <div class="social-handle">{social.handle}</div>
+            <a 
+              href={social.url} 
+              class="card card-3d shadow-md hover:shadow-xl transition-all duration-300 presence-card"
+              style={`background-color: ${social.color}08;`}
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <div class="card-body p-6 items-start text-left aspect-square justify-between presence-card-body">
+                <div class="flex flex-col items-start gap-2">
+                  <img src={`/${social.icon}`} alt={social.name} class="w-10 h-10 monochrome-icon" style={`--icon-color: ${social.color}`} />
+                  <h3 class="card-title text-base" style="color: var(--text-secondary)">{social.name}</h3>
+                </div>
+                <div class="w-full">
+                  <button 
+                    class="btn btn-outline btn-sm w-full brand-button"
+                    style={`--brand-color: ${social.color}; border-color: ${social.color}; color: ${social.color};`}
+                    data-monochrome={(social.color === '#000000' || social.color === '#333333') ? 'true' : 'false'}
+                    onclick="event.preventDefault()"
+                  >
+                    <span class="font-bold">{social.action}</span>
+                    <span class="font-normal">{social.count}</span>
+                  </button>
+                </div>
               </div>
             </a>
           ))}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <section class="section">
-        <h2 class="section-title">Personal Projects</h2>
-        <div class="grid">
-          {profileData.personal.map((project) => (
-            <a href={project.url} class="card project-card" target="_blank" rel="noopener noreferrer">
-              <div class="project-content">
-                <h3 class="project-title">{project.title}</h3>
-                <p class="project-description">{project.description}</p>
+        <!-- Personal Projects -->
+        <section class="mb-16">
+          <h2 class="text-xl font-semibold mb-8" style="color: var(--text-secondary); font-weight: 600;">Personal projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="https://www.youtube.com/watch?v=WacTwZljbKk" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
+            <figure class="w-1/3 relative overflow-hidden">
+              <img
+                src="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
+                alt="Galactic Mail"
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+            </figure>
+            <div class="card-body w-2/3">
+              <h2 class="card-title text-lg" style="color: var(--text-primary);">Galactic Mail</h2>
+              <p class="text-sm" style="color: var(--text-secondary);">A short film about delivering mail across the galaxy.</p>
+              <div class="card-actions justify-end items-center">
+                <button class="btn btn-ghost btn-sm gap-2" onclick="event.preventDefault()">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+                  </svg>
+                  <span style="color: var(--text-secondary);">Like</span>
+                </button>
               </div>
-              <img src={project.image} alt={project.title} class="project-image" />
-            </a>
-          ))}
-        </div>
-      </section>
+            </div>
+          </a>
 
-      <section class="section">
-        <h2 class="section-title">Professional Projects</h2>
-        <div class="grid">
-          {profileData.professional.map((project) => (
-            <a href={project.url} class="card project-card" target="_blank" rel="noopener noreferrer">
-              <div class="project-content">
-                <h3 class="project-title">{project.title}</h3>
-                <p class="project-description">{project.description}</p>
+          <a href="https://www.youtube.com/watch?v=WacTwZljbKk" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
+            <figure class="w-1/3 relative overflow-hidden">
+              <img
+                src="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
+                alt="Another Project"
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+            </figure>
+            <div class="card-body w-2/3">
+              <h2 class="card-title text-lg" style="color: var(--text-primary);">Another Project</h2>
+              <p class="text-sm" style="color: var(--text-secondary);">Another exciting project with innovative features.</p>
+              <div class="card-actions justify-end items-center">
+                <button class="btn btn-ghost btn-sm gap-2" onclick="event.preventDefault()">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+                  </svg>
+                  <span style="color: var(--text-secondary);">Like</span>
+                </button>
               </div>
-              <img src={project.image} alt={project.title} class="project-image" />
-            </a>
-          ))}
+            </div>
+          </a>
         </div>
-      </section>
+        </section>
+
+        <!-- Professional Projects -->
+        <section class="mb-16">
+          <h2 class="text-xl font-semibold mb-8" style="color: var(--text-secondary); font-weight: 600;">Professional projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="https://www.youtube.com/watch?v=WacTwZljbKk" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
+            <figure class="w-1/3 relative overflow-hidden">
+              <img
+                src="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
+                alt="Professional Work"
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+            </figure>
+            <div class="card-body w-2/3">
+              <h2 class="card-title text-lg" style="color: var(--text-primary);">Professional Work</h2>
+              <p class="text-sm" style="color: var(--text-secondary);">Professional project showcasing expertise and experience.</p>
+              <div class="card-actions justify-end items-center">
+                <button class="btn btn-ghost btn-sm gap-2" onclick="event.preventDefault()">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+                  </svg>
+                  <span style="color: var(--text-secondary);">Like</span>
+                </button>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=WacTwZljbKk" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
+            <figure class="w-1/3 relative overflow-hidden">
+              <img
+                src="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
+                alt="Client Project"
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+            </figure>
+            <div class="card-body w-2/3">
+              <h2 class="card-title text-lg" style="color: var(--text-primary);">Client Project</h2>
+              <p class="text-sm" style="color: var(--text-secondary);">High-impact client work delivering exceptional results.</p>
+              <div class="card-actions justify-end items-center">
+                <button class="btn btn-ghost btn-sm gap-2" onclick="event.preventDefault()">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+                  </svg>
+                  <span style="color: var(--text-secondary);">Like</span>
+                </button>
+              </div>
+            </div>
+          </a>
+        </div>
+        </section>
+      </main>
     </div>
+
+    <script>
+      // Theme toggle functionality
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIconLight = document.getElementById('theme-icon-light');
+      const themeIconDark = document.getElementById('theme-icon-dark');
+      
+      function updateThemeIcon(theme: string) {
+        if (theme === 'dark') {
+          themeIconLight?.classList.remove('hidden');
+          themeIconDark?.classList.add('hidden');
+        } else {
+          themeIconLight?.classList.add('hidden');
+          themeIconDark?.classList.remove('hidden');
+        }
+      }
+      
+      // Initialize icon
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      updateThemeIcon(currentTheme);
+      
+      themeToggle?.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+      });
+    </script>
   </body>
 </html>
