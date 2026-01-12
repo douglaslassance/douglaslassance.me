@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="201.0pt" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 209 201" width="209.0pt" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs/>
+<g id="Untitled">
+<g opacity="1">
+<clipPath clip-rule="nonzero" id="ClipPath">
+<path d="M0.239502 0.275146L208.24 0.275146L208.24 0.275146L208.24 200.275L208.24 200.275L0.239502 200.275L0.239502 200.275L0.239502 0.275146L0.239502 0.275146Z"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<path d="M182 55.5312C187.554 66.8963 190.75 79.5641 190.75 93C190.75 141.696 149.932 180.906 99.9062 180.906C85.0622 180.906 71.0564 177.376 58.6562 171.25C74.4018 187.847 96.974 198.312 122.125 198.312C169.69 198.312 208.25 161.103 208.25 115.188C208.25 91.7605 198.15 70.6428 182 55.5312Z" fill="#000000" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M99.8909 180.893C149.917 180.893 190.762 141.703 190.762 93.0071C190.762 44.3113 149.917 5.12085 99.8909 5.12085C49.8649 5.12085 9.01978 44.3113 9.01978 93.0071C9.01978 141.703 49.8649 180.893 99.8909 180.893Z" fill="none" opacity="1" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="6.25"/>
+<path d="M93.0558 137.346C67.6239 137.346 52.6643 116.798 52.6643 91.2376C52.6643 64.6744 69.1197 43.1238 100.535 43.1238C132.948 43.1238 143.918 65.1762 144.417 77.7051L120.98 77.7051C120.482 70.6888 114.497 60.1641 100.037 60.1641C84.5787 60.1641 74.6052 73.6961 74.6052 90.2352C74.6052 106.774 84.5787 120.306 100.037 120.306C113.999 120.306 119.983 109.28 122.476 98.2545L100.037 98.2545L100.037 89.2328L147.122 89.2328L147.122 135.341L126.465 135.341L126.465 106.273C124.969 116.798 118.487 137.346 93.0558 137.346Z" fill="#000000" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+</g>
+</g>
+</svg>

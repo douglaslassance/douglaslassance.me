@@ -1,26 +1,29 @@
 ---
 import Icon from '../components/Icon.astro';
+import PresenceCard from '../components/PresenceCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 
 const profileData = {
   name: "Douglas Lassance",
   bio: "Raised in France, maturing in Los Angeles, I juxtapose brush strokes, connect vertices, drop keyframes, and chain instructions. Once in a while, others can enjoy the result.",
   avatar: "/avatar.png",
   online: [
-    { name: "Bluesky", icon: "bluesky-brands-solid.svg", url: "https://bsky.app/profile/douglaslassance.bsky.social", count: "1.2K", action: "Follow", color: "#1185fe" },
-    { name: "YouTube", icon: "youtube-brands-solid.svg", url: "https://youtube.com/@douglaslassance", count: "856", action: "Subscribe", color: "#ff0000" },
-    { name: "Spotify", icon: "spotify-brands-solid.svg", url: "https://open.spotify.com/user/douglaslassance", count: "42", action: "Follow", color: "#1db954" },
-    { name: "GitHub", icon: "github-brands-solid.svg", url: "https://github.com/douglaslassance", count: "17", action: "Follow", color: "#333333" },
-    { name: "Mastodon", icon: "mastodon-brands-solid.svg", url: "https://mastodon.social/@douglaslassance", count: "94", action: "Follow", color: "#6364ff" },
-    { name: "Patreon", icon: "patreon-brands-solid.svg", url: "https://patreon.com/douglaslassance", count: "8", action: "Support", color: "#ff424d" },
-    { name: "LinkedIn", icon: "square-linkedin-brands-solid.svg", url: "https://linkedin.com/in/douglaslassance", count: "500+", action: "Connect", color: "#0a66c2" },
-    { name: "SoundCloud", icon: "soundcloud-brands-solid.svg", url: "https://soundcloud.com/douglaslassance", count: "127", action: "Follow", color: "#ff5500" },
-    { name: "Pinterest", icon: "pinterest-brands-solid.svg", url: "https://pinterest.com/douglaslassance", count: "215", action: "Follow", color: "#e60023" },
-    { name: "Fab.com", icon: "fab.svg", url: "https://fab.com/sellers/douglaslassance", count: "342", action: "View", color: "#00d4aa" },
+    { name: "Bluesky", icon: "bluesky.svg", url: "https://bsky.app/profile/douglaslassance.bsky.social", count: "1.2K", action: "Follow", color: "#1185fe" },
+    { name: "YouTube", icon: "youtube.svg", url: "https://youtube.com/@douglaslassance", count: "856", action: "Subscribe", color: "#ff0000" },
+    { name: "Spotify", icon: "spotify.svg", url: "https://open.spotify.com/user/douglaslassance", count: "42", action: "Follow", color: "#1db954" },
+    { name: "GitHub", icon: "github.svg", url: "https://github.com/douglaslassance", count: "17", action: "Follow", color: "#333333" },
+    { name: "Mastodon", icon: "mastodon.svg", url: "https://mastodon.social/@douglaslassance", count: "94", action: "Follow", color: "#6364ff" },
+    { name: "Patreon", icon: "patreon.svg", url: "https://patreon.com/douglaslassance", count: "8", action: "Support", color: "#ff424d" },
+    { name: "LinkedIn", icon: "linkedin.svg", url: "https://linkedin.com/in/douglaslassance", count: "500+", action: "Connect", color: "#0a66c2" },
+    { name: "SoundCloud", icon: "soundcloud.svg", url: "https://soundcloud.com/douglaslassance", count: "127", action: "Follow", color: "#ff5500" },
+    { name: "Pinterest", icon: "pinterest.svg", url: "https://pinterest.com/douglaslassance", count: "215", action: "Follow", color: "#e60023" },
+    { name: "Fab", icon: "fab.svg", url: "https://fab.com/sellers/douglaslassance", count: "342", action: "View", color: "#00d4aa" },
     { name: "Midjourney", icon: "midjourney.svg", url: "https://midjourney.com/app/users/douglaslassance", count: "1.5K", action: "View", color: "#000000" },
-    { name: "Itch.io", icon: "itch-io-brands-solid.svg", url: "https://douglaslassance.itch.io", count: "412", action: "Follow", color: "#fa5c5c" },
-    { name: "Gumroad", icon: "gumroad-logo_svgstack_com_50461768210639.svg", url: "https://douglaslassance.gumroad.com", count: "289", action: "Follow", color: "#ff90e8" },
-    { name: "Apple Music", icon: "itunes-note-brands-solid.svg", url: "https://music.apple.com/profile/douglaslassance", count: "34", action: "Follow", color: "#fa243c" },
+    { name: "Itch.io", icon: "itch-io.svg", url: "https://douglaslassance.itch.io", count: "412", action: "Follow", color: "#fa5c5c" },
+    { name: "Gumroad", icon: "gumroad.svg", url: "https://douglaslassance.gumroad.com", count: "289", action: "Follow", color: "#ff90e8" },
+    { name: "Apple Music", icon: "apple-music.svg", url: "https://music.apple.com/profile/douglaslassance", count: "34", action: "Follow", color: "#fa243c" },
     { name: "Ko-fi", icon: "ko-fi.svg", url: "https://ko-fi.com/douglaslassance", count: "23", action: "Support", color: "#ff5e5b" },
+    { name: "Medium", icon: "medium.svg", url: "https://medium.com/@douglaslassance", count: "156", action: "Follow", color: "#000000" },
   ],
   personal: [
     {
@@ -112,33 +115,17 @@ const profileData = {
         filter: grayscale(0%) opacity(1) !important;
       }
       
-      /* Brand button styling */
-      .brand-button {
+      /* Presence button styling */
+      .presence-btn {
+        border-color: var(--brand-color) !important;
+        color: var(--brand-color) !important;
         transition: all 0.3s ease;
-        background-color: transparent !important;
-        border-width: 1px !important;
-        border-style: solid !important;
       }
       
-      .brand-button:hover {
+      .presence-btn:hover {
         background-color: var(--brand-color) !important;
         border-color: var(--brand-color) !important;
         color: white !important;
-      }
-      
-      /* Monochrome buttons adaptation for dark theme */
-      [data-theme="dark"] .brand-button[data-monochrome="true"] {
-        border-color: #ffffff !important;
-        color: #ffffff !important;
-      }
-      
-      [data-theme="dark"] .brand-button[data-monochrome="true"]:hover {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-      }
-      
-      .brand-button span {
-        display: inline;
       }
       
       [data-theme="dark"] {
@@ -196,9 +183,9 @@ const profileData = {
       </div>
     </header>
 
-    <div class="flex h-screen lg:h-screen">
+    <div class="flex h-screen lg:h-screen px-4">
       <!-- Left Column - Fixed Profile (hidden on mobile) -->
-      <aside class="hidden lg:flex lg:w-1/2 xl:w-2/5 px-16 py-12 flex-col justify-between" style="background: var(--bg-primary);">
+      <aside class="hidden lg:flex lg:w-1/2 xl:w-2/5 px-[45px] py-12 flex-col justify-between" style="background: var(--bg-primary);">
         <div class="flex flex-col space-y-8">
           <!-- Top spacing -->
           <div class="h-[50px]"></div>
@@ -216,20 +203,24 @@ const profileData = {
         
         <!-- Theme Toggle at Bottom -->
         <div class="mt-auto pt-8">
-          <button id="theme-toggle" class="btn btn-ghost btn-sm gap-2" aria-label="Toggle theme">
-            <svg id="theme-icon-light" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          <label class="swap swap-rotate">
+            <input type="checkbox" id="theme-toggle" class="theme-controller" />
+            
+            <!-- sun icon -->
+            <svg class="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
             </svg>
-            <svg id="theme-icon-dark" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            
+            <!-- moon icon -->
+            <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
             </svg>
-            <span class="text-sm">Toggle theme</span>
-          </button>
+          </label>
         </div>
       </aside>
 
       <!-- Right Column - Scrollable Content -->
-      <main class="flex-1 overflow-y-auto px-16 py-12" style="background: var(--bg-primary);">
+      <main class="flex-1 overflow-y-auto px-[45px] py-12" style="background: var(--bg-primary);">
         <!-- Top spacing -->
         <div class="h-[50px]"></div>
         
@@ -238,174 +229,99 @@ const profileData = {
           <h2 class="text-xl font-semibold mb-8">Online presence</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           {profileData.online.map((social) => (
-            <a 
-              href={social.url} 
-              class="card card-3d shadow-md hover:shadow-xl transition-all duration-300 presence-card"
-              style={`background-color: ${social.color}08;`}
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <div class="card-body p-6 items-start text-left aspect-square justify-between presence-card-body">
-                <div class="flex flex-col items-start gap-2">
-                  <img src={`/${social.icon}`} alt={social.name} class="w-10 h-10 monochrome-icon" style={`--icon-color: ${social.color}`} />
-                  <h3 class="card-title text-base" style="color: var(--text-secondary)">{social.name}</h3>
-                </div>
-                <div class="w-full">
-                  <button 
-                    class="btn btn-outline btn-sm w-full brand-button"
-                    style={`--brand-color: ${social.color}; border-color: ${social.color}; color: ${social.color};`}
-                    data-monochrome={(social.color === '#000000' || social.color === '#333333') ? 'true' : 'false'}
-                    onclick="event.preventDefault()"
-                  >
-                    <span class="font-bold">{social.action}</span>
-                    <span class="font-normal">{social.count}</span>
-                  </button>
-                </div>
-              </div>
-            </a>
+            <PresenceCard 
+              name={social.name}
+              icon={social.icon}
+              url={social.url}
+              color={social.color}
+              action={social.action}
+              count={social.count}
+            />
           ))}
           </div>
         </section>
 
         <!-- Personal Projects -->
         <section class="mb-16">
-          <h2 class="text-xl font-semibold mb-8" style="color: var(--text-secondary); font-weight: 600;">Personal projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Galactic Mail -->
-          <a href="https://youtu.be/WacTwZljbKk" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img src="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg" alt="Galactic Mail" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Galactic Mail</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">An interactive sci-fi experience</p>
-            </div>
-          </a>
-
-          <!-- Greedy Hand -->
-          <a href="https://www.instagram.com/greedyhand" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img src="https://picsum.photos/seed/greedyhand/400/300" alt="Greedy Hand" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Greedy Hand</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">Creative Instagram project</p>
-            </div>
-          </a>
-
-          <!-- Shaker -->
-          <a href="https://www.unrealengine.com/marketplace/en-US/product/shaker" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img src="https://picsum.photos/seed/shaker/400/300" alt="Shaker" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Shaker</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">Unreal Engine marketplace tool for procedural animations</p>
-            </div>
-          </a>
-
-          <!-- Sigg Jones -->
-          <a href="https://youtu.be/TE86DR8E0LI" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img src="https://i.ytimg.com/vi/TE86DR8E0LI/hqdefault.jpg" alt="Sigg Jones" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Sigg Jones</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">Music video production</p>
-            </div>
-          </a>
-
-          <!-- Gifted -->
-          <a href="https://youtu.be/uSvY8ygMFig" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img src="https://i.ytimg.com/vi/uSvY8ygMFig/hqdefault.jpg" alt="Gifted" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Gifted</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">Short film project</p>
-            </div>
-          </a>
-
-          <!-- Gitalong -->
-          <a href="https://github.com/douglaslassance/gitalong" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img src="https://picsum.photos/seed/gitalong/400/300" alt="Gitalong" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Gitalong</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">Git workflow automation tool</p>
-            </div>
-          </a>
-
-          <!-- Playsthetic -->
-          <a href="https://playsthetic.com/" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img src="https://picsum.photos/seed/playsthetic/400/300" alt="Playsthetic" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Playsthetic</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">Interactive design playground</p>
-            </div>
-          </a>
-
-          <!-- Peel -->
-          <a href="https://formulae.brew.sh/formula/peel" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img src="https://picsum.photos/seed/peel/400/300" alt="Peel" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Peel</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">Command-line tool for layer management</p>
-            </div>
-          </a>
+          <h2 class="text-lg font-normal mb-6 text-base-content/70">Personal projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <ProjectCard
+            title="Galactic Mail"
+            description="An interactive sci-fi experience"
+            url="https://youtu.be/WacTwZljbKk"
+            image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
+            type="youtube"
+          />
+          <ProjectCard
+            title="Greedy Hand"
+            description="Creative Instagram project"
+            url="https://www.instagram.com/greedyhand"
+            image="https://picsum.photos/seed/greedyhand/400/300"
+            type="instagram"
+          />
+          <ProjectCard
+            title="Shaker"
+            description="Unreal Engine marketplace tool for procedural animations"
+            url="https://www.unrealengine.com/marketplace/en-US/product/shaker"
+            image="https://picsum.photos/seed/shaker/400/300"
+            type="website"
+          />
+          <ProjectCard
+            title="Sigg Jones"
+            description="Music video production"
+            url="https://youtu.be/TE86DR8E0LI"
+            image="https://i.ytimg.com/vi/TE86DR8E0LI/hqdefault.jpg"
+            type="youtube"
+          />
+          <ProjectCard
+            title="Gifted"
+            description="Short film project"
+            url="https://youtu.be/uSvY8ygMFig"
+            image="https://i.ytimg.com/vi/uSvY8ygMFig/hqdefault.jpg"
+            type="youtube"
+          />
+          <ProjectCard
+            title="Gitalong"
+            description="Git workflow automation tool"
+            url="https://github.com/douglaslassance/gitalong"
+            image="https://picsum.photos/seed/gitalong/400/300"
+            type="github"
+          />
+          <ProjectCard
+            title="Playsthetic"
+            description="Interactive design playground"
+            url="https://playsthetic.com/"
+            image="https://picsum.photos/seed/playsthetic/400/300"
+            type="website"
+          />
+          <ProjectCard
+            title="Peel"
+            description="Command-line tool for layer management"
+            url="https://formulae.brew.sh/formula/peel"
+            image="https://picsum.photos/seed/peel/400/300"
+            type="github"
+          />
         </div>
         </section>
 
         <!-- Professional Projects -->
         <section class="mb-16">
-          <h2 class="text-xl font-semibold mb-8" style="color: var(--text-secondary); font-weight: 600;">Professional projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <a href="https://www.youtube.com/watch?v=WacTwZljbKk" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img
-                src="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
-                alt="Professional Work"
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Professional Work</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">Professional project showcasing expertise and experience.</p>
-              <div class="card-actions justify-end items-center">
-                <button class="btn btn-ghost btn-sm gap-2" onclick="event.preventDefault()">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
-                  </svg>
-                  <span style="color: var(--text-secondary);">Like</span>
-                </button>
-              </div>
-            </div>
-          </a>
-
-          <a href="https://www.youtube.com/watch?v=WacTwZljbKk" target="_blank" rel="noopener noreferrer" class="card card-side shadow-sm card-3d group cursor-pointer presence-card-height" style="background: var(--bg-secondary);">
-            <figure class="w-1/3 relative overflow-hidden">
-              <img
-                src="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
-                alt="Client Project"
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            </figure>
-            <div class="card-body w-2/3">
-              <h2 class="card-title text-lg" style="color: var(--text-primary);">Client Project</h2>
-              <p class="text-sm" style="color: var(--text-secondary);">High-impact client work delivering exceptional results.</p>
-              <div class="card-actions justify-end items-center">
-                <button class="btn btn-ghost btn-sm gap-2" onclick="event.preventDefault()">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
-                  </svg>
-                  <span style="color: var(--text-secondary);">Like</span>
-                </button>
-              </div>
-            </div>
-          </a>
+          <h2 class="text-lg font-normal mb-6 text-base-content/70">Professional projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <ProjectCard
+            title="Professional Work"
+            description="Professional project showcasing expertise and experience."
+            url="https://www.youtube.com/watch?v=WacTwZljbKk"
+            image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
+            type="youtube"
+          />
+          <ProjectCard
+            title="Client Project"
+            description="High-impact client work delivering exceptional results."
+            url="https://www.youtube.com/watch?v=WacTwZljbKk"
+            image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
+            type="youtube"
+          />
         </div>
         </section>
       </main>
@@ -413,31 +329,23 @@ const profileData = {
 
     <script>
       // Theme toggle functionality
-      const themeToggle = document.getElementById('theme-toggle');
-      const themeIconLight = document.getElementById('theme-icon-light');
-      const themeIconDark = document.getElementById('theme-icon-dark');
+      const themeToggle = document.getElementById('theme-toggle') as HTMLInputElement;
       
-      function updateThemeIcon(theme: string) {
-        if (theme === 'dark') {
-          themeIconLight?.classList.remove('hidden');
-          themeIconDark?.classList.add('hidden');
-        } else {
-          themeIconLight?.classList.add('hidden');
-          themeIconDark?.classList.remove('hidden');
+      function setTheme(theme: string) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        if (themeToggle) {
+          themeToggle.checked = theme === 'dark';
         }
       }
       
-      // Initialize icon
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      updateThemeIcon(currentTheme);
+      // Check for saved theme preference or default to system preference
+      const savedTheme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      setTheme(savedTheme || systemTheme);
       
-      themeToggle?.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
+      themeToggle?.addEventListener('change', () => {
+        setTheme(themeToggle.checked ? 'dark' : 'light');
       });
     </script>
   </body>
