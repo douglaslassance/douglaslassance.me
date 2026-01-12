@@ -1,0 +1,46 @@
+---
+interface Props {
+  name: string;
+  icon: string;
+  url: string;
+  color: string;
+  action: string;
+  count: string;
+}
+
+const { name, icon, url, color, action, count } = Astro.props;
+const isMonochrome = color === '#000000' || color === '#333333';
+---
+
+<a 
+  href={url} 
+  class="card card-3d shadow-md hover:shadow-xl transition-all duration-300 presence-card"
+  style={`background-color: ${color}10;`}
+  target="_blank" 
+  rel="noopener noreferrer"
+>
+  <div class="card-body p-6 items-start text-left aspect-square justify-between presence-card-body">
+    <div class="flex flex-col items-start gap-3 w-full">
+      <img 
+        src={`/${icon}`} 
+        alt={name} 
+        class:list={[
+          'w-12 h-12 presence-icon opacity-60',
+          isMonochrome && 'monochrome-icon'
+        ]} 
+        style={!isMonochrome ? `--icon-color: ${color}` : ''} 
+      />
+      <h3 class="text-base font-medium text-base-content/70">{name}</h3>
+    </div>
+    <div class="w-full flex justify-start">
+      <button 
+        class="btn btn-sm btn-outline presence-btn"
+        style={`--brand-color: ${color};`}
+        onclick="event.preventDefault()"
+      >
+        <span class="font-bold">{action}</span>
+        {count && <span class="font-normal ml-1">{count}</span>}
+      </button>
+    </div>
+  </div>
+</a>
