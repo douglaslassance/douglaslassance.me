@@ -1,0 +1,307 @@
+---
+const profileData = {
+  name: "Douglas Lassance",
+  bio: "Creative developer, open source enthusiast, and digital craftsman building tools and experiences for the web.",
+  avatar: "/avatar.jpg",
+  online: [
+    { name: "Bluesky", icon: "🦋", url: "https://bsky.app", handle: "@username.bsky.social" },
+    { name: "YouTube", icon: "▶️", url: "https://youtube.com/@channel", handle: "@channel" },
+    { name: "Spotify", icon: "🎵", url: "https://open.spotify.com/user/username", handle: "Artist/User" },
+    { name: "GitHub", icon: "💻", url: "https://github.com/douglaslassance", handle: "@douglaslassance" },
+  ],
+  personal: [
+    {
+      title: "Personal Project One",
+      description: "A cool side project I built to solve a problem.",
+      image: "/project1.jpg",
+      url: "#"
+    },
+    {
+      title: "Personal Project Two",
+      description: "Another interesting personal endeavor.",
+      image: "/project2.jpg",
+      url: "#"
+    }
+  ],
+  professional: [
+    {
+      title: "Professional Project One",
+      description: "An enterprise solution I contributed to.",
+      image: "/project3.jpg",
+      url: "#"
+    },
+    {
+      title: "Professional Project Two",
+      description: "A commercial product I helped build.",
+      image: "/project4.jpg",
+      url: "#"
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{profileData.name} - Online Presence</title>
+    <meta name="description" content={profileData.bio} />
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --surface: #1a1a1a;
+        --border: #2a2a2a;
+        --text: #ffffff;
+        --text-secondary: #a0a0a0;
+        --accent: #3b82f6;
+        --radius: 16px;
+        --gap: 16px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 3px solid var(--border);
+        object-fit: cover;
+      }
+
+      .header-info h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+      }
+
+      .header-info p {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        max-width: 600px;
+      }
+
+      .section {
+        margin-bottom: 3rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--gap);
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+      }
+
+      .social-card {
+        aspect-ratio: 1;
+        justify-content: space-between;
+        min-height: 0;
+      }
+
+      .social-icon {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      .social-name {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .social-handle {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      .project-card {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        padding: 0;
+        overflow: hidden;
+        min-height: 250px;
+      }
+
+      .project-content {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .project-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+
+      .project-description {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .project-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: var(--border);
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
+        .header {
+          flex-direction: column;
+          text-align: center;
+          gap: 1rem;
+        }
+
+        .header-info h1 {
+          font-size: 2rem;
+        }
+
+        .header-info p {
+          font-size: 1rem;
+        }
+
+        .grid {
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+
+        .project-card {
+          grid-column: span 1;
+          grid-template-columns: 1fr;
+        }
+
+        .project-image {
+          min-height: 200px;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .project-card {
+          grid-column: span 3;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <img src={profileData.avatar} alt={profileData.name} class="avatar" />
+        <div class="header-info">
+          <h1>{profileData.name}</h1>
+          <p>{profileData.bio}</p>
+        </div>
+      </header>
+
+      <section class="section">
+        <h2 class="section-title">Online Presence</h2>
+        <div class="grid">
+          {profileData.online.map((social) => (
+            <a href={social.url} class="card social-card" target="_blank" rel="noopener noreferrer">
+              <div>
+                <span class="social-icon">{social.icon}</span>
+                <div class="social-name">{social.name}</div>
+                <div class="social-handle">{social.handle}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Personal Projects</h2>
+        <div class="grid">
+          {profileData.personal.map((project) => (
+            <a href={project.url} class="card project-card" target="_blank" rel="noopener noreferrer">
+              <div class="project-content">
+                <h3 class="project-title">{project.title}</h3>
+                <p class="project-description">{project.description}</p>
+              </div>
+              <img src={project.image} alt={project.title} class="project-image" />
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Professional Projects</h2>
+        <div class="grid">
+          {profileData.professional.map((project) => (
+            <a href={project.url} class="card project-card" target="_blank" rel="noopener noreferrer">
+              <div class="project-content">
+                <h3 class="project-title">{project.title}</h3>
+                <p class="project-description">{project.description}</p>
+              </div>
+              <img src={project.image} alt={project.title} class="project-image" />
+            </a>
+          ))}
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
