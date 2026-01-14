@@ -30,7 +30,7 @@ const iconMaskStyle = `
 
 <Tag
   href={isYouTube ? undefined : url}
-  class="card shadow-md hover:shadow-xl transition-all duration-300"
+  class="card shadow-md hover:shadow-xl transition-all duration-300 group"
   style={`background-color: ${color}10;`}
   target={isYouTube ? undefined : "_blank"}
   rel={isYouTube ? undefined : "noopener noreferrer"}
@@ -38,7 +38,7 @@ const iconMaskStyle = `
   <div class="card-body p-4 desktop:p-6 items-start text-left aspect-square justify-between">
     <div class="flex flex-col items-start gap-2 desktop:gap-3 w-full">
       <div 
-        class="w-7 h-7 desktop:w-12 desktop:h-12 transition-all duration-300 opacity-60 hover:opacity-100"
+        class="w-7 h-7 desktop:w-12 desktop:h-12 transition-all duration-300 opacity-60 group-hover:opacity-100"
         style={iconMaskStyle} 
       />
       <h3 class="text-sm desktop:text-base font-medium text-base-content/70">{name}</h3>
@@ -47,7 +47,7 @@ const iconMaskStyle = `
       <div class="w-full flex justify-start">
         <a 
           href={subscribeUrl}
-          class="btn btn-xs desktop:btn-sm btn-outline border-red-500 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500"
+          class="btn btn-xs desktop:btn-sm bg-red-500 text-white border-red-500 hover:bg-red-600 hover:border-red-600"
           target="_blank"
           rel="noopener noreferrer"
         >
