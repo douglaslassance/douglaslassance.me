@@ -1,6 +1,7 @@
 ---
 import Icon from '../components/Icon.astro';
 import PresenceCard from '../components/PresenceCard.astro';
+import ProfessionalProjectCard from '../components/ProfessionalProjectCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
 const profileData = {
@@ -10,15 +11,15 @@ const profileData = {
   online: [
     { name: "Bluesky", icon: "bluesky.svg", url: "https://bsky.app/profile/douglaslassance.bsky.social", count: "1.2K", action: "Follow", color: "#1185fe" },
     { name: "YouTube", icon: "youtube.svg", url: "https://youtube.com/@douglaslassance", count: "856", action: "Subscribe", color: "#ff0000" },
-    { name: "Spotify", icon: "spotify.svg", url: "https://open.spotify.com/user/douglaslassance", count: "42", action: "Follow", color: "#1db954" },
+    { name: "Spotify", icon: "spotify.svg", url: "https://open.spotify.com/user/asterokid", count: "42", action: "Follow", color: "#1db954" },
     { name: "GitHub", icon: "github.svg", url: "https://github.com/douglaslassance", count: "17", action: "Follow", color: "#333333" },
     { name: "Mastodon", icon: "mastodon.svg", url: "https://mastodon.social/@douglaslassance", count: "94", action: "Follow", color: "#6364ff" },
     { name: "Patreon", icon: "patreon.svg", url: "https://patreon.com/douglaslassance", count: "8", action: "Support", color: "#ff424d" },
     { name: "LinkedIn", icon: "linkedin.svg", url: "https://linkedin.com/in/douglaslassance", count: "500+", action: "Connect", color: "#0a66c2" },
     { name: "SoundCloud", icon: "soundcloud.svg", url: "https://soundcloud.com/douglaslassance", count: "127", action: "Follow", color: "#ff5500" },
     { name: "Pinterest", icon: "pinterest.svg", url: "https://pinterest.com/douglaslassance", count: "215", action: "Follow", color: "#e60023" },
-    { name: "Fab", icon: "fab.svg", url: "https://fab.com/sellers/douglaslassance", count: "342", action: "View", color: "#00d4aa" },
-    { name: "Midjourney", icon: "midjourney.svg", url: "https://midjourney.com/app/users/douglaslassance", count: "1.5K", action: "View", color: "#000000" },
+    { name: "Fab", icon: "fab.svg", url: "https://www.fab.com/sellers/Douglas%20Lassance", count: "342", action: "View", color: "#00d4aa" },
+    { name: "Midjourney", icon: "midjourney.svg", url: "https://www.midjourney.com/@douglaslassance", count: "1.5K", action: "View", color: "#000000" },
     { name: "Itch.io", icon: "itch-io.svg", url: "https://douglaslassance.itch.io", count: "412", action: "Follow", color: "#fa5c5c" },
     { name: "Gumroad", icon: "gumroad.svg", url: "https://douglaslassance.gumroad.com", count: "289", action: "Follow", color: "#ff90e8" },
     { name: "Apple Music", icon: "apple-music.svg", url: "https://music.apple.com/profile/douglaslassance", count: "34", action: "Follow", color: "#fa243c" },
@@ -247,56 +248,56 @@ const profileData = {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <ProjectCard
             title="Galactic Mail"
-            description="An interactive sci-fi experience"
+            description="Short film"
             url="https://youtu.be/WacTwZljbKk"
             image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
             type="youtube"
           />
           <ProjectCard
             title="Greedy Hand"
-            description="Creative Instagram project"
+            description="Photo series"
             url="https://www.instagram.com/greedyhand"
             image="https://picsum.photos/seed/greedyhand/400/300"
             type="instagram"
           />
           <ProjectCard
             title="Shaker"
-            description="Unreal Engine marketplace tool for procedural animations"
+            description="Unreal Engine plugin"
             url="https://www.unrealengine.com/marketplace/en-US/product/shaker"
             image="https://picsum.photos/seed/shaker/400/300"
             type="website"
           />
           <ProjectCard
             title="Sigg Jones"
-            description="Music video production"
+            description="Short film"
             url="https://youtu.be/TE86DR8E0LI"
             image="https://i.ytimg.com/vi/TE86DR8E0LI/hqdefault.jpg"
             type="youtube"
           />
           <ProjectCard
             title="Gifted"
-            description="Short film project"
+            description="macOS application"
             url="https://youtu.be/uSvY8ygMFig"
             image="https://i.ytimg.com/vi/uSvY8ygMFig/hqdefault.jpg"
             type="youtube"
           />
           <ProjectCard
             title="Gitalong"
-            description="Git workflow automation tool"
+            description="Command line interface"
             url="https://github.com/douglaslassance/gitalong"
             image="https://picsum.photos/seed/gitalong/400/300"
             type="github"
           />
           <ProjectCard
             title="Playsthetic"
-            description="Interactive design playground"
+            description="Game studio"
             url="https://playsthetic.com/"
             image="https://picsum.photos/seed/playsthetic/400/300"
             type="website"
           />
           <ProjectCard
             title="Peel"
-            description="Command-line tool for layer management"
+            description="macOS application"
             url="https://formulae.brew.sh/formula/peel"
             image="https://picsum.photos/seed/peel/400/300"
             type="github"
@@ -308,16 +309,26 @@ const profileData = {
         <section class="mb-16">
           <h2 class="text-lg font-normal mb-6 text-base-content/70">Professional projects</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <ProjectCard
-            title="Professional Work"
-            description="Professional project showcasing expertise and experience."
-            url="https://www.youtube.com/watch?v=WacTwZljbKk"
-            image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
+          <ProfessionalProjectCard
+            title="Fortnite Superman"
+            description='Cinematic'
+            role="Technical Director"
+            url="https://youtu.be/Kk9nW1UMsH0?si=iuRVesNojyi0VEKS"
+            image="https://i.ytimg.com/vi/Kk9nW1UMsH0/hqdefault.jpg"
             type="youtube"
           />
-          <ProjectCard
-            title="Client Project"
-            description="High-impact client work delivering exceptional results."
+          <ProfessionalProjectCard
+            title="Spectre Divide",
+            description='Video game',
+            role="Principal Technical Artist",
+            url="https://store.steampowered.com/app/2641470/Spectre_Divide/"
+            image="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2641470/header.jpg?t=1745278846"
+            type="steam"
+          />
+          <ProfessionalProjectCard
+            title="Marcel Lassance",
+            description='Internet site',
+            role="Developer",
             url="https://www.youtube.com/watch?v=WacTwZljbKk"
             image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
             type="youtube"
