@@ -10,37 +10,56 @@ interface Props {
 
 const { name, icon, url, color, action, count } = Astro.props;
 const isMonochrome = color === '#000000' || color === '#333333';
+const isYouTube = name === 'YouTube';
+const subscribeUrl = isYouTube ? `${url}?sub_confirmation=1` : url;
+const Tag = isYouTube ? 'div' : 'a';
+
+// Icon mask styles
+const iconMaskStyle = `
+  -webkit-mask-image: url(/${icon});
+  mask-image: url(/${icon});
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  ${!isMonochrome ? `background-color: ${color};` : ''}
+`;
 ---
 
-<a 
-  href={url} 
-  class="card card-3d shadow-md hover:shadow-xl transition-all duration-300 presence-card"
+<Tag
+  href={isYouTube ? undefined : url}
+  class="card shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]"
   style={`background-color: ${color}10;`}
-  target="_blank" 
-  rel="noopener noreferrer"
+  target={isYouTube ? undefined : "_blank"}
+  rel={isYouTube ? undefined : "noopener noreferrer"}
 >
-  <div class="card-body p-6 items-start text-left aspect-square justify-between presence-card-body">
+  <div class="card-body p-6 items-start text-left aspect-square justify-between">
     <div class="flex flex-col items-start gap-3 w-full">
-      <img 
-        src={`/${icon}`} 
-        alt={name} 
+      <div 
         class:list={[
-          'w-12 h-12 presence-icon opacity-60',
-          isMonochrome && 'monochrome-icon'
-        ]} 
-        style={!isMonochrome ? `--icon-color: ${color}` : ''} 
+          'w-12 h-12 transition-all duration-300 group-hover:opacity-100',
+          isMonochrome ? '[.card:hover_&]:opacity-100 opacity-60 [data-theme=light]_&:bg-black [data-theme=dark]_&:bg-white' : 'opacity-60 [.card:hover_&]:opacity-100'
+        ]}
+        style={iconMaskStyle} 
       />
       <h3 class="text-base font-medium text-base-content/70">{name}</h3>
     </div>
-    <div class="w-full flex justify-start">
-      <button 
-        class="btn btn-sm btn-outline presence-btn"
-        style={`--brand-color: ${color};`}
-        onclick="event.preventDefault()"
-      >
-        <span class="font-bold">{action}</span>
-        {count && <span class="font-normal ml-1">{count}</span>}
-      </button>
-    </div>
+    {isYouTube && (
+      <div class="w-full flex justify-start">
+        <a 
+          href={subscribeUrl}
+          class="btn btn-sm btn-outline transition-all duration-300"
+          style={`border-color: ${color}; color: ${color};`}
+          onmouseenter={`this.style.backgroundColor='${color}'; this.style.color='white';`}
+          onmouseleave={`this.style.backgroundColor='transparent'; this.style.color='${color}';`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="font-bold">{action}</span>
+        </a>
+      </div>
+    )}
   </div>
-</a>
+</Tag>
