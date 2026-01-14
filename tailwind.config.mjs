@@ -7,7 +7,7 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       screens: {
-        'desktop': '1270px',
+        'desktop': '1362px',
       },
     },
   },

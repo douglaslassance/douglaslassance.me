@@ -101,7 +101,7 @@ const profileData = {
         <!-- Online Presence -->
         <section class="mb-16">
           <h2 class="text-xl font-semibold mb-8">Online presence</h2>
-          <div class="grid grid-cols-3 gap-3">
+          <div class="grid grid-cols-3 gap-4">
           {profileData.online.map((social) => (
             <PresenceCard 
               name={social.name}
@@ -183,7 +183,7 @@ const profileData = {
           <h2 class="text-lg font-normal mb-6 text-base-content/70">Professional projects</h2>
           <div class="grid grid-cols-1 gap-4">
           <ProfessionalProjectCard
-            title="Fortnite Superman"
+            title="Fortnite Superman goes Mad"
             description='Cinematic'
             role="Technical Director"
             url="https://youtu.be/Kk9nW1UMsH0?si=iuRVesNojyi0VEKS"
@@ -200,7 +200,7 @@ const profileData = {
           />
           <ProfessionalProjectCard
             title="Marcel Lassance",
-            description='Internet site',
+            description='Website',
             role="Developer",
             url="https://marcellassance.fr"
             image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
@@ -232,9 +232,9 @@ const profileData = {
     </div>
 
     <!-- DESKTOP LAYOUT (>= desktop breakpoint) -->
-    <div class="hidden desktop:flex h-screen">
+    <div class="hidden desktop:flex h-screen justify-between">
       <!-- Left Column - Baseball Card (flexible) -->
-      <aside class="flex flex-1 min-w-[350px] max-w-[500px] px-[45px] py-12 flex-col justify-between bg-base-100">
+      <aside class="flex flex-1 min-w-[350px] max-w-[500px] pl-[60px] pr-[45px] py-12 flex-col justify-between bg-base-100">
         <div class="flex flex-col space-y-8">
           <!-- Top spacing -->
           <div class="h-[50px]"></div>
@@ -266,14 +266,14 @@ const profileData = {
       </aside>
 
       <!-- Right Column - Cards (fixed width, scrollable) -->
-      <main class="w-[920px] overflow-y-auto px-[45px] py-12 bg-base-100">
+      <main class="w-[1012px] overflow-y-auto pl-[45px] pr-[60px] py-12 bg-base-100">
         <!-- Top spacing -->
         <div class="h-[50px]"></div>
         
         <!-- Online Presence -->
         <section class="mb-16">
           <h2 class="text-xl font-semibold mb-8">Online presence</h2>
-          <div class="grid grid-cols-4 gap-4">
+          <div class="grid grid-cols-4 gap-7">
             {profileData.online.map((social) => (
               <PresenceCard 
                 name={social.name}
@@ -290,7 +290,7 @@ const profileData = {
         <!-- Personal Projects -->
         <section class="mb-16">
           <h2 class="text-lg font-normal mb-6 text-base-content/70">Personal projects</h2>
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-6">
             <ProjectCard
               title="Galactic Mail"
               description="Short film"
@@ -321,14 +321,14 @@ const profileData = {
             />
             <ProjectCard
               title="Gifted"
-              description="macOS application"
+              description="Application"
               url="https://youtu.be/uSvY8ygMFig"
               image="https://i.ytimg.com/vi/uSvY8ygMFig/hqdefault.jpg"
               type="youtube"
             />
             <ProjectCard
               title="Gitalong"
-              description="Command line interface"
+              description="CLI"
               url="https://github.com/douglaslassance/gitalong"
               image="https://picsum.photos/seed/gitalong/400/300"
               type="github"
@@ -342,7 +342,7 @@ const profileData = {
             />
             <ProjectCard
               title="Peel"
-              description="macOS application"
+              description="Application"
               url="https://formulae.brew.sh/formula/peel"
               image="https://picsum.photos/seed/peel/400/300"
               type="homebrew"
@@ -353,7 +353,7 @@ const profileData = {
         <!-- Professional Projects -->
         <section class="mb-16">
           <h2 class="text-lg font-normal mb-6 text-base-content/70">Professional projects</h2>
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-6">
             <ProfessionalProjectCard
               title="Fortnite Superman"
               description='Cinematic'
@@ -372,7 +372,7 @@ const profileData = {
             />
             <ProfessionalProjectCard
               title="Marcel Lassance",
-              description='Internet site',
+              description='Website',
               role="Developer",
               url="https://marcellassance.fr"
               image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
