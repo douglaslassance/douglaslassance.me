@@ -1,4 +1,5 @@
 ---
+import BaseballCard from '../components/BaseballCard.astro';
 import Icon from '../components/Icon.astro';
 import PresenceCard from '../components/PresenceCard.astro';
 import ProfessionalProjectCard from '../components/ProfessionalProjectCard.astro';
@@ -74,136 +75,34 @@ const profileData = {
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
     </script>
-    <style>
-      body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      }
-      
-      /* Softer colors - no pure black or white */
-      [data-theme="dark"] {
-        --bg-primary: #0f1419;
-        --bg-secondary: #1a1f26;
-        --border-color: #2a3340;
-        --text-primary: #e8eaed;
-        --text-secondary: #9aa0a6;
-      }
-      
-      [data-theme="light"] {
-        --bg-primary: #fafafa;
-        --bg-secondary: #ffffff;
-        --border-color: #e5e7eb;
-        --text-primary: #1f2937;
-        --text-secondary: #6b7280;
-      }
-
-      /* 3D hover effect for cards */
-      .card-3d {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        transform-style: preserve-3d;
-      }
-      
-      .card-3d:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      }
-      
-      /* Icon hover effect */
-      .social-icon {
-        transition: all 0.3s ease;
-      }
-      
-      .presence-card:hover .social-icon {
-        filter: grayscale(0%) opacity(1) !important;
-      }
-      
-      /* Presence button styling */
-      .presence-btn {
-        border-color: var(--brand-color) !important;
-        color: var(--brand-color) !important;
-        transition: all 0.3s ease;
-      }
-      
-      .presence-btn:hover {
-        background-color: var(--brand-color) !important;
-        border-color: var(--brand-color) !important;
-        color: white !important;
-      }
-      
-      [data-theme="dark"] {
-        --accent-color: #3b82f6;
-      }
-      
-      [data-theme="light"] {
-        --accent-color: #3b82f6;
-      }
-
-      /* Monochrome icon tinting with brand colors */
-      .monochrome-icon {
-        position: relative;
-        display: inline-block;
-      }
-      
-      /* For light theme: make icons use brand color */
-      [data-theme="light"] .monochrome-icon {
-        filter: brightness(0) saturate(100%);
-        opacity: 0.8;
-      }
-      
-      /* For dark theme: invert then apply brand color */
-      [data-theme="dark"] .monochrome-icon {
-        filter: brightness(0) saturate(100%) invert(1);
-        opacity: 0.8;
-      }
-      
-      /* Match project card height to presence cards */
-      .presence-card-height {
-        height: calc((100vw - 32rem - 2rem) / 4);
-      }
-      
-      @media (min-width: 768px) {
-        .presence-card-height {
-          height: auto;
-          aspect-ratio: 2 / 1;
-        }
-      }
-    </style>
   </head>
-  <body class="min-h-screen overflow-hidden" style="background: var(--bg-primary); color: var(--text-primary);">
+  <body class="min-h-screen overflow-hidden bg-base-100 text-base-content font-['Inter']">
     <!-- Mobile Header (visible only on mobile) -->
-    <header class="lg:hidden p-8" style="background: var(--bg-primary);">
-      <div class="flex items-center gap-4">
-        <div class="avatar">
-          <div class="w-24 rounded-full">
-            <img src={profileData.avatar} alt={profileData.name} />
-          </div>
-        </div>
-        <div>
-          <h1 class="text-2xl font-bold">{profileData.name}</h1>
-          <p class="text-base" style="color: var(--text-secondary)">{profileData.bio}</p>
-        </div>
-      </div>
+    <header class="lg:hidden p-8 bg-base-100">
+      <BaseballCard 
+        name={profileData.name}
+        bio={profileData.bio}
+        avatar={profileData.avatar}
+        mobile={true}
+      />
     </header>
 
     <div class="flex h-screen lg:h-screen px-4">
       <!-- Left Column - Fixed Profile (hidden on mobile) -->
-      <aside class="hidden lg:flex lg:w-1/2 xl:w-2/5 px-[45px] py-12 flex-col justify-between" style="background: var(--bg-primary);">
+      <aside class="hidden lg:flex lg:w-1/2 xl:w-2/5 px-[45px] py-12 flex-col justify-between bg-base-100">
         <div class="flex flex-col space-y-8">
           <!-- Top spacing -->
           <div class="h-[50px]"></div>
           
-          <div class="avatar">
-            <div class="w-48 rounded-full">
-              <img src={profileData.avatar} alt={profileData.name} />
-            </div>
-          </div>
-          <div>
-            <h1 class="text-4xl font-bold mb-4">{profileData.name}</h1>
-            <p class="text-lg leading-relaxed" style="color: var(--text-secondary)">{profileData.bio}</p>
-          </div>
+          <BaseballCard 
+            name={profileData.name}
+            bio={profileData.bio}
+            avatar={profileData.avatar}
+          />
         </div>
         
-        <!-- Theme Toggle at Bottom -->
-        <div class="mt-auto pt-8">
+        <!-- Theme Toggle and Copyright at Bottom -->
+        <div class="mt-auto pt-8 flex items-center gap-4">
           <label class="swap swap-rotate">
             <input type="checkbox" id="theme-toggle" class="theme-controller" />
             
@@ -217,11 +116,12 @@ const profileData = {
               <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
             </svg>
           </label>
+          <p class="text-sm text-base-content/60">© {new Date().getFullYear()} {profileData.name}</p>
         </div>
       </aside>
 
       <!-- Right Column - Scrollable Content -->
-      <main class="flex-1 overflow-y-auto px-[45px] py-12" style="background: var(--bg-primary);">
+      <main class="flex-1 overflow-y-auto px-[45px] py-12 bg-base-100">
         <!-- Top spacing -->
         <div class="h-[50px]"></div>
         
