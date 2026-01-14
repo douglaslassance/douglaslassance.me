@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
+      screens: {
+        'desktop': '1270px',
+      },
     },
   },
   plugins: [require('daisyui')],
