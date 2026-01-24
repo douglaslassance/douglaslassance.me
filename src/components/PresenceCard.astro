@@ -5,10 +5,9 @@ interface Props {
   url: string;
   color: string;
   action: string;
-  count: string;
 }
 
-const { name, icon, url, color, action, count } = Astro.props;
+const { name, icon, url, color, action } = Astro.props;
 const isMonochrome = color === '#000000' || color === '#333333';
 const isYouTube = name === 'YouTube';
 const subscribeUrl = isYouTube ? `${url}?sub_confirmation=1` : url;
