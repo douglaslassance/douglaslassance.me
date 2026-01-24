@@ -1,61 +1,76 @@
 ---
 import BaseballCard from '../components/BaseballCard.astro';
-import Icon from '../components/Icon.astro';
 import PresenceCard from '../components/PresenceCard.astro';
 import ProfessionalProjectCard from '../components/ProfessionalProjectCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+
+type ProjectType = 'youtube' | 'instagram' | 'website' | 'github' | 'steam' | 'fab' | 'company' | 'homebrew';
+
+interface Project {
+  title: string;
+  category: string;
+  description: string;
+  url: string;
+  image: string;
+  type: ProjectType;
+}
 
 const profileData = {
   name: "Douglas Lassance",
   bio: "Raised in France, maturing in Los Angeles, I juxtapose brush strokes, connect vertices, drop keyframes, and chain instructions. Once in a while, others can enjoy the result.",
   avatar: "/avatar.png",
   online: [
-    { name: "Bluesky", icon: "bluesky.svg", url: "https://bsky.app/profile/douglaslassance.bsky.social", count: "1.2K", action: "Follow", color: "#1185fe" },
-    { name: "YouTube", icon: "youtube.svg", url: "https://youtube.com/@douglaslassance", count: "856", action: "Subscribe", color: "#ff0000" },
-    { name: "Spotify", icon: "spotify.svg", url: "https://open.spotify.com/user/asterokid", count: "42", action: "Follow", color: "#1db954" },
-    { name: "GitHub", icon: "github.svg", url: "https://github.com/douglaslassance", count: "17", action: "Follow", color: "#333333" },
-    { name: "Steam", icon: "steam.svg", url: "https://steamcommunity.com/id/douglaslassance/", count: "", action: "Follow", color: "#1b9fd8" },
-    { name: "Mastodon", icon: "mastodon.svg", url: "https://mastodon.social/@douglaslassance", count: "94", action: "Follow", color: "#6364ff" },
-    { name: "Patreon", icon: "patreon.svg", url: "https://patreon.com/douglaslassance", count: "8", action: "Support", color: "#ff424d" },
-    { name: "LinkedIn", icon: "linkedin.svg", url: "https://linkedin.com/in/douglaslassance", count: "500+", action: "Connect", color: "#0a66c2" },
-    { name: "SoundCloud", icon: "soundcloud.svg", url: "https://soundcloud.com/douglaslassance", count: "127", action: "Follow", color: "#ff5500" },
-    { name: "Pinterest", icon: "pinterest.svg", url: "https://pinterest.com/douglaslassance", count: "215", action: "Follow", color: "#e60023" },
-    { name: "Fab", icon: "fab.svg", url: "https://www.fab.com/sellers/Douglas%20Lassance", count: "342", action: "View", color: "#00d4aa" },
-    { name: "Midjourney", icon: "midjourney.svg", url: "https://www.midjourney.com/@douglaslassance", count: "1.5K", action: "View", color: "#000000" },
-    { name: "Itch.io", icon: "itch-io.svg", url: "https://douglaslassance.itch.io", count: "412", action: "Follow", color: "#fa5c5c" },
-    { name: "Gumroad", icon: "gumroad.svg", url: "https://douglaslassance.gumroad.com", count: "289", action: "Follow", color: "#ff90e8" },
-    { name: "Apple Music", icon: "apple-music.svg", url: "https://music.apple.com/profile/douglaslassance", count: "34", action: "Follow", color: "#fa243c" },
-    { name: "Ko-fi", icon: "ko-fi.svg", url: "https://ko-fi.com/douglaslassance", count: "23", action: "Support", color: "#ff5e5b" },
-    { name: "Medium", icon: "medium.svg", url: "https://medium.com/@douglaslassance", count: "156", action: "Follow", color: "#000000" },
+    { name: "Bluesky", icon: "bluesky.svg", url: "https://bsky.app/profile/douglaslassance.bsky.social", action: "Follow", color: "#1185fe" },
+    { name: "YouTube", icon: "youtube.svg", url: "https://youtube.com/@douglaslassance", action: "Subscribe", color: "#ff0000" },
+    { name: "Spotify", icon: "spotify.svg", url: "https://open.spotify.com/user/asterokid", action: "Follow", color: "#1db954" },
+    { name: "GitHub", icon: "github.svg", url: "https://github.com/douglaslassance", action: "Follow", color: "#333333" },
+    { name: "Steam", icon: "steam.svg", url: "https://steamcommunity.com/id/douglaslassance/", action: "Follow", color: "#1b9fd8" },
+    { name: "Mastodon", icon: "mastodon.svg", url: "https://mastodon.social/@douglaslassance", action: "Follow", color: "#6364ff" },
+    { name: "Patreon", icon: "patreon.svg", url: "https://patreon.com/douglaslassance", action: "Support", color: "#ff424d" },
+    { name: "LinkedIn", icon: "linkedin.svg", url: "https://linkedin.com/in/douglaslassance", action: "Connect", color: "#0a66c2" },
+    { name: "SoundCloud", icon: "soundcloud.svg", url: "https://soundcloud.com/douglaslassance", action: "Follow", color: "#ff5500" },
+    { name: "Pinterest", icon: "pinterest.svg", url: "https://pinterest.com/douglaslassance", action: "Follow", color: "#e60023" },
+    { name: "Fab", icon: "fab.svg", url: "https://www.fab.com/sellers/Douglas%20Lassance", action: "View", color: "#00d4aa" },
+    { name: "Midjourney", icon: "midjourney.svg", url: "https://www.midjourney.com/@douglaslassance", action: "View", color: "#000000" },
+    { name: "Itch.io", icon: "itch-io.svg", url: "https://douglaslassance.itch.io", action: "Follow", color: "#fa5c5c" },
+    { name: "Gumroad", icon: "gumroad.svg", url: "https://douglaslassance.gumroad.com", action: "Follow", color: "#ff90e8" },
+    { name: "Apple Music", icon: "apple-music.svg", url: "https://music.apple.com/profile/douglaslassance", action: "Follow", color: "#fa243c" },
+    { name: "Ko-fi", icon: "ko-fi.svg", url: "https://ko-fi.com/douglaslassance", action: "Support", color: "#ff5e5b" },
+    { name: "Medium", icon: "medium.svg", url: "https://medium.com/@douglaslassance", action: "Follow", color: "#000000" },
   ],
-  personal: [
-    {
-      title: "Personal Project One",
-      description: "A cool side project I built to solve a problem I encountered in my daily workflow.",
-      image: "/project1.jpg",
-      url: "#"
-    },
-    {
-      title: "Personal Project Two",
-      description: "Another interesting personal endeavor exploring new technologies.",
-      image: "/project2.jpg",
-      url: "#"
-    }
-  ],
-  professional: [
-    {
-      title: "Professional Project One",
-      description: "An enterprise solution I contributed to, serving thousands of users.",
-      image: "/project3.jpg",
-      url: "#"
-    },
-    {
-      title: "Professional Project Two",
-      description: "A commercial product I helped build from the ground up.",
-      image: "/project4.jpg",
-      url: "#"
-    }
-  ]
+  personalProjects: [
+    { title: "Galactic Mail", category: "Animated short", description: "Corporate rivalry meets interstellar delivery.", url: "https://youtu.be/WacTwZljbKk", image: "https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg", type: "youtube" },
+    { title: "Greedy Hand", category: "Photo series", description: "No need own when you can hold.", url: "https://www.instagram.com/greedyhand", image: "/greedy-hand.png", type: "instagram" },
+    { title: "Shaker", category: "Unreal Engine plugin", description: "Shake anything!", url: "https://www.unrealengine.com/marketplace/en-US/product/shaker", image: "https://media.fab.com/image_previews/gallery_images/c7f65c12-0b25-40eb-a365-86b0437751c2/121b8639-fb63-4948-9d67-1866c80fdff8.jpg", type: "fab" },
+    { title: "Sigg Jones", category: "Animated short", description: "When brawl meet bromance.", url: "https://youtu.be/TE86DR8E0LI", image: "https://i.ytimg.com/vi/TE86DR8E0LI/hqdefault.jpg", type: "youtube" },
+    { title: "Gifted", category: "macOS app", description: "Automatic VJing for your next party.", url: "https://github.com/douglaslassance/gifted", image: "https://i.ytimg.com/vi/uSvY8ygMFig/hqdefault.jpg", type: "github" },
+    { title: "Gitalong", category: "CLI", description: "Git without conflicts.", url: "https://github.com/douglaslassance/gitalong", image: "/code.webp", type: "github" },
+    { title: "Playsthetic", category: "Game studio", description: "Lean game studio with respect for the past.", url: "https://playsthetic.com/", image: "https://v1.screenshot.11ty.dev/https%3A%2F%2Fplaysthetic.com%2F/opengraph/", type: "website" },
+    { title: "Peel", category: "macOS app", description: "Browse your file by tags.", url: "https://formulae.brew.sh/formula/peel", image: "https://v1.screenshot.11ty.dev/https%3A%2F%2Fformulae.brew.sh%2Fformula%2Fpeel/opengraph/", type: "homebrew" },
+  ] as Project[],
+  professionalProjects: [
+    { title: "Fortnite Superman", category: "Cinematic trailer", description: "Technical Director", url: "https://youtu.be/Kk9nW1UMsH0?si=iuRVesNojyi0VEKS", image: "https://i.ytimg.com/vi/Kk9nW1UMsH0/hqdefault.jpg", type: "youtube" },
+    { title: "Spectre Divide", category: "Video game", description: "Principal Technical Artist", url: "https://store.steampowered.com/app/2641470/Spectre_Divide/", image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2641470/header.jpg?t=1745278846", type: "steam" },
+    { title: "Marcel Lassance", category: "Website", description: "Developer", url: "https://marcellassance.fr", image: "https://v1.screenshot.11ty.dev/https%3A%2F%2Fmarcellassance.fr/opengraph/", type: "website" },
+    { title: "Love, Death & Robots", category: "Animated series", description: "Previs Supervisor", url: "https://youtu.be/wUFwunMKa4E?si=jrPzF7psHNnH1xRs", image: "https://i.ytimg.com/vi/wUFwunMKa4E/hqdefault.jpg", type: "youtube" },
+    { title: "League of Legends: A New Dawn", category: "Cinematic trailer", description: "Previs Artist", url: "https://youtu.be/vzHrjOMfHPY?si=NBlwjFsm5u-i0nTC", image: "https://i.ytimg.com/vi/vzHrjOMfHPY/hqdefault.jpg", type: "youtube" },
+    { title: "Angel Stone", category: "Cinematic trailer", description: "Previs Supervisor", url: "https://youtu.be/WDkGCuqY0Xs?si=_YFCeC69LTRFKvjp", image: "https://i.ytimg.com/vi/WDkGCuqY0Xs/hqdefault.jpg", type: "youtube" },
+    { title: "The Girl with the Dragon Tattoo", category: "Opening titles", description: "Previs Artist", url: "https://youtu.be/sY4f_83t_rw?si=ZWX2l3WI9FG-0BXW", image: "https://i.ytimg.com/vi/sY4f_83t_rw/hqdefault.jpg", type: "youtube" },
+    { title: "Deadpool", category: "Movie", description: "Previs Artist", url: "https://youtu.be/ONHBaC-pfsk?si=fiiMuGCWSED3F52Z", image: "https://i.ytimg.com/vi/ONHBaC-pfsk/hqdefault.jpg", type: "youtube" },
+    { title: "SW: Knights of the Fallen Empire", category: "Cinematic trailer", description: "Previs Supervisor", url: "https://youtu.be/1udespUmzGY?si=eo6tjNg_PvZWi9xn", image: "https://i.ytimg.com/vi/1udespUmzGY/hqdefault.jpg", type: "youtube" },
+    { title: "Dead Rising 3", category: "Launch trailer", description: "Previs Artist", url: "https://youtu.be/UFXfH-ruLXo?si=ZPNTSnoZE1h3Lt8w", image: "https://i.ytimg.com/vi/UFXfH-ruLXo/hqdefault.jpg", type: "youtube" },
+    { title: "Arena of Valor", category: "Cinematic trailer", description: "Previs Supervisor", url: "https://youtu.be/JM_UdSUW1ao?si=k_aggFSAIzbA36aX", image: "https://i.ytimg.com/vi/JM_UdSUW1ao/hqdefault.jpg", type: "youtube" },
+    { title: "Halo Wars 2", category: "Game cinematics", description: "Previs Supervisor", url: "https://youtu.be/uWk8FRDdvlY?si=8PXGmH7UpL41XnLU", image: "https://i.ytimg.com/vi/uWk8FRDdvlY/hqdefault.jpg", type: "youtube" },
+    { title: "cross3d", category: "Python library", description: "Developer", url: "https://github.com/blurstudio/cross3d", image: "/code.webp", type: "github" },
+    { title: "Elder Scrolls Online", category: "Cinematic trailer", description: "Previs Artist", url: "https://youtu.be/195pyutqDA4?si=XsnEVdkvCr0GjXQC", image: "https://i.ytimg.com/vi/195pyutqDA4/hqdefault.jpg", type: "youtube" },
+    { title: "Batman: Arkham Knight", category: "Cinematic trailer", description: "Previs Artist", url: "https://youtu.be/6IE3fjbc_wY?si=342LXnV39PUeEA2g", image: "https://i.ytimg.com/vi/6IE3fjbc_wY/hqdefault.jpg", type: "youtube" },
+    { title: "Batman: Arkham Origins", category: "Cinematic trailer", description: "Previs Artist", url: "https://youtu.be/9pnK8akbd2M?si=TjEX9LvOmwx_5XQ2", image: "https://i.ytimg.com/vi/9pnK8akbd2M/hqdefault.jpg", type: "youtube" },
+    { title: "Resident Evil: Raccoon City", category: "Cinematic trailer", description: "Previs Artist", url: "https://youtu.be/Ar-qKACbnkg?si=WVmcCsfmrPnU4wfG", image: "https://i.ytimg.com/vi/Ar-qKACbnkg/hqdefault.jpg", type: "youtube" },
+    { title: "WildStar", category: "Launch trailer", description: "Previs Artist", url: "https://youtu.be/x-NXdWk9sm8?si=Obz3ZkQMCKfW-Fyb", image: "https://i.ytimg.com/vi/x-NXdWk9sm8/hqdefault.jpg", type: "youtube" },
+    { title: "Star Wars: The Old Republic", category: "Cinematic trailer", description: "Previs Artist", url: "https://youtu.be/Pb8M5P1QKX8?si=wX70Up99NIyRid5x", image: "https://i.ytimg.com/vi/Pb8M5P1QKX8/hqdefault.jpg", type: "youtube" },
+    { title: "eBoy Peecol'", category: "Toys", description: "Modeler", url: "https://www.eboy.com/search?q=peecol", image: "https://www.eboy.com/cdn/shop/files/eboy-peecol-toy-poster-detail-square.png", type: "website" },
+    { title: "Dead Pirates' Wood", category: "Music video", description: "Rigger", url: "https://youtu.be/cD1Rrfc0y-M?si=lVait8LIEMPVjs5W", image: "https://i.ytimg.com/vi/cD1Rrfc0y-M/hqdefault.jpg", type: "youtube" },
+  ] as Project[]
 };
 ---
 
@@ -109,7 +124,6 @@ const profileData = {
               url={social.url}
               color={social.color}
               action={social.action}
-              count={social.count}
             />
           ))}
           </div>
@@ -119,62 +133,16 @@ const profileData = {
         <section class="mb-16">
           <h2 class="text-xl font-semibold mb-8">Personal projects</h2>
           <div class="grid grid-cols-1 gap-4">
-          <ProjectCard
-            title="Galactic Mail"
-            description="Short film"
-            url="https://youtu.be/WacTwZljbKk"
-            image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProjectCard
-            title="Greedy Hand"
-            description="Photo series"
-            url="https://www.instagram.com/greedyhand"
-            image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fwww.instagram.com%2Fgreedyhand/opengraph/"
-            type="instagram"
-          />
-          <ProjectCard
-            title="Shaker"
-            description="Unreal Engine plugin"
-            url="https://www.unrealengine.com/marketplace/en-US/product/shaker"
-            image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fwww.unrealengine.com%2Fmarketplace%2Fen-US%2Fproduct%2Fshaker/opengraph/"
-            type="fab"
-          />
-          <ProjectCard
-            title="Sigg Jones"
-            description="Short film"
-            url="https://youtu.be/TE86DR8E0LI"
-            image="https://i.ytimg.com/vi/TE86DR8E0LI/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProjectCard
-            title="Gifted"
-            description="macOS application"
-            url="https://youtu.be/uSvY8ygMFig"
-            image="https://i.ytimg.com/vi/uSvY8ygMFig/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProjectCard
-            title="Gitalong"
-            description="Command line interface"
-            url="https://github.com/douglaslassance/gitalong"
-            image="https://opengraph.githubassets.com/1/douglaslassance/gitalong"
-            type="github"
-          />
-          <ProjectCard
-            title="Playsthetic"
-            description="Game studio"
-            url="https://playsthetic.com/"
-            image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fplaysthetic.com%2F/opengraph/"
-            type="website"
-          />
-          <ProjectCard
-            title="Peel"
-            description="macOS application"
-            url="https://formulae.brew.sh/formula/peel"
-            image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fformulae.brew.sh%2Fformula%2Fpeel/opengraph/"
-            type="homebrew"
-          />
+          {profileData.personalProjects.map((project) => (
+            <ProjectCard
+              title={project.title}
+              category={project.category}
+              description={project.description}
+              url={project.url}
+              image={project.image}
+              type={project.type}
+            />
+          ))}
           </div>
         </section>
 
@@ -182,175 +150,17 @@ const profileData = {
         <section class="mb-16">
           <h2 class="text-xl font-semibold mb-8">Professional projects</h2>
           <div class="grid grid-cols-1 gap-4">
-          <ProfessionalProjectCard
-            title="Fortnite Superman"
-            description='Cinematic trailer'
-            role="Technical Director"
-            url="https://youtu.be/Kk9nW1UMsH0?si=iuRVesNojyi0VEKS"
-            image="https://i.ytimg.com/vi/Kk9nW1UMsH0/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Spectre Divide",
-            description='Video game',
-            role="Principal Technical Artist",
-            url="https://store.steampowered.com/app/2641470/Spectre_Divide/"
-            image="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2641470/header.jpg?t=1745278846"
-            type="steam"
-          />
-          <ProfessionalProjectCard
-            title="Marcel Lassance",
-            description='Website',
-            role="Developer",
-            url="https://marcellassance.fr"
-            image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fmarcellassance.fr/opengraph/"
-            type="website"
-          />
-          <ProfessionalProjectCard
-            title="Love, Death & Robots"
-            description='Animated series'
-            role="Previs Supervisor"
-            url="https://youtu.be/wUFwunMKa4E?si=jrPzF7psHNnH1xRs"
-            image="https://i.ytimg.com/vi/wUFwunMKa4E/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="League of Legends: A New Dawn"
-            description='Cinematic trailer'
-            role="Previs Artist"
-            url="https://youtu.be/vzHrjOMfHPY?si=NBlwjFsm5u-i0nTC"
-            image="https://i.ytimg.com/vi/vzHrjOMfHPY/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Angel Stone"
-            description='Cinematic trailer'
-            role="Previs Supervisor"
-            url="https://youtu.be/WDkGCuqY0Xs?si=_YFCeC69LTRFKvjp"
-            image="https://i.ytimg.com/vi/WDkGCuqY0Xs/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="The Girl with the Dragon Tattoo"
-            description='Opening titles'
-            role="Previs Artist"
-            url="https://youtu.be/sY4f_83t_rw?si=ZWX2l3WI9FG-0BXW"
-            image="https://i.ytimg.com/vi/sY4f_83t_rw/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Deadpool"
-            description='Movie'
-            role="Previs Artist"
-            url="https://youtu.be/ONHBaC-pfsk?si=fiiMuGCWSED3F52Z"
-            image="https://i.ytimg.com/vi/ONHBaC-pfsk/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="SW: Knights of the Fallen Empire"
-            description='Cinematic trailer'
-            role="Previs Supervisor"
-            url="https://youtu.be/1udespUmzGY?si=eo6tjNg_PvZWi9xn"
-            image="https://i.ytimg.com/vi/1udespUmzGY/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Dead Rising 3"
-            description='Launch trailer'
-            role="Previs Artist"
-            url="https://youtu.be/UFXfH-ruLXo?si=ZPNTSnoZE1h3Lt8w"
-            image="https://i.ytimg.com/vi/UFXfH-ruLXo/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Arena of Valor"
-            description='Cinematic trailer'
-            role="Previs Supervisor"
-            url="https://youtu.be/JM_UdSUW1ao?si=k_aggFSAIzbA36aX"
-            image="https://i.ytimg.com/vi/JM_UdSUW1ao/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Halo Wars 2"
-            description='Game cinematics'
-            role="Previs Supervisor"
-            url="https://youtu.be/uWk8FRDdvlY?si=8PXGmH7UpL41XnLU"
-            image="https://i.ytimg.com/vi/uWk8FRDdvlY/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="cross3d"
-            description='Library'
-            role="Developer"
-            url="https://github.com/blurstudio/cross3d"
-            image="https://opengraph.githubassets.com/1/blurstudio/cross3d"
-            type="github"
-          />
-          <ProfessionalProjectCard
-            title="Elder Scrolls Online"
-            description='Cinematic trailer'
-            role="Layout Artist"
-            url="https://youtu.be/195pyutqDA4?si=XsnEVdkvCr0GjXQC"
-            image="https://i.ytimg.com/vi/195pyutqDA4/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Batman: Arkham Knight"
-            description='Cinematic trailer'
-            role="Previs Artist"
-            url="https://youtu.be/6IE3fjbc_wY?si=342LXnV39PUeEA2g"
-            image="https://i.ytimg.com/vi/6IE3fjbc_wY/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Batman: Arkham Origins"
-            description='Cinematic trailer'
-            role="Previs Artist"
-            url="https://youtu.be/9pnK8akbd2M?si=TjEX9LvOmwx_5XQ2"
-            image="https://i.ytimg.com/vi/9pnK8akbd2M/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Resident Evil: Raccoon City"
-            description='Cinematic trailer'
-            role="Previs Artist"
-            url="https://youtu.be/Ar-qKACbnkg?si=WVmcCsfmrPnU4wfG"
-            image="https://i.ytimg.com/vi/Ar-qKACbnkg/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="WildStar"
-            description='Launch trailer'
-            role="Previs Artist"
-            url="https://youtu.be/x-NXdWk9sm8?si=Obz3ZkQMCKfW-Fyb"
-            image="https://i.ytimg.com/vi/x-NXdWk9sm8/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="Star Wars: The Old Republic"
-            description='Cinematic trailer'
-            role="Previs Artist"
-            url="https://youtu.be/Pb8M5P1QKX8?si=wX70Up99NIyRid5x"
-            image="https://i.ytimg.com/vi/Pb8M5P1QKX8/hqdefault.jpg"
-            type="youtube"
-          />
-          <ProfessionalProjectCard
-            title="eBoy Peecol'"
-            description='Toys'
-            role="Modeler"
-            url="https://www.eboy.com/search?q=peecol"
-            image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fwww.eboy.com%2Fsearch%3Fq%3Dpeecol/opengraph/"
-            type="website"
-          />
-          <ProfessionalProjectCard
-            title="Dead Pirates' Wood"
-            description='Music video'
-            role="Rigger"
-            url="https://youtu.be/cD1Rrfc0y-M?si=lVait8LIEMPVjs5W"
-            image="https://i.ytimg.com/vi/cD1Rrfc0y-M/hqdefault.jpg"
-            type="youtube"
-          />
-        </div>
+          {profileData.professionalProjects.map((project) => (
+            <ProfessionalProjectCard
+              title={project.title}
+              category={project.category}
+              description={project.description}
+              url={project.url}
+              image={project.image}
+              type={project.type}
+            />
+          ))}
+          </div>
         </section>
       </main>
       
@@ -426,7 +236,6 @@ const profileData = {
                 url={social.url}
                 color={social.color}
                 action={social.action}
-                count={social.count}
               />
             ))}
           </div>
@@ -436,62 +245,16 @@ const profileData = {
         <section class="mb-16">
           <h2 class="text-xl font-semibold mb-8">Personal projects</h2>
           <div class="grid grid-cols-2 gap-6">
-            <ProjectCard
-              title="Galactic Mail"
-              description="Short film"
-              url="https://youtu.be/WacTwZljbKk"
-              image="https://i.ytimg.com/vi/WacTwZljbKk/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProjectCard
-              title="Greedy Hand"
-              description="Photo series"
-              url="https://www.instagram.com/greedyhand"
-              image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fwww.instagram.com%2Fgreedyhand/opengraph/"
-              type="instagram"
-            />
-            <ProjectCard
-              title="Shaker"
-              description="Unreal Engine plugin"
-              url="https://www.unrealengine.com/marketplace/en-US/product/shaker"
-              image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fwww.unrealengine.com%2Fmarketplace%2Fen-US%2Fproduct%2Fshaker/opengraph/"
-              type="fab"
-            />
-            <ProjectCard
-              title="Sigg Jones"
-              description="Short film"
-              url="https://youtu.be/TE86DR8E0LI"
-              image="https://i.ytimg.com/vi/TE86DR8E0LI/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProjectCard
-              title="Gifted"
-              description="Application"
-              url="https://youtu.be/uSvY8ygMFig"
-              image="https://i.ytimg.com/vi/uSvY8ygMFig/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProjectCard
-              title="Gitalong"
-              description="CLI"
-              url="https://github.com/douglaslassance/gitalong"
-              image="https://opengraph.githubassets.com/1/douglaslassance/gitalong"
-              type="github"
-            />
-            <ProjectCard
-              title="Playsthetic"
-              description="Game studio"
-              url="https://playsthetic.com/"
-              image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fplaysthetic.com%2F/opengraph/"
-              type="website"
-            />
-            <ProjectCard
-              title="Peel"
-              description="Application"
-              url="https://formulae.brew.sh/formula/peel"
-              image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fformulae.brew.sh%2Fformula%2Fpeel/opengraph/"
-              type="homebrew"
-            />
+            {profileData.personalProjects.map((project) => (
+              <ProjectCard
+                title={project.title}
+                category={project.category}
+                description={project.description}
+                url={project.url}
+                image={project.image}
+                type={project.type}
+              />
+            ))}
           </div>
         </section>
 
@@ -499,174 +262,16 @@ const profileData = {
         <section class="mb-16">
           <h2 class="text-xl font-semibold mb-8">Professional projects</h2>
           <div class="grid grid-cols-2 gap-7">
-            <ProfessionalProjectCard
-              title="Fortnite Superman"
-              description='Cinematic trailer'
-              role="Technical Director"
-              url="https://youtu.be/Kk9nW1UMsH0?si=iuRVesNojyi0VEKS"
-              image="https://i.ytimg.com/vi/Kk9nW1UMsH0/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Spectre Divide"
-              description='Video game'
-              role="Principal Technical Artist"
-              url="https://store.steampowered.com/app/2641470/Spectre_Divide/"
-              image="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2641470/header.jpg?t=1745278846"
-              type="steam"
-            />
-            <ProfessionalProjectCard
-              title="Marcel Lassance"
-              description='Website'
-              role="Developer"
-              url="https://marcellassance.fr"
-              image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fmarcellassance.fr/opengraph/"
-              type="website"
-            />
-            <ProfessionalProjectCard
-              title="Love, Death & Robots"
-              description='Animated series'
-              role="Previs Supervisor"
-              url="https://youtu.be/wUFwunMKa4E?si=jrPzF7psHNnH1xRs"
-              image="https://i.ytimg.com/vi/wUFwunMKa4E/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="League of Legends: A New Dawn"
-              description='Cinematic trailer'
-              role="Previs Artist"
-              url="https://youtu.be/vzHrjOMfHPY?si=NBlwjFsm5u-i0nTC"
-              image="https://i.ytimg.com/vi/vzHrjOMfHPY/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Angel Stone"
-              description='Cinematic trailer'
-              role="Previs Supervisor"
-              url="https://youtu.be/WDkGCuqY0Xs?si=_YFCeC69LTRFKvjp"
-              image="https://i.ytimg.com/vi/WDkGCuqY0Xs/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="The Girl with the Dragon Tattoo"
-              description='Opening titles'
-              role="Previs Artist"
-              url="https://youtu.be/sY4f_83t_rw?si=ZWX2l3WI9FG-0BXW"
-              image="https://i.ytimg.com/vi/sY4f_83t_rw/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Deadpool"
-              description='Movie'
-              role="Previs Artist"
-              url="https://youtu.be/ONHBaC-pfsk?si=fiiMuGCWSED3F52Z"
-              image="https://i.ytimg.com/vi/ONHBaC-pfsk/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="SW: Knights of the Fallen Empire"
-              description='Cinematic trailer'
-              role="Previs Supervisor"
-              url="https://youtu.be/1udespUmzGY?si=eo6tjNg_PvZWi9xn"
-              image="https://i.ytimg.com/vi/1udespUmzGY/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Dead Rising 3"
-              description='Launch trailer'
-              role="Previs Artist"
-              url="https://youtu.be/UFXfH-ruLXo?si=ZPNTSnoZE1h3Lt8w"
-              image="https://i.ytimg.com/vi/UFXfH-ruLXo/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Arena of Valor"
-              description='Cinematic trailer'
-              role="Previs Supervisor"
-              url="https://youtu.be/JM_UdSUW1ao?si=k_aggFSAIzbA36aX"
-              image="https://i.ytimg.com/vi/JM_UdSUW1ao/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Halo Wars 2"
-              description='Game cinematics'
-              role="Previs Supervisor"
-              url="https://youtu.be/uWk8FRDdvlY?si=8PXGmH7UpL41XnLU"
-              image="https://i.ytimg.com/vi/uWk8FRDdvlY/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="cross3d"
-              description='Library'
-              role="Developer"
-              url="https://github.com/blurstudio/cross3d"
-              image="https://opengraph.githubassets.com/1/blurstudio/cross3d"
-              type="github"
-            />
-            <ProfessionalProjectCard
-              title="Elder Scrolls Online"
-              description='Cinematic trailer'
-              role="Layout Artist"
-              url="https://youtu.be/195pyutqDA4?si=XsnEVdkvCr0GjXQC"
-              image="https://i.ytimg.com/vi/195pyutqDA4/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Batman: Arkham Knight"
-              description='Cinematic trailer'
-              role="Previs Artist"
-              url="https://youtu.be/6IE3fjbc_wY?si=342LXnV39PUeEA2g"
-              image="https://i.ytimg.com/vi/6IE3fjbc_wY/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Batman: Arkham Origins"
-              description='Cinematic trailer'
-              role="Previs Artist"
-              url="https://youtu.be/9pnK8akbd2M?si=TjEX9LvOmwx_5XQ2"
-              image="https://i.ytimg.com/vi/9pnK8akbd2M/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Resident Evil: Raccoon City"
-              description='Cinematic trailer'
-              role="Previs Artist"
-              url="https://youtu.be/Ar-qKACbnkg?si=WVmcCsfmrPnU4wfG"
-              image="https://i.ytimg.com/vi/Ar-qKACbnkg/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="WildStar"
-              description='Launch trailer'
-              role="Previs Artist"
-              url="https://youtu.be/x-NXdWk9sm8?si=Obz3ZkQMCKfW-Fyb"
-              image="https://i.ytimg.com/vi/x-NXdWk9sm8/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="Star Wars: The Old Republic"
-              description='Cinematic trailer'
-              role="Previs Artist"
-              url="https://youtu.be/Pb8M5P1QKX8?si=wX70Up99NIyRid5x"
-              image="https://i.ytimg.com/vi/Pb8M5P1QKX8/hqdefault.jpg"
-              type="youtube"
-            />
-            <ProfessionalProjectCard
-              title="eBoy Peecol'"
-              description='Toys'
-              role="Modeler"
-              url="https://www.eboy.com/search?q=peecol"
-              image="https://v1.screenshot.11ty.dev/https%3A%2F%2Fwww.eboy.com%2Fsearch%3Fq%3Dpeecol/opengraph/"
-              type="website"
-            />
-            <ProfessionalProjectCard
-              title="Dead Pirates' Wood"
-              description='Music video'
-              role="Rigger"
-              url="https://youtu.be/cD1Rrfc0y-M?si=lVait8LIEMPVjs5W"
-              image="https://i.ytimg.com/vi/cD1Rrfc0y-M/hqdefault.jpg"
-              type="youtube"
-            />
+            {profileData.professionalProjects.map((project) => (
+              <ProfessionalProjectCard
+                title={project.title}
+                category={project.category}
+                description={project.description}
+                url={project.url}
+                image={project.image}
+                type={project.type}
+              />
+            ))}
           </div>
         </section>
       </main>

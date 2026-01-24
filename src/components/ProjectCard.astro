@@ -1,13 +1,14 @@
 ---
 interface Props {
   title: string;
+  category: string;
   description: string;
   url: string;
   image: string;
   type?: 'youtube' | 'instagram' | 'website' | 'github' | 'steam' | 'fab' | 'company' | 'homebrew';
 }
 
-const { title, description, url, image, type = 'website' } = Astro.props;
+const { title, category, description, url, image, type = 'website' } = Astro.props;
 
 // Brand colors and icons mapping
 const brandConfig: Record<string, { color: string; icon: string }> = {
@@ -52,7 +53,9 @@ const iconMaskStyle = `
           />
           <h3 class="card-title text-base font-semibold text-base-content/80">{title}</h3>
         </div>
-        <span class="inline-block px-2 py-1 rounded-full text-xs font-medium text-base-content/70" style={`background-color: ${brand.color}20;`}>{description}</span>
+        <span class="inline-block px-2 py-1 rounded-full text-xs font-medium text-base-content/70" style={`background-color: ${brand.color}20;`}>{category}</span>
+        <div class="divider my-1"></div>
+        <p class="text-sm text-base-content/60">{description}</p>
       </div>
     </div>
     
