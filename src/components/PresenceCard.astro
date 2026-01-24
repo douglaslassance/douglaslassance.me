@@ -11,7 +11,6 @@ const { name, icon, url, color, action } = Astro.props;
 const isMonochrome = color === '#000000' || color === '#333333';
 const isYouTube = name === 'YouTube';
 const subscribeUrl = isYouTube ? `${url}?sub_confirmation=1` : url;
-const Tag = isYouTube ? 'div' : 'a';
 
 // Icon mask styles - always include background color
 const iconMaskStyle = `
@@ -27,12 +26,12 @@ const iconMaskStyle = `
 `;
 ---
 
-<Tag
-  href={isYouTube ? undefined : url}
-  class="card shadow-md hover:shadow-xl transition-all duration-300 group"
+<a
+  href={url}
+  class="card shadow-md hover:shadow-xl transition-all duration-300 group block"
   style={`background-color: ${color}10;`}
-  target={isYouTube ? undefined : "_blank"}
-  rel={isYouTube ? undefined : "noopener noreferrer"}
+  target="_blank"
+  rel="noopener noreferrer"
 >
   <div class="card-body p-3 desktop:p-5 items-start text-left aspect-square justify-between">
     <div class="flex flex-col items-start gap-2 desktop:gap-3 w-full">
@@ -44,16 +43,15 @@ const iconMaskStyle = `
     </div>
     {isYouTube && (
       <div class="w-full flex justify-start">
-        <a 
-          href={subscribeUrl}
-          class="btn btn-xs desktop:btn-sm text-white border-0"
+        <button 
+          onclick={`window.open('${subscribeUrl}', '_blank'); event.stopPropagation();`}
+          class="btn btn-xs desktop:btn-sm text-white border-0 p-3"
           style="background-color: #ff0000cc;"
-          target="_blank"
-          rel="noopener noreferrer"
+          type="button"
         >
-          <span class="font-bold">{action}</span>
-        </a>
+          {action}
+        </button>
       </div>
     )}
   </div>
-</Tag>
+</a>
