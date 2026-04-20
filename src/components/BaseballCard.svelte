@@ -1,15 +1,13 @@
----
-interface Props {
-  name: string;
-  bio: string;
-  avatar: string;
-  mobile?: boolean;
-}
+<script lang="ts">
+  let { name, bio, avatar, mobile = false }: {
+    name: string;
+    bio: string;
+    avatar: string;
+    mobile?: boolean;
+  } = $props();
+</script>
 
-const { name, bio, avatar, mobile = false } = Astro.props;
----
-
-{mobile ? (
+{#if mobile}
   <div class="flex flex-col items-center gap-4 text-center">
     <div class="w-24 rounded-full overflow-hidden flex-shrink-0">
       <img src={avatar} alt={name} />
@@ -19,7 +17,7 @@ const { name, bio, avatar, mobile = false } = Astro.props;
       <p class="text-base text-foreground/60">{bio}</p>
     </div>
   </div>
-) : (
+{:else}
   <div class="flex flex-col space-y-8">
     <div class="w-48 rounded-full overflow-hidden flex-shrink-0">
       <img src={avatar} alt={name} />
@@ -29,4 +27,4 @@ const { name, bio, avatar, mobile = false } = Astro.props;
       <p class="text-lg leading-relaxed text-foreground/60">{bio}</p>
     </div>
   </div>
-)}
+{/if}
