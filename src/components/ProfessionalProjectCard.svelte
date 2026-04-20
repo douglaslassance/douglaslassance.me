@@ -47,16 +47,13 @@
   <div class="flex flex-row h-full aspect-[5/2]">
     <div class="flex-1 flex flex-col justify-between p-4">
       <div>
-        <div class="flex items-start gap-2 mb-2">
-          <div
-            class="w-4 h-4 opacity-60 flex-shrink-0 mt-1"
-            style={iconMaskStyle}
-          ></div>
-          <div class="overflow-hidden min-w-0 flex-1">
-            <h3 class="card-title whitespace-nowrap text-base font-semibold text-foreground/80">{title}</h3>
-          </div>
+        <div class="overflow-hidden min-w-0 mb-2">
+          <h3 class="card-title whitespace-nowrap text-base font-semibold text-foreground/80">{title}</h3>
         </div>
-        <span class="inline-block px-2 py-1 rounded-full text-xs font-medium text-foreground/70 bg-muted">{category}</span>
+        <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium text-foreground/70 bg-muted">
+          <div class="w-3 h-3 opacity-60 flex-shrink-0" style={iconMaskStyle}></div>
+          {category}
+        </span>
         <hr class="border-border my-2" />
         <p class="text-sm text-foreground/60">{description}</p>
       </div>
