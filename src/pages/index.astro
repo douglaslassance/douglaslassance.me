@@ -280,5 +280,65 @@ const profileData = {
       document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
       document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggleTheme);
     </script>
+
+    <script>
+      import gsap from 'gsap';
+
+      // === ENTRANCE STAGGER ===
+      gsap.from('.presence-card', {
+        opacity: 0, y: 16,
+        duration: 0.5, stagger: 0.04,
+        ease: 'power3.out', delay: 0.15,
+      });
+
+      gsap.from('.project-card', {
+        opacity: 0, y: 24,
+        duration: 0.55, stagger: 0.06,
+        ease: 'power3.out', delay: 0.3,
+      });
+
+      // === MAGNETIC — all cards ===
+      function addMagnetic(selector: string, strength: number) {
+        document.querySelectorAll(selector).forEach((card) => {
+          const xTo = gsap.quickTo(card, 'x', { duration: 0.4, ease: 'power3.out' });
+          const yTo = gsap.quickTo(card, 'y', { duration: 0.4, ease: 'power3.out' });
+
+          card.addEventListener('mousemove', (e: MouseEvent) => {
+            const r = (card as HTMLElement).getBoundingClientRect();
+            xTo((e.clientX - r.left - r.width  / 2) * strength);
+            yTo((e.clientY - r.top  - r.height / 2) * strength);
+          });
+          card.addEventListener('mouseleave', () => { xTo(0); yTo(0); });
+        });
+      }
+
+      addMagnetic('.bio-card',      0.08);
+      addMagnetic('.presence-card', 0.2);
+      addMagnetic('.project-card',  0.1);
+
+      // === PROJECT CARD TITLE — scroll on hover if overflowing ===
+      document.querySelectorAll('.project-card').forEach((card) => {
+        const title = card.querySelector('.card-title') as HTMLElement | null;
+        if (!title) return;
+        const wrapper = title.parentElement as HTMLElement;
+
+        card.addEventListener('mouseenter', () => {
+          const overflow = title.scrollWidth - wrapper.clientWidth;
+          if (overflow > 2) {
+            gsap.to(title, {
+              x: -overflow,
+              duration: overflow / 40,
+              ease: 'none',
+              delay: 0.4,
+            });
+          }
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gsap.killTweensOf(title);
+          gsap.to(title, { x: 0, duration: 0.3, ease: 'power2.out' });
+        });
+      });
+    </script>
   </body>
 </html>

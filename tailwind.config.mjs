@@ -10,7 +10,7 @@ export default {
       screens: {
         'desktop': '1394px',
       },
-      colors: {
+colors: {
         background: 'hsl(var(--background) / <alpha-value>)',
         foreground: 'hsl(var(--foreground) / <alpha-value>)',
         card: {

@@ -42,7 +42,7 @@
   href={url}
   target="_blank"
   rel="noopener noreferrer"
-  class={cn('block rounded-lg border border-border bg-card shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden')}
+  class={cn('project-card block rounded-lg border border-border bg-card shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden')}
 >
   <div class="flex flex-row h-full aspect-[5/2]">
     <div class="flex-1 flex flex-col justify-between p-4">
@@ -52,7 +52,9 @@
             class="w-4 h-4 opacity-60 flex-shrink-0 mt-1"
             style={iconMaskStyle}
           ></div>
-          <h3 class="text-base font-semibold text-foreground/80">{title}</h3>
+          <div class="overflow-hidden min-w-0 flex-1">
+            <h3 class="card-title whitespace-nowrap text-base font-semibold text-foreground/80">{title}</h3>
+          </div>
         </div>
         <span class="inline-block px-2 py-1 rounded-full text-xs font-medium text-foreground/70 bg-muted">{category}</span>
         <hr class="border-border my-2" />

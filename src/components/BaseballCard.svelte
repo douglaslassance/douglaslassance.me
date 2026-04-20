@@ -20,6 +20,7 @@
     </div>
   </Card>
 {:else}
+  <div class="bio-card">
   <Card class="flex flex-col overflow-hidden max-w-sm">
     <div class="w-full aspect-square">
       <img src={avatar} alt={name} class="w-full h-full object-cover object-top" />
@@ -29,4 +30,5 @@
       <p class="text-sm leading-relaxed text-foreground/60">{bio}</p>
     </div>
   </Card>
+  </div>
 {/if}
