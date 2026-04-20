@@ -10,9 +10,10 @@
 </script>
 
 {#if mobile}
-  <Card class="flex flex-col items-center gap-5 text-center overflow-hidden">
+  <Card class="bio-card flex flex-col items-center gap-5 text-center overflow-hidden">
     <div class="w-full aspect-square">
-      <img src={avatar} alt={name} class="w-full h-full object-cover object-top" />
+      <img src={avatar} alt={name} class="avatar-default w-full h-full object-cover object-top" />
+      <img src="/avatar-tired.png" alt={name} class="avatar-junji w-full h-full object-cover object-top" />
     </div>
     <div class="px-6 pb-6">
       <h1 class="text-2xl font-bold mb-2">{name}</h1>
@@ -23,7 +24,8 @@
   <div class="bio-card">
   <Card class="flex flex-col overflow-hidden max-w-sm">
     <div class="w-full aspect-square">
-      <img src={avatar} alt={name} class="w-full h-full object-cover object-top" />
+      <img src={avatar} alt={name} class="avatar-default w-full h-full object-cover object-top" />
+      <img src="/avatar-tired.png" alt={name} class="avatar-junji w-full h-full object-cover object-top" />
     </div>
     <div class="p-6 space-y-3">
       <h1 class="text-2xl font-bold tracking-tight">{name}</h1>
@@ -32,3 +34,9 @@
   </Card>
   </div>
 {/if}
+
+<style>
+  .avatar-junji { display: none; }
+  :global(body.junji-on) .avatar-default { display: none; }
+  :global(body.junji-on) .avatar-junji { display: block; }
+</style>

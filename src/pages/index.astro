@@ -93,13 +93,72 @@ const profileData = {
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.classList.toggle('dark', theme === 'dark');
     </script>
+    <style is:global>
+      /* Scanlines overlay — thicker stripes (2px on / 4px off) so they're
+         less sensitive to subpixel rasterization differences at 100% zoom
+         that produced visible seam bands with 1px-thick stripes. */
+      #junji-overlay {
+        background: repeating-linear-gradient(
+          0deg,
+          transparent 0px, transparent 4px,
+          rgba(0,0,0,0.12) 4px, rgba(0,0,0,0.12) 6px
+        );
+        mix-blend-mode: multiply;
+      }
+      .dark #junji-overlay {
+        background: repeating-linear-gradient(
+          0deg,
+          transparent 0px, transparent 4px,
+          rgba(255,255,255,0.07) 4px, rgba(255,255,255,0.07) 6px
+        );
+        mix-blend-mode: screen;
+      }
+      /* Neutralize interior section backgrounds so the filter renders on a
+         single uniform body canvas (prevents vertical banding from column bg
+         joins under the filter). */
+      body.junji-on .bg-background { background-color: transparent !important; }
+      /* In light junji mode, soften the body background so pure white doesn't
+         glare and the spiral + scanlines read better. */
+      html:not(.dark) body.junji-on { background-color: hsl(0 0% 92%); }
+    </style>
   </head>
   <body class="min-h-screen bg-background text-foreground font-sans antialiased relative">
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
+    <!-- Junji Ito SVG filter definitions -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+      <defs>
+        <filter id="junji-filter" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+          <!-- 1. Desaturate to grayscale -->
+          <feColorMatrix type="saturate" values="0" result="gray"/>
+          <!-- 2. Moderate contrast boost -->
+          <feComponentTransfer in="gray" result="boosted">
+            <feFuncR type="linear" slope="1.5" intercept="-0.25"/>
+            <feFuncG type="linear" slope="1.5" intercept="-0.25"/>
+            <feFuncB type="linear" slope="1.5" intercept="-0.25"/>
+          </feComponentTransfer>
+          <!-- 3. Turbulence + displacement (scale=0 at rest → zero deformation, spiked on glitch) -->
+          <feTurbulence id="junji-turbulence" type="turbulence" baseFrequency="0.03 0.08" numOctaves="2" seed="5" result="glitch-map"/>
+          <feDisplacementMap id="junji-disp" in="boosted" in2="glitch-map" scale="0" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+          <!-- 4. Gentle final lift -->
+          <feComponentTransfer in="displaced">
+            <feFuncR type="linear" slope="1.05" intercept="-0.02"/>
+            <feFuncG type="linear" slope="1.05" intercept="-0.02"/>
+            <feFuncB type="linear" slope="1.05" intercept="-0.02"/>
+          </feComponentTransfer>
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- Junji Ito overlay (scanlines + vignette, sits above filtered content) -->
+    <div id="junji-overlay" class="fixed inset-0 pointer-events-none z-[100] hidden"></div>
+
+    <!-- Junji Ito spiral background (uzumaki) -->
+    <canvas id="junji-spiral" class="fixed inset-0 pointer-events-none z-[1] hidden"></canvas>
+
     <!-- Content wrapper with higher z-index -->
-    <div class="relative z-10">
+    <div id="content-root" class="relative z-10">
 
     <!-- MOBILE LAYOUT (< desktop breakpoint) -->
     <div class="desktop:hidden max-w-lg mx-auto">
@@ -168,16 +227,32 @@ const profileData = {
       <!-- Mobile Footer -->
       <footer class="p-4 bg-background">
         <div class="flex items-center justify-between gap-4">
-          <button id="theme-toggle-mobile" class="text-foreground/60 hover:text-foreground transition-colors">
-            <!-- sun: shown in dark mode -->
-            <svg class="hidden dark:block w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
-            </svg>
-            <!-- moon: shown in light mode -->
-            <svg class="block dark:hidden w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
-            </svg>
-          </button>
+          <div class="flex items-center gap-3">
+            <button id="theme-toggle-mobile" class="text-foreground/60 hover:text-foreground transition-colors">
+              <!-- sun: shown in dark mode -->
+              <svg class="hidden dark:block w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
+              </svg>
+              <!-- moon: shown in light mode -->
+              <svg class="block dark:hidden w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
+              </svg>
+            </button>
+            <button class="junji-btn text-foreground/60 hover:text-foreground transition-colors" aria-label="Toggle Junji Ito mode">
+              <!-- shell: shown when inactive (enter) -->
+              <svg class="junji-icon-off w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 11a2 2 0 1 1-4 0 4 4 0 0 1 8 0 6 6 0 0 1-12 0 8 8 0 0 1 16 0 10 10 0 1 1-20 0 11.93 11.93 0 0 1 2.42-7.22 2 2 0 1 1 3.16 2.44"/>
+              </svg>
+              <!-- door-open: shown when active (exit) -->
+              <svg class="junji-icon-on hidden w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 4h3a2 2 0 0 1 2 2v14"/>
+                <path d="M2 20h3"/>
+                <path d="M13 20h9"/>
+                <path d="M10 12v.01"/>
+                <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/>
+              </svg>
+            </button>
+          </div>
           <p class="text-sm text-foreground/60">© {new Date().getFullYear()} {profileData.name}</p>
         </div>
       </footer>
@@ -207,6 +282,20 @@ const profileData = {
             <!-- moon: shown in light mode -->
             <svg class="block dark:hidden w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
+            </svg>
+          </button>
+          <button class="junji-btn text-foreground/60 hover:text-foreground transition-colors" aria-label="Toggle Junji Ito mode">
+            <!-- shell: shown when inactive (enter) -->
+            <svg class="junji-icon-off w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 11a2 2 0 1 1-4 0 4 4 0 0 1 8 0 6 6 0 0 1-12 0 8 8 0 0 1 16 0 10 10 0 1 1-20 0 11.93 11.93 0 0 1 2.42-7.22 2 2 0 1 1 3.16 2.44"/>
+            </svg>
+            <!-- door-open: shown when active (exit) -->
+            <svg class="junji-icon-on hidden w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 4h3a2 2 0 0 1 2 2v14"/>
+              <path d="M2 20h3"/>
+              <path d="M13 20h9"/>
+              <path d="M10 12v.01"/>
+              <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/>
             </svg>
           </button>
           <p class="text-sm text-foreground/60">© {new Date().getFullYear()} {profileData.name}</p>
@@ -339,6 +428,149 @@ const profileData = {
           gsap.to(title, { x: 0, duration: 0.3, ease: 'power2.out' });
         });
       });
+    </script>
+
+    <script>
+      // === JUNJI ITO MODE ===
+      let junjiActive = false;
+      let glitchTimer: ReturnType<typeof setInterval> | null = null;
+      let spiralRaf: number | null = null;
+      let spiralStart = 0;
+
+      const contentRoot = document.getElementById('content-root') as HTMLElement;
+      // Filter targets: filter `main` (one continuous tall region, avoids
+      // intra-viewport seams) and each `.bio-card` individually. The sticky
+      // desktop `aside` is left un-filtered so its scroll behavior matches
+      // non-junji mode exactly, and there's no filter-region boundary inside
+      // the viewport.
+      const filterTargets = Array.from(
+        contentRoot.querySelectorAll<HTMLElement>(
+          // Filter each section/card/footer individually. Keeps every
+          // filter raster small (avoids Chrome's filter size limits on the
+          // tall main column) and puts any region boundary inside an
+          // existing visual gap (mb-16 between sections, aside padding,
+          // etc.), so seams aren't visible. The sticky desktop aside is
+          // itself un-filtered, so scroll behavior matches non-junji mode.
+          'main section, .bio-card, footer, aside > .mt-auto'
+        )
+      );
+      const overlay    = document.getElementById('junji-overlay')   as HTMLElement;
+      const turbulence = document.getElementById('junji-turbulence') as SVGFETurbulenceElement;
+      const disp       = document.getElementById('junji-disp')       as SVGFEDisplacementMapElement;
+      const spiral     = document.getElementById('junji-spiral')     as HTMLCanvasElement;
+      const spiralCtx  = spiral.getContext('2d')!;
+
+      function resizeSpiral() {
+        const w = window.innerWidth, h = window.innerHeight;
+        spiral.width  = w;
+        spiral.height = h;
+      }
+
+      function drawSpiral(tSec: number) {
+        const w = spiral.width, h = spiral.height;
+        let cx = w / 2, cy = h / 2;
+        for (const b of document.querySelectorAll<HTMLElement>('.bio-card')) {
+          const r = b.getBoundingClientRect();
+          if (r.width > 0 && r.height > 0) {
+            cx = r.left + r.width  / 2;
+            cy = r.top  + r.height / 2;
+            break;
+          }
+        }
+        const isDark = document.documentElement.classList.contains('dark');
+        spiralCtx.clearRect(0, 0, w, h);
+        spiralCtx.lineWidth = 6;
+
+        const rotation = tSec * 4.0;          // hypnotic rotation
+        const pulse    = 1 + Math.sin(tSec * 0.6) * 0.03;
+        const maxR     = Math.hypot(w, h) * 0.75 * pulse;
+        const turns    = 14;
+        const totalTh  = turns * Math.PI * 2;
+        const steps    = 1400;
+        const b        = maxR / totalTh;
+
+        const ink = isDark ? '255,255,255' : '0,0,0';
+        const grad = spiralCtx.createRadialGradient(cx, cy, 0, cx, cy, maxR);
+        grad.addColorStop(0,   `rgba(${ink},0)`);
+        grad.addColorStop(0.2, `rgba(${ink},0.07)`);
+        grad.addColorStop(1,   `rgba(${ink},0.14)`);
+        spiralCtx.strokeStyle = grad;
+
+        spiralCtx.beginPath();
+        for (let i = 0; i <= steps; i++) {
+          const theta = (i / steps) * totalTh;
+          const r = b * theta;
+          const a = theta + rotation;
+          const x = cx + Math.cos(a) * r;
+          const y = cy + Math.sin(a) * r;
+          if (i === 0) spiralCtx.moveTo(x, y);
+          else spiralCtx.lineTo(x, y);
+        }
+        spiralCtx.stroke();
+      }
+
+      function spiralTick(now: number) {
+        if (!junjiActive) return;
+        drawSpiral((now - spiralStart) / 1000);
+        spiralRaf = requestAnimationFrame(spiralTick);
+      }
+
+      function resetPrimitives() {
+        turbulence.setAttribute('seed', '5');
+        turbulence.setAttribute('baseFrequency', '0.03 0.08');
+        disp.setAttribute('scale', '0');   // no deformation at rest
+      }
+
+      function junjTick() {
+        if (!junjiActive) return;
+        if (Math.random() < 0.25) {
+          // Glitch spike: displacement burst (CA stays constant)
+          turbulence.setAttribute('seed', String(Math.floor(Math.random() * 999)));
+          turbulence.setAttribute(
+            'baseFrequency',
+            `${(0.01 + Math.random() * 0.06).toFixed(4)} ${(0.05 + Math.random() * 0.13).toFixed(4)}`
+          );
+          disp.setAttribute('scale', String(Math.round(6 + Math.random() * 16)));
+        } else {
+          resetPrimitives();
+        }
+      }
+
+      function toggleJunji() {
+        junjiActive = !junjiActive;
+        for (const t of filterTargets) {
+          t.style.filter    = junjiActive ? 'url(#junji-filter)' : '';
+          t.style.willChange = junjiActive ? 'filter' : '';
+        }
+        overlay.classList.toggle('hidden', !junjiActive);
+        spiral.classList.toggle('hidden', !junjiActive);
+        document.body.classList.toggle('junji-on', junjiActive);
+
+        if (junjiActive) {
+          glitchTimer = setInterval(junjTick, 80);
+          resizeSpiral();
+          window.addEventListener('resize', resizeSpiral);
+          spiralStart = performance.now();
+          spiralRaf = requestAnimationFrame(spiralTick);
+        } else {
+          clearInterval(glitchTimer!);
+          glitchTimer = null;
+          resetPrimitives();
+          if (spiralRaf !== null) cancelAnimationFrame(spiralRaf);
+          spiralRaf = null;
+          window.removeEventListener('resize', resizeSpiral);
+          spiralCtx.clearRect(0, 0, spiral.width, spiral.height);
+        }
+
+        document.querySelectorAll<HTMLElement>('.junji-btn').forEach((btn) => {
+          btn.querySelector<HTMLElement>('.junji-icon-off')?.classList.toggle('hidden', junjiActive);
+          btn.querySelector<HTMLElement>('.junji-icon-on')?.classList.toggle('hidden', !junjiActive);
+        });
+      }
+
+      document.querySelectorAll('.junji-btn').forEach((btn) =>
+        btn.addEventListener('click', toggleJunji)
+      );
     </script>
   </body>
 </html>
