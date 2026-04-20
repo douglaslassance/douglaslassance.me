@@ -61,7 +61,7 @@
         <p class="text-sm text-foreground/60">{description}</p>
       </div>
     </div>
-    <div class="w-36 desktop:w-52 flex-shrink-0">
+    <div class="w-2/5 flex-shrink-0">
       <img src={image} alt={title} class="w-full h-full object-cover" />
     </div>
   </div>
