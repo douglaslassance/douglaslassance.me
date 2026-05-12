@@ -22,7 +22,7 @@
 
 <a
   href={url}
-  class={cn('presence-card group block max-w-40 rounded-lg border border-border bg-card shadow-sm hover:shadow-md transition-shadow duration-300')}
+  class={cn('presence-card group block w-full rounded-lg border border-border bg-card shadow-sm hover:shadow-md transition-shadow duration-300')}
   target="_blank"
   rel="noopener noreferrer"
 >
