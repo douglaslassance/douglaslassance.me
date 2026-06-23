@@ -1,0 +1,24 @@
+---
+import AppPage from '../../components/AppPage.astro';
+
+const description = "Gitoptic gives you visual diffs for the binary files Git keeps invisible: images, audio, video, and 3D scenes. Open a local clone — and if its origin is GitHub, see open pull requests alongside the commit history.";
+
+const features = [
+  { icon: 'eye',              title: 'See every byte',     description: 'Side-by-side preview for changes Git normally treats as opaque blobs.' },
+  { icon: 'image',             title: 'Images, audio, video, 3D', description: 'Built-in renderers for the common binary formats teams actually ship.' },
+  { icon: 'git-pull-request', title: 'PRs + history',      description: 'Open pull requests live next to the commit log when origin is on GitHub.' },
+  { icon: 'shield-check',     title: 'Local-first',        description: 'Read your repo straight from disk; no cloud middleman, no upload.' },
+];
+---
+
+<AppPage
+  name="Gitoptic"
+  description={description}
+  iconSrc="/gitoptic/icon.png"
+  heroTagline="Review more than text"
+  features={features}
+  brewCommand="brew install douglaslassance/tap/gitoptic"
+  apiSlug="gitoptic"
+>
+  <svg slot="hero-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+</AppPage>

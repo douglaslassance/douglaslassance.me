@@ -1,0 +1,24 @@
+---
+import AppPage from '../../components/AppPage.astro';
+
+const description = "Trotter helps you plan and map your next trip on your Mac. Drop pins, sketch routes, and keep everything in open formats so your itinerary stays portable.";
+
+const features = [
+  { icon: 'map',          title: 'Map your route',  description: 'Sketch your itinerary on an interactive map with as many legs as you like.' },
+  { icon: 'map-pin',      title: 'Mark every stop', description: 'Pin places you want to visit and keep notes attached to each one.' },
+  { icon: 'file-text',    title: 'Open formats',    description: 'Import and export GPX and KML so you can share with any other map app.' },
+  { icon: 'shield-check', title: 'Local-first',     description: 'Your trips live on your Mac, never on a server you do not control.' },
+];
+---
+
+<AppPage
+  name="Trotter"
+  description={description}
+  iconSrc="/trotter/icon.png"
+  heroTagline="Shape your next journey"
+  features={features}
+  brewCommand="brew install douglaslassance/tap/trotter"
+  apiSlug="trotter"
+>
+  <svg slot="hero-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>
+</AppPage>

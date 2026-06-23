@@ -1,0 +1,24 @@
+---
+import AppPage from '../../components/AppPage.astro';
+
+const description = "Ramble keeps your Mastodon and Bluesky accounts side-by-side. Posts that look like cross-postings of the same thought are matched into a single row, with placeholder cells when a thought is missing on one network so you can fill it in with a click.";
+
+const features = [
+  { icon: 'columns-2', title: 'Side-by-side timelines', description: 'Every account gets its own column so you can read across networks at a glance.' },
+  { icon: 'repeat-2',  title: 'Cross-post once',        description: 'Match the same thought across networks; fill the gaps with a single click.' },
+  { icon: 'at-sign',   title: 'Multiple accounts',      description: 'Add as many Mastodon and Bluesky accounts as you keep in flight.' },
+  { icon: 'send',      title: 'Native posting',         description: 'Compose, reply, repost, and like without leaving the Ramble window.' },
+];
+---
+
+<AppPage
+  name="Ramble"
+  description={description}
+  iconSrc="/ramble/icon.png"
+  heroTagline="Cross-post with ease"
+  features={features}
+  brewCommand="brew install douglaslassance/tap/ramble"
+  apiSlug="ramble"
+>
+  <svg slot="hero-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 3-3 3 3"/><path d="M13 18H7a2 2 0 0 1-2-2V6"/><path d="m22 15-3 3-3-3"/><path d="M11 6h6a2 2 0 0 1 2 2v10"/></svg>
+</AppPage>

@@ -24,6 +24,7 @@
   };
 
   const brand = $derived(brandConfig[type]);
+  const isExternal = $derived(/^https?:\/\//i.test(url));
 
   const iconMaskStyle = $derived(`
     -webkit-mask-image: url(/${brand.icon});
@@ -40,8 +41,8 @@
 
 <a
   href={url}
-  target="_blank"
-  rel="noopener noreferrer"
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
   class={cn('project-card block rounded-lg border border-border bg-card shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden')}
 >
   <div class="flex flex-row h-full aspect-[5/2]">
@@ -55,10 +56,10 @@
           {category}
         </span>
         <hr class="border-border my-2" />
-        <p class="text-sm text-foreground/60">{description}</p>
+        <p class="text-sm text-muted-foreground">{description}</p>
       </div>
     </div>
-    <div class="w-1/2 flex-shrink-0">
+    <div class="aspect-square h-full flex-shrink-0">
       <img src={image} alt={title} class="w-full h-full object-cover" />
     </div>
   </div>

@@ -11,9 +11,9 @@ interface Props {
   description: string;
   iconSrc: string;
   iconAlt?: string;
-  screenshotLight: string;
-  screenshotDark: string;
-  screenshotAlt: string;
+  screenshotLight?: string;
+  screenshotDark?: string;
+  screenshotAlt?: string;
   heroTagline: string;
   features: Feature[];
   brewCommand: string;
@@ -38,30 +38,41 @@ const {
 ---
 
 <Layout title={name} description={description}>
-  <div class="flex flex-col items-center text-center pt-8 desktop:pt-0">
-    <div class="project-card mb-8">
-      <div class="macos-icon">
-        <img src={iconSrc} alt={iconAlt} class="w-[160px] h-[160px] desktop:w-[200px] desktop:h-[200px] block" />
+  <section class="flex justify-center pt-8 desktop:pt-0">
+    <div class="project-card flex items-center gap-8">
+      <div class="macos-icon shrink-0">
+        <img src={iconSrc} alt={iconAlt} class="w-[120px] h-[120px] desktop:w-[160px] desktop:h-[160px] block" />
+      </div>
+      <div class="flex flex-col items-start">
+        <h1 class="text-4xl font-bold tracking-tight">{name}</h1>
+        <span class="mt-1 inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium text-foreground/70 bg-muted">
+          <div
+            class="w-3 h-3 opacity-60 flex-shrink-0"
+            style="-webkit-mask-image: url(/website.svg); mask-image: url(/website.svg); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; background-color: hsl(var(--foreground));"
+          ></div>
+          App
+        </span>
       </div>
     </div>
-    <h1 class="text-4xl font-bold -mt-2 mb-0 tracking-tight">{name}</h1>
-  </div>
+  </section>
 
-  <div class="w-full mt-4">
+  <section class={`w-full ${screenshotLight ? 'mt-8' : 'mt-20'}`}>
     <div class="project-card mb-6">
-      <div class="screenshot-flowout relative z-10 -mb-[180px] desktop:-mb-[260px]">
-        <img src={screenshotLight} alt={screenshotAlt} class="block w-full h-auto dark:hidden" />
-        <img src={screenshotDark} alt={screenshotAlt} class="hidden w-full h-auto dark:block" />
-      </div>
+      {screenshotLight && (
+        <div class="screenshot-flowout relative z-10 -mb-[180px] desktop:-mb-[260px]">
+          <img src={screenshotLight} alt={screenshotAlt} class="block w-full h-auto dark:hidden" />
+          <img src={screenshotDark} alt={screenshotAlt} class="hidden w-full h-auto dark:block" />
+        </div>
+      )}
       <Card>
-        <div class="flex flex-col p-4 gap-3 pt-[130px] desktop:pt-[180px]">
+        <div class={`flex flex-col p-4 gap-3${screenshotLight ? ' pt-[130px] desktop:pt-[180px]' : ''}`}>
           <div class="flex items-center gap-2">
             <span class="inline-flex w-4 h-4 shrink-0 items-center justify-center text-foreground/50" aria-hidden="true">
               <slot name="hero-icon" />
             </span>
-            <h2 class="text-base font-semibold text-foreground/80 leading-none">{heroTagline}</h2>
+            <h2 class="text-sm font-semibold leading-none">{heroTagline}</h2>
           </div>
-          <p class="text-sm text-foreground/60 leading-relaxed">{description}</p>
+          <p class="text-sm text-muted-foreground leading-relaxed">{description}</p>
         </div>
       </Card>
     </div>
@@ -71,9 +82,9 @@ const {
         <FeatureCard icon={f.icon as any} title={f.title} description={f.description} pro={f.pro} />
       ))}
     </div>
-  </div>
+  </section>
 
-  <div class="w-full mt-16">
+  <section class="w-full mt-16">
     <div class="text-center max-w-2xl mx-auto">
       {appStoreUrl && (
         <div class="flex justify-center mb-6">
@@ -89,20 +100,27 @@ const {
           </a>
         </div>
       )}
-      <h2 class="text-sm font-medium text-foreground/60 mb-3">
+      <h2 class="text-sm font-medium text-muted-foreground mb-3">
         {appStoreUrl ? 'or install with' : 'Install with'} <a href="https://brew.sh/" class="text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors">Homebrew</a>
       </h2>
-      <div class="flex items-center justify-between bg-foreground/5 ring-1 ring-foreground/10 rounded-lg px-4 py-3 mx-auto max-w-lg">
+      <div class="flex items-center justify-between bg-card border border-border rounded-lg px-4 py-3 mx-auto max-w-lg">
         <code class="flex-1 text-left font-mono text-sm">{brewCommand}</code>
         <CopyButton client:load text={brewCommand} />
       </div>
-      <p class="mt-3 text-sm text-foreground/40">
+      <p class="mt-3 text-sm text-muted-foreground/60">
         or download directly <a id="dmg-link" href="#" class="underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors">here</a>.
       </p>
     </div>
-  </div>
+  </section>
 
-  <slot name="credits" />
+  <section class="mt-16">
+    <div class="flex flex-col desktop:flex-row desktop:justify-between gap-2 desktop:gap-4 text-center desktop:text-left">
+      <p class="text-sm text-muted-foreground">
+        App icon by <a href="https://www.milescorless.com/" target="_blank" rel="noopener" class="underline underline-offset-4 decoration-foreground/20 hover:decoration-foreground transition-colors">Miles Corless</a>.
+      </p>
+      <slot name="credits" />
+    </div>
+  </section>
 </Layout>
 
 <script is:inline define:vars={{ apiSlug }}>

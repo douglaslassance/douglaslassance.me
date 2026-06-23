@@ -1,0 +1,24 @@
+---
+import AppPage from '../../components/AppPage.astro';
+
+const description = "Rollpaper rotates your desktop wallpaper from a folder you choose, with controls in the menu bar. Set the cadence, pick which displays to cover, and stop staring at the same image every morning.";
+
+const features = [
+  { icon: 'image',     title: 'Wallpaper rotation', description: 'Point Rollpaper at a folder and it cycles through every image inside.' },
+  { icon: 'rotate-cw', title: 'Set the cadence',    description: 'Rotate every few minutes, hourly, or daily — whatever rhythm fits.' },
+  { icon: 'monitor',   title: 'Per display',        description: 'Different wallpaper on each connected screen, all rotating independently.' },
+  { icon: 'calendar',  title: 'Menu bar control',   description: 'Skip, pause, or jump to a specific image straight from the menu bar.' },
+];
+---
+
+<AppPage
+  name="Rollpaper"
+  description={description}
+  iconSrc="/rollpaper/icon.png"
+  heroTagline="Put your wallpaper to use"
+  features={features}
+  brewCommand="brew install douglaslassance/tap/rollpaper"
+  apiSlug="rollpaper"
+>
+  <svg slot="hero-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+</AppPage>

@@ -17,7 +17,7 @@
     </div>
     <div class="px-6 pb-6">
       <h1 class="text-2xl font-bold mb-2">{name}</h1>
-      <p class="text-sm text-foreground/60">{bio}</p>
+      <p class="text-sm text-muted-foreground">{bio}</p>
     </div>
   </Card>
 {:else}
@@ -29,7 +29,7 @@
     </div>
     <div class="p-6 space-y-3">
       <h1 class="text-2xl font-bold tracking-tight">{name}</h1>
-      <p class="text-sm leading-relaxed text-foreground/60">{bio}</p>
+      <p class="text-sm leading-relaxed text-muted-foreground">{bio}</p>
     </div>
   </Card>
   </div>

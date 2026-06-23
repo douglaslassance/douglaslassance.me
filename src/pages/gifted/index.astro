@@ -1,0 +1,24 @@
+---
+import AppPage from '../../components/AppPage.astro';
+
+const description = "Gifted plays GIFs that react to live audio. Point it at a folder of loops, plug it into any audio input, and you have an endless music video that pulses with whatever is playing.";
+
+const features = [
+  { icon: 'music',     title: 'Live audio reactive', description: 'Captures any input device on your Mac and drives playback in real time.' },
+  { icon: 'activity',  title: 'Beat detection',      description: 'FFT-based band-energy detection picks out kicks, snares, and hats as they happen.' },
+  { icon: 'disc',      title: 'Bring your library',  description: 'Drop in any folder of GIFs and Gifted shuffles through them as the music moves.' },
+  { icon: 'sparkles',  title: 'Plug and play',       description: 'No DJ rig required — open Gifted, point it at speakers, and let it run.' },
+];
+---
+
+<AppPage
+  name="Gifted"
+  description={description}
+  iconSrc="/gifted/icon.png"
+  heroTagline="Automated VJing for your next party"
+  features={features}
+  brewCommand="brew install douglaslassance/tap/gifted"
+  apiSlug="gifted"
+>
+  <svg slot="hero-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+</AppPage>

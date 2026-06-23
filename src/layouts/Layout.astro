@@ -87,9 +87,8 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
         display: inline-block;
         border-radius: 22.5%;
         overflow: hidden;
-        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+        border: 1px solid hsl(var(--border));
       }
-      .dark .macos-icon { filter: drop-shadow(0 2px 6px rgba(255, 255, 255, 0.15)); }
       .macos-icon::after {
         content: '';
         position: absolute;
@@ -191,7 +190,7 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
               <a href="/privacy" class="text-foreground/60 hover:text-foreground transition-colors" aria-label="Privacy">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18a2 2 0 0 0-4 0"/><path d="m19 11-2.11-6.657a2 2 0 0 0-2.752-1.148l-1.276.61A2 2 0 0 1 12 4H8.5a2 2 0 0 0-1.925 1.456L5 11"/><path d="M2 11h20"/><circle cx="17" cy="18" r="3"/><circle cx="7" cy="18" r="3"/></svg>
               </a>
-              <p class="text-sm text-foreground/60">© {new Date().getFullYear()} {profileData.name}</p>
+              <p class="text-sm text-muted-foreground">© {new Date().getFullYear()} {profileData.name}</p>
             </div>
           </aside>
 
@@ -243,7 +242,7 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18a2 2 0 0 0-4 0"/><path d="m19 11-2.11-6.657a2 2 0 0 0-2.752-1.148l-1.276.61A2 2 0 0 1 12 4H8.5a2 2 0 0 0-1.925 1.456L5 11"/><path d="M2 11h20"/><circle cx="17" cy="18" r="3"/><circle cx="7" cy="18" r="3"/></svg>
                 </a>
               </div>
-              <p class="text-sm text-foreground/60">© {new Date().getFullYear()} {profileData.name}</p>
+              <p class="text-sm text-muted-foreground">© {new Date().getFullYear()} {profileData.name}</p>
             </div>
           </footer>
 
@@ -428,11 +427,17 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
           btn.querySelector<HTMLElement>('.junji-icon-off')?.classList.toggle('hidden', junjiActive);
           btn.querySelector<HTMLElement>('.junji-icon-on')?.classList.toggle('hidden', !junjiActive);
         });
+
+        localStorage.setItem('junji', junjiActive ? 'on' : 'off');
       }
 
       document.querySelectorAll('.junji-btn').forEach((btn) =>
         btn.addEventListener('click', toggleJunji)
       );
+
+      if (localStorage.getItem('junji') === 'on') {
+        toggleJunji();
+      }
     </script>
   </body>
 </html>
