@@ -1,0 +1,27 @@
+---
+import AppPage from '../../components/AppPage.astro';
+
+const description = "Mamecase is a simple MAME launcher built to celebrate years of video game history.";
+
+const features = [
+  { icon: 'image',        title: 'Beautiful previews', description: 'Box and cover art pulled automatically, laid out in a masonry gallery so nothing gets cropped.' },
+  { icon: 'plug',         title: 'Simply MAME',        description: 'Mamecase plugs into your MAME setup without opinions on how you run it.' },
+  { icon: 'shield-check', title: 'ROM checks',         description: "Verify your ROMs against MAME's database to catch missing files, bad dumps, and version mismatches." },
+  { icon: 'list-music',   title: 'Playlists',          description: 'Group games however you want. Theme, genre, completion, the choice is yours.' },
+];
+---
+
+<AppPage
+  name="Mamecase"
+  description={description}
+  iconSrc="/mamecase/icon.png"
+  screenshotLight="/mamecase/screenshot-light.png"
+  screenshotDark="/mamecase/screenshot-dark.png"
+  screenshotAlt="Mamecase showing a gallery of arcade game thumbnails"
+  heroTagline="Give MAME a face"
+  features={features}
+  brewCommand="brew install douglaslassance/tap/mamecase"
+  apiSlug="mamecase"
+>
+  <svg slot="hero-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+</AppPage>

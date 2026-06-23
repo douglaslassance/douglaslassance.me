@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '$lib/components/ui/card/card.svelte';
+import FeatureCard from './AppFeatureCard.svelte';
+import CopyButton from './CopyButton.svelte';
+
+type Feature = { icon: string; title: string; description: string; pro?: boolean };
+
+interface Props {
+  name: string;
+  description: string;
+  iconSrc: string;
+  iconAlt?: string;
+  screenshotLight: string;
+  screenshotDark: string;
+  screenshotAlt: string;
+  heroTagline: string;
+  features: Feature[];
+  brewCommand: string;
+  appStoreUrl?: string;
+  apiSlug: string;
+}
+
+const {
+  name,
+  description,
+  iconSrc,
+  iconAlt = `${Astro.props.name} app icon`,
+  screenshotLight,
+  screenshotDark,
+  screenshotAlt,
+  heroTagline,
+  features,
+  brewCommand,
+  appStoreUrl,
+  apiSlug,
+} = Astro.props;
+---
+
+<Layout title={name} description={description}>
+  <div class="flex flex-col items-center text-center pt-8 desktop:pt-0">
+    <div class="project-card mb-8">
+      <div class="macos-icon">
+        <img src={iconSrc} alt={iconAlt} class="w-[160px] h-[160px] desktop:w-[200px] desktop:h-[200px] block" />
+      </div>
+    </div>
+    <h1 class="text-4xl font-bold -mt-2 mb-0 tracking-tight">{name}</h1>
+  </div>
+
+  <div class="w-full mt-4">
+    <div class="project-card mb-6">
+      <div class="screenshot-flowout relative z-10 -mb-[180px] desktop:-mb-[260px]">
+        <img src={screenshotLight} alt={screenshotAlt} class="block w-full h-auto dark:hidden" />
+        <img src={screenshotDark} alt={screenshotAlt} class="hidden w-full h-auto dark:block" />
+      </div>
+      <Card>
+        <div class="flex flex-col p-4 gap-3 pt-[130px] desktop:pt-[180px]">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex w-4 h-4 shrink-0 items-center justify-center text-foreground/50" aria-hidden="true">
+              <slot name="hero-icon" />
+            </span>
+            <h2 class="text-base font-semibold text-foreground/80 leading-none">{heroTagline}</h2>
+          </div>
+          <p class="text-sm text-foreground/60 leading-relaxed">{description}</p>
+        </div>
+      </Card>
+    </div>
+
+    <div class="grid grid-cols-1 desktop:grid-cols-2 gap-4 desktop:gap-6">
+      {features.map((f) => (
+        <FeatureCard icon={f.icon as any} title={f.title} description={f.description} pro={f.pro} />
+      ))}
+    </div>
+  </div>
+
+  <div class="w-full mt-16">
+    <div class="text-center max-w-2xl mx-auto">
+      {appStoreUrl && (
+        <div class="flex justify-center mb-6">
+          <a
+            href={appStoreUrl}
+            target="_blank"
+            rel="noopener"
+            aria-label={`Download ${name} on the App Store (opens in new window)`}
+            class="inline-flex items-center justify-center gap-2 px-5 h-11 rounded-md bg-foreground text-background font-medium hover:opacity-90 transition-opacity"
+          >
+            <img src="/apple.svg" alt="" aria-hidden="true" class="w-4 h-4 icon-button-primary" />
+            Download on App Store
+          </a>
+        </div>
+      )}
+      <h2 class="text-sm font-medium text-foreground/60 mb-3">
+        {appStoreUrl ? 'or install with' : 'Install with'} <a href="https://brew.sh/" class="text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors">Homebrew</a>
+      </h2>
+      <div class="flex items-center justify-between bg-foreground/5 ring-1 ring-foreground/10 rounded-lg px-4 py-3 mx-auto max-w-lg">
+        <code class="flex-1 text-left font-mono text-sm">{brewCommand}</code>
+        <CopyButton client:load text={brewCommand} />
+      </div>
+      <p class="mt-3 text-sm text-foreground/40">
+        or download directly <a id="dmg-link" href="#" class="underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors">here</a>.
+      </p>
+    </div>
+  </div>
+
+  <slot name="credits" />
+</Layout>
+
+<script is:inline define:vars={{ apiSlug }}>
+  fetch(`https://api.douglaslassance.me/${apiSlug}`)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((data) => {
+      if (!data?.latest) return;
+      const link = document.getElementById('dmg-link');
+      if (link) link.href = `https://api.douglaslassance.me/${apiSlug}/download/${data.latest}/aarch64-apple-darwin`;
+    })
+    .catch(() => {});
+</script>

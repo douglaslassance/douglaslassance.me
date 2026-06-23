@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const lastUpdated = "June 22, 2026";
+const description = "Privacy policy for all of Douglas Lassance's apps.";
+---
+
+<Layout title="Privacy" description={description}>
+  <article class="max-w-2xl mx-auto">
+    <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">Privacy</h1>
+    <p class="text-foreground/60 text-sm mt-2">Last updated {lastUpdated}.</p>
+
+    <p class="text-foreground/60 text-xl mt-8 leading-relaxed">
+      None of my apps collect personal data, use analytics or tracking, or transmit your files or library data. This page describes what data my apps handle and how. It applies to every app I publish unless its store listing says otherwise.
+    </p>
+
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-3xl font-semibold tracking-tight mt-12">Data stored on your device</h2>
+    <p class="leading-7 mt-6">
+      Application preferences, security-scoped bookmarks, cached thumbnails, and any per-app data (such as tags, favorites, recents, or playlists) are stored locally on your Mac. They are not transmitted to me or any third party. Uninstalling an app removes its data from your device.
+    </p>
+
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-3xl font-semibold tracking-tight mt-12">Network connections</h2>
+    <p class="leading-7 mt-6">
+      My apps connect to the network only for the following purposes:
+    </p>
+    <ul class="my-6 ml-6 list-disc [&>li]:mt-2 leading-7">
+      <li>
+        <strong>Software updates</strong> (non–Mac App Store builds). Apps periodically check for new versions by fetching an update feed from <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">storage.douglaslassance.me</code>. The request includes only standard HTTP metadata such as your IP address and macOS version, and is not used for tracking.
+      </li>
+      <li>
+        <strong>Public assets and metadata.</strong> Some apps fetch publicly available assets from community sources (for example, thumbnails, cover art, or reference data) to enrich what you see. These requests include only standard HTTP metadata.
+      </li>
+      <li>
+        <strong>In-App Purchases</strong> (Mac App Store builds). Purchases and receipt validation are handled by Apple's StoreKit framework. I never see your payment information. Apple's <a href="https://www.apple.com/legal/privacy/" class="font-medium underline underline-offset-4">privacy policy</a> applies.
+      </li>
+    </ul>
+
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-3xl font-semibold tracking-tight mt-12">Files and folders</h2>
+    <p class="leading-7 mt-6">
+      My apps only read files and folders that you explicitly grant access to via the macOS sandbox. Previews, waveforms, suggestions, and similar features are computed entirely on your Mac. No file content is uploaded.
+    </p>
+
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-3xl font-semibold tracking-tight mt-12">Analytics and tracking</h2>
+    <p class="leading-7 mt-6">
+      My apps do not use analytics, telemetry, crash reporting, or advertising SDKs. No usage data is collected.
+    </p>
+
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-3xl font-semibold tracking-tight mt-12">Children</h2>
+    <p class="leading-7 mt-6">
+      My apps are not directed at children under 13 and do not knowingly collect data from them.
+    </p>
+
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-3xl font-semibold tracking-tight mt-12">Changes to this policy</h2>
+    <p class="leading-7 mt-6">
+      If this policy is updated, the revised version will be posted on this page with a new "Last updated" date.
+    </p>
+  </article>
+</Layout>

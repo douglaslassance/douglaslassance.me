@@ -1,0 +1,39 @@
+---
+import AppPage from '../../components/AppPage.astro';
+
+const description = "Peel transforms how you browse your files. By handling tags like folders, you retain all their flexibility while not compromising on discoverability.";
+
+const features = [
+  { icon: 'file-text',   title: 'Works with your files', description: 'Peel is not opinionated, it works with native tags and any folder on your system.' },
+  { icon: 'image',       title: 'Great media support',   description: 'Beautiful previews for images, movies, GIFs, audio files, and more.' },
+  { icon: 'layout-grid', title: 'Amazing layouts',       description: 'Masonry layouts to enjoy uncropped images while not compromising on real estate.', pro: true },
+  { icon: 'tags',        title: 'Suggested tags',        description: 'Leveraging the local power of your computer to suggest relevant tags.', pro: true },
+];
+---
+
+<AppPage
+  name="Peel"
+  description={description}
+  iconSrc="/peel/icon.png"
+  screenshotLight="/peel/screenshot-light.png"
+  screenshotDark="/peel/screenshot-dark.png"
+  screenshotAlt="Peel app showing tags sidebar and a masonry grid of media"
+  heroTagline="Browse different"
+  features={features}
+  brewCommand="brew install douglaslassance/tap/peel"
+  appStoreUrl="https://apps.apple.com/app/id6760927457"
+  apiSlug="peel"
+>
+  <svg slot="hero-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+
+  <div slot="credits" class="mt-16">
+    <div class="flex flex-col desktop:flex-row desktop:justify-between gap-2 desktop:gap-4 text-center desktop:text-left">
+      <p class="text-sm text-foreground/60">
+        App icon by <a href="https://www.milescorless.com/" target="_blank" rel="noopener" class="underline underline-offset-4 decoration-foreground/20 hover:decoration-foreground transition-colors">Miles Corless</a>.
+      </p>
+      <p class="text-sm text-foreground/60">
+        Art by <a href="https://www.beef.zone/" target="_blank" rel="noopener" class="underline underline-offset-4 decoration-foreground/20 hover:decoration-foreground transition-colors">Jordan Speer</a>, <a href="https://www.louiezong.com/" target="_blank" rel="noopener" class="underline underline-offset-4 decoration-foreground/20 hover:decoration-foreground transition-colors">Louie Zong</a>, and <a href="http://joe-sparrow.com/" target="_blank" rel="noopener" class="underline underline-offset-4 decoration-foreground/20 hover:decoration-foreground transition-colors">Joe Sparrow</a>.
+      </p>
+    </div>
+  </div>
+</AppPage>
