@@ -263,12 +263,12 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
       import gsap from 'gsap';
 
       function addMagnetic(selector: string, strength: number) {
-        document.querySelectorAll(selector).forEach((card) => {
+        document.querySelectorAll<HTMLElement>(selector).forEach((card) => {
           const xTo = gsap.quickTo(card, 'x', { duration: 0.4, ease: 'power3.out' });
           const yTo = gsap.quickTo(card, 'y', { duration: 0.4, ease: 'power3.out' });
 
-          card.addEventListener('mousemove', (e: MouseEvent) => {
-            const r = (card as HTMLElement).getBoundingClientRect();
+          card.addEventListener('mousemove', (e) => {
+            const r = card.getBoundingClientRect();
             xTo((e.clientX - r.left - r.width  / 2) * strength);
             yTo((e.clientY - r.top  - r.height / 2) * strength);
           });
@@ -317,8 +317,8 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
         )
       );
       const overlay    = document.getElementById('junji-overlay')   as HTMLElement;
-      const turbulence = document.getElementById('junji-turbulence') as SVGFETurbulenceElement;
-      const disp       = document.getElementById('junji-disp')       as SVGFEDisplacementMapElement;
+      const turbulence = document.getElementById('junji-turbulence') as unknown as SVGFETurbulenceElement;
+      const disp       = document.getElementById('junji-disp')       as unknown as SVGFEDisplacementMapElement;
       const spiral     = document.getElementById('junji-spiral')     as HTMLCanvasElement;
       const spiralCtx  = spiral.getContext('2d')!;
 
