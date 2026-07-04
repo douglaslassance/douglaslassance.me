@@ -50,8 +50,6 @@
     </a>
   </div>
 {:else}
-  <p class="mb-8 leading-relaxed">Feel free to drop me a message using the form below.</p>
-
   <form onsubmit={handleSubmit} class="rounded-lg border border-border bg-card shadow-sm p-4 desktop:p-6 flex flex-col gap-4">
     <div class="flex flex-col gap-1.5">
       <label for="contact-name" class="text-sm font-medium text-foreground/70">Name</label>
