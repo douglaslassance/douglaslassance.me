@@ -1,5 +1,5 @@
 <script lang="ts">
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbddrwbe';
+  const CONTACT_ENDPOINT = 'https://api.douglaslassance.me/contact';
 
   let name = $state('');
   let email = $state('');
@@ -14,15 +14,10 @@
     status = 'sending';
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      const response = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          _subject: `New message from ${name} via douglaslassance.me`,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message, honeypot }),
       });
 
       if (response.ok) {
@@ -86,7 +81,7 @@
 
     <input
       type="text"
-      name="_gotcha"
+      name="honeypot"
       bind:value={honeypot}
       tabindex="-1"
       autocomplete="off"
