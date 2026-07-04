@@ -319,7 +319,7 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
       const contentRoot = document.getElementById('content-root') as HTMLElement;
       const filterTargets = Array.from(
         contentRoot.querySelectorAll<HTMLElement>(
-          'main section, .bio-card, footer, aside > .mt-auto'
+          'main section, main article, .bio-card, footer, aside > .mt-auto'
         )
       );
       const overlay    = document.getElementById('junji-overlay')   as HTMLElement;
