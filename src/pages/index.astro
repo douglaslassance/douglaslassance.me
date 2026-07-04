@@ -8,7 +8,7 @@ import { profileData } from '../lib/profile';
 
 <Layout>
   <section class="mb-16">
-    <h2 class="text-xl font-semibold mb-8">Online presence</h2>
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mb-8">Online presence</h2>
     <div class="grid grid-cols-2 desktop:grid-cols-4 gap-4 desktop:gap-7">
       {profileData.online.map((social) => (
         <PresenceCard
@@ -21,7 +21,7 @@ import { profileData } from '../lib/profile';
   </section>
 
   <section class="mb-16">
-    <h2 class="text-xl font-semibold mb-8">Personal projects</h2>
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mb-8">Personal projects</h2>
     <div class="grid grid-cols-1 desktop:grid-cols-2 gap-4 desktop:gap-6">
       {profileData.personalProjects.map((project) => (
         <ProjectCard
@@ -37,7 +37,7 @@ import { profileData } from '../lib/profile';
   </section>
 
   <section class="mb-16">
-    <h2 class="text-xl font-semibold mb-8">Professional work</h2>
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mb-8">Professional work</h2>
     <div class="grid grid-cols-1 desktop:grid-cols-2 gap-4 desktop:gap-7">
       {profileData.professionalProjects.map((project) => (
         <ProfessionalProjectCard
