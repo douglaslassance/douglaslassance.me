@@ -1,7 +1,6 @@
 <script lang="ts">
   const CONTACT_ENDPOINT = 'https://api.douglaslassance.me/contact';
 
-  let name = $state('');
   let email = $state('');
   let message = $state('');
   let honeypot = $state('');
@@ -17,12 +16,11 @@
       const response = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message, honeypot }),
+        body: JSON.stringify({ email, message, honeypot }),
       });
 
       if (response.ok) {
         status = 'success';
-        name = '';
         email = '';
         message = '';
       } else {
@@ -46,17 +44,6 @@
   </div>
 {:else}
   <form onsubmit={handleSubmit} class="rounded-lg border border-border bg-card shadow-sm p-4 desktop:p-6 flex flex-col gap-4">
-    <div class="flex flex-col gap-1.5">
-      <label for="contact-name" class="text-sm font-medium text-foreground/70">Name</label>
-      <input
-        id="contact-name"
-        type="text"
-        bind:value={name}
-        required
-        class="rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
-      />
-    </div>
-
     <div class="flex flex-col gap-1.5">
       <label for="contact-email" class="text-sm font-medium text-foreground/70">Email</label>
       <input
