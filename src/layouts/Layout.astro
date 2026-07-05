@@ -440,13 +440,17 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
         });
 
         localStorage.setItem('junji', junjiActive ? 'on' : 'off');
+        localStorage.setItem('junjiSetAt', String(Date.now()));
       }
 
       document.querySelectorAll('.junji-btn').forEach((btn) =>
         btn.addEventListener('click', toggleJunji)
       );
 
-      if (localStorage.getItem('junji') === 'on') {
+      const JUNJI_TTL_MS = 12 * 60 * 60 * 1000;
+      const junjiSetAt = Number(localStorage.getItem('junjiSetAt'));
+      const junjiStillValid = junjiSetAt && Date.now() - junjiSetAt <= JUNJI_TTL_MS;
+      if (localStorage.getItem('junji') === 'on' && junjiStillValid) {
         toggleJunji();
       }
     </script>
