@@ -2,6 +2,7 @@
   const CONTACT_ENDPOINT = 'https://api.douglaslassance.me/contact';
 
   let email = $state('');
+  let subject = $state('');
   let message = $state('');
   let honeypot = $state('');
   let status: 'idle' | 'sending' | 'success' | 'error' = $state('idle');
@@ -16,12 +17,13 @@
       const response = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, message, honeypot }),
+        body: JSON.stringify({ email, subject, message, honeypot }),
       });
 
       if (response.ok) {
         status = 'success';
         email = '';
+        subject = '';
         message = '';
       } else {
         status = 'error';
@@ -50,6 +52,17 @@
         id="contact-email"
         type="email"
         bind:value={email}
+        required
+        class="rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
+      />
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label for="contact-subject" class="text-sm font-medium text-foreground/70">Subject</label>
+      <input
+        id="contact-subject"
+        type="text"
+        bind:value={subject}
         required
         class="rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
       />
