@@ -1,5 +1,6 @@
 <script lang="ts">
   import Card from '$lib/components/ui/card/card.svelte';
+  import { Badge } from '$lib/components/ui/badge';
   import {
     FileText, Image, LayoutGrid, Tags, Plug, ShieldCheck, ListMusic,
     Map, MapPin, Columns2, Repeat2, AtSign, Send, Eye, GitPullRequest,
@@ -56,14 +57,14 @@
     </div>
   </Card>
   {#if pro}
-    <a
+    <Badge
       href="https://douglaslassance.gumroad.com/l/peel-pro"
       target="_blank"
       rel="noopener"
       aria-label="Pro feature, available with Peel Pro"
-      class="pro-badge absolute -top-2 -right-2 inline-flex items-center justify-center px-2.5 py-1 rounded-md text-xs font-bold tracking-wider text-white ring-1 ring-inset ring-white/20 hover:scale-105 transition-transform duration-200"
+      class="absolute -top-2 -right-2 font-bold tracking-wider hover:scale-105 transition-transform duration-200"
     >
       PRO
-    </a>
+    </Badge>
   {/if}
 </div>

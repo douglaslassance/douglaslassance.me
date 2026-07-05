@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Copy, Check } from '@lucide/svelte';
+  import { Button } from '$lib/components/ui/button';
 
   let { text }: { text: string } = $props();
   let copied = $state(false);
@@ -11,15 +12,16 @@
   }
 </script>
 
-<button
-  type="button"
+<Button
+  variant="ghost"
+  size="icon"
   onclick={copy}
   aria-label="Copy to clipboard"
-  class="inline-flex items-center justify-center w-8 h-8 rounded-md text-foreground/70 hover:text-foreground hover:bg-foreground/5 transition-colors"
+  class="text-muted-foreground"
 >
   {#if copied}
-    <Check size={15} strokeWidth={2} aria-hidden="true" />
+    <Check strokeWidth={2} aria-hidden="true" />
   {:else}
-    <Copy size={15} strokeWidth={2} aria-hidden="true" />
+    <Copy strokeWidth={2} aria-hidden="true" />
   {/if}
-</button>
+</Button>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { cn } from '$lib/utils.js';
+  import { Badge } from '$lib/components/ui/badge';
 
   type ProjectType = 'youtube' | 'instagram' | 'website' | 'github' | 'steam' | 'fab' | 'company' | 'homebrew';
 
@@ -51,10 +52,10 @@
         <div class="overflow-hidden min-w-0 mb-2">
           <h3 class="card-title whitespace-nowrap text-base font-semibold text-foreground/80">{title}</h3>
         </div>
-        <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium text-foreground/70 bg-muted">
+        <Badge variant="secondary">
           <div class="w-3 h-3 opacity-60 flex-shrink-0" style={iconMaskStyle}></div>
           {category}
-        </span>
+        </Badge>
         <hr class="border-border my-2" />
         <p class="text-sm text-muted-foreground">{description}</p>
       </div>
