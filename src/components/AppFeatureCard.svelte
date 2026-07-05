@@ -77,7 +77,7 @@
       target="_blank"
       rel="noopener"
       aria-label="Pro feature — available with Peel Pro"
-      class="pro-badge absolute -top-2 -right-2 inline-flex items-center justify-center px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider text-white ring-1 ring-inset ring-white/20 hover:scale-105 transition-transform duration-200"
+      class="pro-badge absolute -top-2 -right-2 inline-flex items-center justify-center px-2.5 py-1 rounded-md text-xs font-bold tracking-wider text-white ring-1 ring-inset ring-white/20 hover:scale-105 transition-transform duration-200"
     >
       PRO
     </a>
