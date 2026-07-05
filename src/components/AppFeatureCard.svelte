@@ -64,7 +64,7 @@
       aria-label="Pro feature, available with Peel Pro"
       class="absolute -top-2 -right-2 font-bold tracking-wider hover:scale-105 transition-transform duration-200"
     >
-      PRO
+      Pro
     </Badge>
   {/if}
 </div>
