@@ -16,7 +16,7 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    background-color: hsl(var(--foreground));
+    background-color: var(--foreground);
   `);
 </script>
 
