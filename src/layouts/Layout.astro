@@ -107,6 +107,25 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
         -webkit-mask-image: linear-gradient(to top, transparent 15%, black 45%);
                 mask-image: linear-gradient(to top, transparent 15%, black 45%);
       }
+
+      /* Pro badge is a deliberate exception to the monochrome theme: it pops
+         with the OS system accent color (falling back to blue). */
+      .pro-badge {
+        background-image: linear-gradient(
+          to bottom,
+          color-mix(in oklab, AccentColor 100%, white 12%),
+          color-mix(in oklab, AccentColor 100%, black 10%)
+        );
+        box-shadow: 0 10px 15px -3px color-mix(in oklab, AccentColor 30%, transparent),
+                    0 4px 6px -4px color-mix(in oklab, AccentColor 30%, transparent);
+      }
+      @supports not (background: AccentColor) {
+        .pro-badge {
+          background-image: linear-gradient(to bottom, hsl(217 91% 60%), hsl(217 91% 52%));
+          box-shadow: 0 10px 15px -3px hsl(217 91% 60% / 0.3),
+                      0 4px 6px -4px hsl(217 91% 60% / 0.3);
+        }
+      }
     </style>
   </head>
   <body class="min-h-screen bg-background text-foreground font-sans antialiased relative">
