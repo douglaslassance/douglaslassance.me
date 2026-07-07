@@ -3,7 +3,7 @@
   import {
     FileText, Image, LayoutGrid, Tags, Plug, ShieldCheck, ListMusic,
     Map, MapPin, Columns2, Repeat2, AtSign, Send, Eye, GitPullRequest,
-    RotateCw, Monitor, Calendar, Music, Activity, Disc, Sparkles
+    RotateCw, Monitor, Calendar, Music, Activity, Disc, Sparkles, Rss
   } from '@lucide/svelte';
 
   const icons = {
@@ -28,16 +28,19 @@
     music: Music,
     activity: Activity,
     disc: Disc,
-    sparkles: Sparkles
+    sparkles: Sparkles,
+    rss: Rss
   };
 
   type IconKey = keyof typeof icons;
 
-  let { icon, title, description, pro = false }: {
+  let { icon, title, description, pro = false, proUrl, appName }: {
     icon: IconKey;
     title: string;
     description: string;
     pro?: boolean;
+    proUrl?: string;
+    appName?: string;
   } = $props();
 
   const Icon = $derived(icons[icon]);
@@ -55,15 +58,22 @@
       <p class="text-sm text-muted-foreground leading-relaxed">{description}</p>
     </div>
   </Card>
-  {#if pro}
+  {#if pro && proUrl}
     <a
-      href="https://douglaslassance.gumroad.com/l/peel-pro"
+      href={proUrl}
       target="_blank"
       rel="noopener"
-      aria-label="Pro feature, available with Peel Pro"
+      aria-label={`Pro feature, available with ${appName} Pro`}
       class="pro-badge absolute -top-2 -right-2 inline-flex items-center justify-center rounded-md px-2.5 py-1 text-xs font-bold tracking-wider text-white ring-1 ring-inset ring-white/20 transition-transform duration-200 hover:scale-105"
     >
       Pro
     </a>
+  {:else if pro}
+    <span
+      aria-label={appName ? `Pro feature, available with ${appName} Pro` : 'Pro feature'}
+      class="pro-badge absolute -top-2 -right-2 inline-flex items-center justify-center rounded-md px-2.5 py-1 text-xs font-bold tracking-wider text-white ring-1 ring-inset ring-white/20"
+    >
+      Pro
+    </span>
   {/if}
 </div>

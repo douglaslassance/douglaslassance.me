@@ -45,7 +45,7 @@ export const profileData = {
     { title: "Trotter", category: "App", description: "Shape your next journey", url: "/trotter", image: "/trotter/icon.png", type: "website" },
     { title: "Ramble", category: "App", description: "Cross-post with ease", url: "/ramble", image: "/ramble/icon.png", type: "website" },
     { title: "Gitoptic", category: "App", description: "Review more than text", url: "/gitoptic", image: "/gitoptic/icon.png", type: "website" },
-    { title: "Rollpaper", category: "App", description: "Put your wallpaper to use", url: "/rollpaper", image: "/rollpaper/icon.png", type: "website" },
+    { title: "Rollpaper", category: "App", description: "Turn 90% of your screen into something useful", url: "/rollpaper", image: "/rollpaper/icon.png", type: "website" },
     { title: "Gifted", category: "App", description: "Automated VJing for your next party", url: "/gifted", image: "/gifted/icon.png", type: "website" },
     { title: "Playsthetic", category: "Game Studio", description: "Game development with attitude ", url: "https://playsthetic.com/", image: "https://v1.screenshot.11ty.dev/https%3A%2F%2Fplaysthetic.com%2F/opengraph/", type: "website" },
     { title: "Shaker", category: "Unreal Engine Plugin", description: "Shake anything", url: "https://www.unrealengine.com/marketplace/en-US/product/shaker", image: "https://media.fab.com/image_previews/gallery_images/c7f65c12-0b25-40eb-a365-86b0437751c2/121b8639-fb63-4948-9d67-1866c80fdff8.jpg", type: "fab" },

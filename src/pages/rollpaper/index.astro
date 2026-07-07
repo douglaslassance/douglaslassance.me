@@ -1,13 +1,13 @@
 ---
 import AppPage from '../../components/AppPage.astro';
 
-const description = "Rollpaper rotates your desktop wallpaper from a folder you choose, with controls in the menu bar. Set the cadence, pick which displays to cover, and stop staring at the same image every morning.";
+const description = "Rollpaper turns your wallpaper into a social feed viewer. Passively stay on top of what interests you, turning a completely static space into something connected to the rest of the world.";
 
 const features = [
-  { icon: 'image',     title: 'Wallpaper rotation', description: 'Point Rollpaper at a folder and it cycles through every image inside.' },
-  { icon: 'rotate-cw', title: 'Set the cadence',    description: 'Rotate every few minutes, hourly, or daily — whatever rhythm fits.' },
-  { icon: 'monitor',   title: 'Per display',        description: 'Different wallpaper on each connected screen, all rotating independently.' },
-  { icon: 'calendar',  title: 'Menu bar control',   description: 'Skip, pause, or jump to a specific image straight from the menu bar.' },
+  { icon: 'rss',      title: 'Your favorite feeds',            description: "Pulls images from the good guys. Mastodon users, Bluesky feeds, subreddits, it's all supported." },
+  { icon: 'calendar', title: 'Switch on schedule',              description: 'Rotate every few minutes, hourly, or daily, whatever rhythm fits your day.' },
+  { icon: 'sparkles', title: 'Upscale low-resolution content',  description: 'Images below your display resolution get upscaled automatically, so nothing looks soft or stretched.', pro: true },
+  { icon: 'eye',      title: "Filter content you don't like",   description: "Not everything will feel good as wallpaper, flag what you don't want to see again.", pro: true },
 ];
 ---
 
@@ -15,7 +15,7 @@ const features = [
   name="Rollpaper"
   description={description}
   iconSrc="/rollpaper/icon.png"
-  heroTagline="Put your wallpaper to use"
+  heroTagline="Turn 90% of your screen into something useful"
   features={features}
   brewCommand="brew install douglaslassance/tap/rollpaper"
   apiSlug="rollpaper"

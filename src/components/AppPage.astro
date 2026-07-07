@@ -21,6 +21,7 @@ interface Props {
   brewCommand: string;
   appStoreUrl?: string;
   apiSlug: string;
+  proUrl?: string;
 }
 
 const {
@@ -36,6 +37,7 @@ const {
   brewCommand,
   appStoreUrl,
   apiSlug,
+  proUrl,
 } = Astro.props;
 ---
 
@@ -81,7 +83,7 @@ const {
 
     <div class="grid grid-cols-1 desktop:grid-cols-2 gap-4 desktop:gap-6">
       {features.map((f) => (
-        <FeatureCard icon={f.icon as any} title={f.title} description={f.description} pro={f.pro} />
+        <FeatureCard icon={f.icon as any} title={f.title} description={f.description} pro={f.pro} proUrl={proUrl} appName={name} />
       ))}
     </div>
   </section>
