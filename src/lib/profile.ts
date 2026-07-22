@@ -20,7 +20,6 @@ export const profileData = {
     { name: "YouTube", icon: "youtube.svg", url: "https://youtube.com/@douglaslassance" },
     { name: "LinkedIn", icon: "linkedin.svg", url: "https://linkedin.com/in/douglaslassance" },
     { name: "SoundCloud", icon: "soundcloud.svg", url: "https://soundcloud.com/douglaslassance" },
-    { name: "Gumroad", icon: "gumroad.svg", url: "https://douglaslassance.gumroad.com" },
     { name: "Fab", icon: "fab.svg", url: "https://www.fab.com/sellers/Douglas%20Lassance" },
     { name: "Midjourney", icon: "midjourney.svg", url: "https://www.midjourney.com/@douglaslassance" },
     { name: "Spotify", icon: "spotify.svg", url: "https://open.spotify.com/user/asterokid" },
@@ -29,10 +28,7 @@ export const profileData = {
     { name: "Apple Music", icon: "apple-music.svg", url: "https://music.apple.com/profile/douglaslassance" },
     { name: "Ko-fi", icon: "ko-fi.svg", url: "https://ko-fi.com/douglaslassance" },
     { name: "Medium", icon: "medium.svg", url: "https://medium.com/@douglaslassance" },
-    { name: "Product Hunt", icon: "producthunt.svg", url: "https://www.producthunt.com/@douglaslassance" },
     { name: "Monkeytype", icon: "monkeytype.svg", url: "https://monkeytype.com/profile/douglaslassance" },
-    { name: "Itch.io", icon: "itch-io.svg", url: "https://douglaslassance.itch.io" },
-    { name: "Patreon", icon: "patreon.svg", url: "https://patreon.com/douglaslassance" },
   ],
   personalProjects: [
     { title: "Galactic Mail", category: "Animated Short", description: "Corporate rivalry meets interstellar delivery", url: "https://youtu.be/WacTwZljbKk", image: "https://i.ytimg.com/vi/WacTwZljbKk/mqdefault.jpg", type: "youtube" },
