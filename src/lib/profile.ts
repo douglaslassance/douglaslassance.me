@@ -26,9 +26,9 @@ export const profileData = {
     { name: "Steam", icon: "steam.svg", url: "https://steamcommunity.com/id/douglaslassance/" },
     { name: "Pinterest", icon: "pinterest.svg", url: "https://pinterest.com/douglaslassance" },
     { name: "Apple Music", icon: "apple-music.svg", url: "https://music.apple.com/profile/douglaslassance" },
-    { name: "Ko-fi", icon: "ko-fi.svg", url: "https://ko-fi.com/douglaslassance" },
     { name: "Medium", icon: "medium.svg", url: "https://medium.com/@douglaslassance" },
     { name: "Monkeytype", icon: "monkeytype.svg", url: "https://monkeytype.com/profile/douglaslassance" },
+    { name: "Ko-fi", icon: "ko-fi.svg", url: "https://ko-fi.com/douglaslassance" },
   ],
   personalProjects: [
     { title: "Galactic Mail", category: "Animated Short", description: "Corporate rivalry meets interstellar delivery", url: "https://youtu.be/WacTwZljbKk", image: "https://i.ytimg.com/vi/WacTwZljbKk/mqdefault.jpg", type: "youtube" },
