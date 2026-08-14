@@ -278,6 +278,8 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
           const yTo = gsap.quickTo(card, 'y', { duration: 0.4, ease: 'power3.out' });
 
           card.addEventListener('mousemove', (e) => {
+            // Hold the card still while a button is down so text stays selectable.
+            if (e.buttons) return;
             const r = card.getBoundingClientRect();
             xTo((e.clientX - r.left - r.width  / 2) * strength);
             yTo((e.clientY - r.top  - r.height / 2) * strength);
