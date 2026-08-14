@@ -5,13 +5,15 @@
       "name": "Astro Dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 4321
+      "port": 4321,
+      "autoPort": true
     },
     {
       "name": "Astro Preview",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "preview"],
-      "port": 4321
+      "port": 4321,
+      "autoPort": true
     }
   ]
 }
