@@ -1,7 +1,10 @@
 ---
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
 import BaseballCard from '../components/BaseballCard.svelte';
 import { profileData } from '../lib/profile';
+import favicon from '../../art/favicon.png';
+import avatarTiredImage from '../../art/avatar-tired.png';
 
 interface Props {
   title?: string;
@@ -9,6 +12,13 @@ interface Props {
 }
 
 const { title = profileData.name, description = profileData.bio } = Astro.props;
+
+// The bio card is a Svelte island, so it takes a plain src rather than <Picture>.
+const avatarWidth = 768;
+const [avatar, avatarTired] = await Promise.all([
+  getImage({ src: profileData.avatar, format: 'webp', width: avatarWidth }),
+  getImage({ src: avatarTiredImage, format: 'webp', width: avatarWidth }),
+]);
 ---
 
 <!doctype html>
@@ -18,7 +28,7 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href={favicon.src} />
     <script is:inline>
       const THEME_TTL_MS = 12 * 60 * 60 * 1000;
       const storedValue = localStorage.getItem('theme');
@@ -166,7 +176,8 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
                 <BaseballCard
                   name={profileData.name}
                   bio={profileData.bio}
-                  avatar={profileData.avatar}
+                  avatar={avatar.src}
+                  avatarTired={avatarTired.src}
                 />
               </a>
             </div>
@@ -207,7 +218,8 @@ const { title = profileData.name, description = profileData.bio } = Astro.props;
               <BaseballCard
                 name={profileData.name}
                 bio={profileData.bio}
-                avatar={profileData.avatar}
+                avatar={avatar.src}
+                avatarTired={avatarTired.src}
                 mobile={true}
               />
             </a>

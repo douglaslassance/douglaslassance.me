@@ -1,3 +1,14 @@
+import avatar from '../../art/avatar.png';
+import codeImage from '../../art/code.jpg';
+import greedyHandImage from '../../art/greedy-hand.png';
+import giftedIcon from '../../art/gifted/icon.png';
+import gitopticIcon from '../../art/gitoptic/icon.png';
+import mamecaseIcon from '../../art/mamecase/icon.png';
+import peelIcon from '../../art/peel/icon.png';
+import rambleIcon from '../../art/ramble/icon.png';
+import rollpaperIcon from '../../art/rollpaper/icon.png';
+import trotterIcon from '../../art/trotter/icon.png';
+
 export type ProjectType = 'youtube' | 'instagram' | 'website' | 'github' | 'steam' | 'fab' | 'company' | 'homebrew';
 
 export interface Project {
@@ -5,14 +16,15 @@ export interface Project {
   category: string;
   description: string;
   url: string;
-  image: string;
+  /** A local import gets optimized at build time; a string is an external URL. */
+  image: string | ImageMetadata;
   type: ProjectType;
 }
 
 export const profileData = {
   name: "Douglas Lassance",
   bio: "Raised in France, maturing in Los Angeles, I juxtapose brush strokes, connect vertices, drop keyframes, and chain instructions. Once in a while, others can enjoy the result.",
-  avatar: "/avatar.png",
+  avatar,
   online: [
     { name: "Bluesky", icon: "bluesky.svg", url: "https://bsky.app/profile/douglaslassance.bsky.social" },
     { name: "Mastodon", icon: "mastodon.svg", url: "https://mastodon.social/@douglaslassance" },
@@ -32,17 +44,17 @@ export const profileData = {
   ],
   personalProjects: [
     { title: "Galactic Mail", category: "Animated Short", description: "Corporate rivalry meets interstellar delivery", url: "https://youtu.be/WacTwZljbKk", image: "https://i.ytimg.com/vi/WacTwZljbKk/mqdefault.jpg", type: "youtube" },
-    { title: "Peel", category: "App", description: "Browse different", url: "/peel", image: "/peel/icon.png", type: "website" },
+    { title: "Peel", category: "App", description: "Browse different", url: "/peel", image: peelIcon, type: "website" },
     { title: "Kitsch", category: "SaaS", description: "Text to film", url: "https://kitsch.tv", image: "https://v1.screenshot.11ty.dev/https%3A%2F%2Fkitsch.tv/opengraph/", type: "website" },
     { title: "Curiomancer", category: "SaaS", description: "Let your taste guide you", url: "https://curiomancer.com", image: "https://v1.screenshot.11ty.dev/https%3A%2F%2Fcuriomancer.com/opengraph/", type: "website" },
-    { title: "Mamecase", category: "App", description: "Give MAME a face", url: "/mamecase", image: "/mamecase/icon.png", type: "website" },
-    { title: "Gitalong", category: "CLI", description: "Git without conflicts", url: "https://github.com/douglaslassance/gitalong", image: "/code.webp", type: "github" },
-    { title: "Greedy Hand", category: "Photo Series", description: "No need own when you can hold", url: "https://www.instagram.com/greedyhand", image: "/greedy-hand.png", type: "instagram" },
-    { title: "Trotter", category: "App", description: "Shape your next journey", url: "/trotter", image: "/trotter/icon.png", type: "website" },
-    { title: "Ramble", category: "App", description: "Cross-post with ease", url: "/ramble", image: "/ramble/icon.png", type: "website" },
-    { title: "Gitoptic", category: "App", description: "Review more than text", url: "/gitoptic", image: "/gitoptic/icon.png", type: "website" },
-    { title: "Rollpaper", category: "App", description: "Turn 90% of your screen into something useful", url: "/rollpaper", image: "/rollpaper/icon.png", type: "website" },
-    { title: "Gifted", category: "App", description: "Automated VJing for your next party", url: "/gifted", image: "/gifted/icon.png", type: "website" },
+    { title: "Mamecase", category: "App", description: "Give MAME a face", url: "/mamecase", image: mamecaseIcon, type: "website" },
+    { title: "Gitalong", category: "CLI", description: "Git without conflicts", url: "https://github.com/douglaslassance/gitalong", image: codeImage, type: "github" },
+    { title: "Greedy Hand", category: "Photo Series", description: "No need own when you can hold", url: "https://www.instagram.com/greedyhand", image: greedyHandImage, type: "instagram" },
+    { title: "Trotter", category: "App", description: "Shape your next journey", url: "/trotter", image: trotterIcon, type: "website" },
+    { title: "Ramble", category: "App", description: "Cross-post with ease", url: "/ramble", image: rambleIcon, type: "website" },
+    { title: "Gitoptic", category: "App", description: "Review more than text", url: "/gitoptic", image: gitopticIcon, type: "website" },
+    { title: "Rollpaper", category: "App", description: "Turn 90% of your screen into something useful", url: "/rollpaper", image: rollpaperIcon, type: "website" },
+    { title: "Gifted", category: "App", description: "Automated VJing for your next party", url: "/gifted", image: giftedIcon, type: "website" },
     { title: "Playsthetic", category: "Game Studio", description: "Game development with attitude ", url: "https://playsthetic.com/", image: "https://v1.screenshot.11ty.dev/https%3A%2F%2Fplaysthetic.com%2F/opengraph/", type: "website" },
     { title: "Shaker", category: "Unreal Engine Plugin", description: "Shake anything", url: "https://www.unrealengine.com/marketplace/en-US/product/shaker", image: "https://media.fab.com/image_previews/gallery_images/c7f65c12-0b25-40eb-a365-86b0437751c2/121b8639-fb63-4948-9d67-1866c80fdff8.jpg", type: "fab" },
     { title: "Sigg Jones", category: "Animated Short", description: "A story of brawl and bromance", url: "https://youtu.be/TE86DR8E0LI", image: "https://i.ytimg.com/vi/TE86DR8E0LI/mqdefault.jpg", type: "youtube" },
@@ -60,7 +72,7 @@ export const profileData = {
     { title: "Dead Rising 3", category: "Launch Trailer", description: "Previs Artist", url: "https://youtu.be/UFXfH-ruLXo?si=ZPNTSnoZE1h3Lt8w", image: "https://i.ytimg.com/vi/UFXfH-ruLXo/mqdefault.jpg", type: "youtube" },
     { title: "Arena of Valor", category: "Cinematic Trailer", description: "Previs Supervisor", url: "https://youtu.be/JM_UdSUW1ao?si=k_aggFSAIzbA36aX", image: "https://i.ytimg.com/vi/JM_UdSUW1ao/mqdefault.jpg", type: "youtube" },
     { title: "Halo Wars 2", category: "Game Cinematics", description: "Previs Supervisor", url: "https://youtu.be/uWk8FRDdvlY?si=8PXGmH7UpL41XnLU", image: "https://i.ytimg.com/vi/uWk8FRDdvlY/mqdefault.jpg", type: "youtube" },
-    { title: "cross3d", category: "Python library", description: "Developer", url: "https://github.com/blurstudio/cross3d", image: "/code.webp", type: "github" },
+    { title: "cross3d", category: "Python library", description: "Developer", url: "https://github.com/blurstudio/cross3d", image: codeImage, type: "github" },
     { title: "Elder Scrolls Online", category: "Cinematic Trailer", description: "Previs Artist", url: "https://youtu.be/195pyutqDA4?si=XsnEVdkvCr0GjXQC", image: "https://i.ytimg.com/vi/195pyutqDA4/mqdefault.jpg", type: "youtube" },
     { title: "Arkham Knight", category: "Cinematic Trailer", description: "Previs Artist", url: "https://youtu.be/6IE3fjbc_wY?si=342LXnV39PUeEA2g", image: "https://i.ytimg.com/vi/6IE3fjbc_wY/mqdefault.jpg", type: "youtube" },
     { title: "Arkham Origins", category: "Cinematic Trailer", description: "Previs Artist", url: "https://youtu.be/9pnK8akbd2M?si=TjEX9LvOmwx_5XQ2", image: "https://i.ytimg.com/vi/9pnK8akbd2M/mqdefault.jpg", type: "youtube" },

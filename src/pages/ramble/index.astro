@@ -1,5 +1,6 @@
 ---
 import AppPage from '../../components/AppPage.astro';
+import icon from '../../../art/ramble/icon.png';
 
 const description = "Ramble keeps your Mastodon and Bluesky accounts side-by-side. Posts that look like cross-postings of the same thought are matched into a single row, with placeholder cells when a thought is missing on one network so you can fill it in with a click.";
 
@@ -14,7 +15,7 @@ const features = [
 <AppPage
   name="Ramble"
   description={description}
-  iconSrc="/ramble/icon.png"
+  iconSrc={icon}
   heroTagline="Cross-post with ease"
   features={features}
   brewCommand="brew install douglaslassance/tap/ramble"

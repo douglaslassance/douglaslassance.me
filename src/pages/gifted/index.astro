@@ -1,5 +1,6 @@
 ---
 import AppPage from '../../components/AppPage.astro';
+import icon from '../../../art/gifted/icon.png';
 
 const description = "Gifted plays GIFs that react to live audio. Point it at a folder of loops, plug it into any audio input, and you have an endless music video that pulses with whatever is playing.";
 
@@ -14,7 +15,7 @@ const features = [
 <AppPage
   name="Gifted"
   description={description}
-  iconSrc="/gifted/icon.png"
+  iconSrc={icon}
   heroTagline="Automated VJing for your next party"
   features={features}
   brewCommand="brew install douglaslassance/tap/gifted"

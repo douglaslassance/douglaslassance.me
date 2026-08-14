@@ -12,7 +12,7 @@ type Feature = { icon: string; title: string; description: string; pro?: boolean
 interface Props {
   name: string;
   description: string;
-  iconSrc: string;
+  iconSrc: ImageMetadata;
   iconAlt?: string;
   screenshotLight?: ImageMetadata;
   screenshotDark?: ImageMetadata;
@@ -46,7 +46,15 @@ const {
   <section class="flex justify-center pt-8 desktop:pt-0">
     <div class="project-card flex items-center gap-8">
       <div class="macos-icon shrink-0">
-        <img src={iconSrc} alt={iconAlt} class="w-[120px] h-[120px] desktop:w-[160px] desktop:h-[160px] block" />
+        <Picture
+          src={iconSrc}
+          alt={iconAlt}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          widths={[120, 160, 240, 320]}
+          sizes="(min-width: 1024px) 160px, 120px"
+          class="w-[120px] h-[120px] desktop:w-[160px] desktop:h-[160px] block"
+        />
       </div>
       <div class="flex flex-col items-start">
         <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight">{name}</h1>

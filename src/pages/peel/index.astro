@@ -1,5 +1,6 @@
 ---
 import AppPage from '../../components/AppPage.astro';
+import icon from '../../../art/peel/icon.png';
 import screenshotLight from '../../../art/peel/screenshot-light.png';
 import screenshotDark from '../../../art/peel/screenshot-dark.png';
 
@@ -16,7 +17,7 @@ const features = [
 <AppPage
   name="Peel"
   description={description}
-  iconSrc="/peel/icon.png"
+  iconSrc={icon}
   screenshotLight={screenshotLight}
   screenshotDark={screenshotDark}
   screenshotAlt="Peel app showing tags sidebar and a masonry grid of media"

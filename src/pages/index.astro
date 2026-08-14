@@ -1,9 +1,24 @@
 ---
+import { getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import PresenceCard from '../components/PresenceCard.svelte';
 import ProfessionalProjectCard from '../components/ProfessionalProjectCard.svelte';
 import ProjectCard from '../components/ProjectCard.svelte';
-import { profileData } from '../lib/profile';
+import { profileData, type Project } from '../lib/profile';
+
+// Cards are Svelte islands, so they take a plain src. Local imports get
+// optimized here; external URLs pass through untouched.
+const CARD_WIDTH = 400;
+async function withResolvedImage(project: Project) {
+  if (typeof project.image === 'string') return { ...project, image: project.image };
+  const optimized = await getImage({ src: project.image, format: 'webp', width: CARD_WIDTH });
+  return { ...project, image: optimized.src };
+}
+
+const [personalProjects, professionalProjects] = await Promise.all([
+  Promise.all(profileData.personalProjects.map(withResolvedImage)),
+  Promise.all(profileData.professionalProjects.map(withResolvedImage)),
+]);
 ---
 
 <Layout>
@@ -23,7 +38,7 @@ import { profileData } from '../lib/profile';
   <section class="mb-16">
     <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mb-8">Personal projects</h2>
     <div class="grid grid-cols-1 desktop:grid-cols-2 gap-4 desktop:gap-6">
-      {profileData.personalProjects.map((project) => (
+      {personalProjects.map((project) => (
         <ProjectCard
           title={project.title}
           category={project.category}
@@ -39,7 +54,7 @@ import { profileData } from '../lib/profile';
   <section class="mb-16">
     <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mb-8">Professional work</h2>
     <div class="grid grid-cols-1 desktop:grid-cols-2 gap-4 desktop:gap-7">
-      {profileData.professionalProjects.map((project) => (
+      {professionalProjects.map((project) => (
         <ProfessionalProjectCard
           title={project.title}
           category={project.category}

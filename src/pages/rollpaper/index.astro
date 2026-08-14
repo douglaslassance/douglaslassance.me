@@ -1,5 +1,6 @@
 ---
 import AppPage from '../../components/AppPage.astro';
+import icon from '../../../art/rollpaper/icon.png';
 
 const description = "Rollpaper turns your wallpaper into a social feed viewer. Passively stay on top of what interests you, turning a completely static space into something connected to the rest of the world.";
 
@@ -14,7 +15,7 @@ const features = [
 <AppPage
   name="Rollpaper"
   description={description}
-  iconSrc="/rollpaper/icon.png"
+  iconSrc={icon}
   heroTagline="Turn 90% of your screen into something useful"
   features={features}
   brewCommand="brew install douglaslassance/tap/rollpaper"

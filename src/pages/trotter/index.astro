@@ -1,5 +1,6 @@
 ---
 import AppPage from '../../components/AppPage.astro';
+import icon from '../../../art/trotter/icon.png';
 
 const description = "Trotter helps you plan and map your next trip on your Mac. Drop pins, sketch routes, and keep everything in open formats so your itinerary stays portable.";
 
@@ -14,7 +15,7 @@ const features = [
 <AppPage
   name="Trotter"
   description={description}
-  iconSrc="/trotter/icon.png"
+  iconSrc={icon}
   heroTagline="Shape your next journey"
   features={features}
   brewCommand="brew install douglaslassance/tap/trotter"

@@ -1,5 +1,6 @@
 ---
 import AppPage from '../../components/AppPage.astro';
+import icon from '../../../art/gitoptic/icon.png';
 
 const description = "Gitoptic gives you visual diffs for the binary files Git keeps invisible: images, audio, video, and 3D scenes. Open a local clone — and if its origin is GitHub, see open pull requests alongside the commit history.";
 
@@ -14,7 +15,7 @@ const features = [
 <AppPage
   name="Gitoptic"
   description={description}
-  iconSrc="/gitoptic/icon.png"
+  iconSrc={icon}
   heroTagline="Review more than text"
   features={features}
   brewCommand="brew install douglaslassance/tap/gitoptic"
