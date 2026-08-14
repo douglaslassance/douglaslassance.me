@@ -1,5 +1,7 @@
 ---
 import AppPage from '../../components/AppPage.astro';
+import screenshotLight from '../../assets/peel/screenshot-light.png';
+import screenshotDark from '../../assets/peel/screenshot-dark.png';
 
 const description = "Peel transforms how you browse your files. By handling tags like folders, you retain all their flexibility while not compromising on discoverability.";
 
@@ -15,8 +17,8 @@ const features = [
   name="Peel"
   description={description}
   iconSrc="/peel/icon.png"
-  screenshotLight="/peel/screenshot-light.png"
-  screenshotDark="/peel/screenshot-dark.png"
+  screenshotLight={screenshotLight}
+  screenshotDark={screenshotDark}
   screenshotAlt="Peel app showing tags sidebar and a masonry grid of media"
   heroTagline="Browse different"
   features={features}

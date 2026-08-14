@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Card from '$lib/components/ui/card/card.svelte';
 import FeatureCard from './AppFeatureCard.svelte';
@@ -13,8 +14,8 @@ interface Props {
   description: string;
   iconSrc: string;
   iconAlt?: string;
-  screenshotLight?: string;
-  screenshotDark?: string;
+  screenshotLight?: ImageMetadata;
+  screenshotDark?: ImageMetadata;
   screenshotAlt?: string;
   heroTagline: string;
   features: Feature[];
@@ -31,7 +32,7 @@ const {
   iconAlt = `${Astro.props.name} app icon`,
   screenshotLight,
   screenshotDark,
-  screenshotAlt,
+  screenshotAlt = `${Astro.props.name} screenshot`,
   heroTagline,
   features,
   brewCommand,
@@ -64,8 +65,26 @@ const {
     <div class="project-card mb-6">
       {screenshotLight && (
         <div class="screenshot-flowout relative z-10 -mb-[180px] desktop:-mb-[260px]">
-          <img src={screenshotLight} alt={screenshotAlt} class="block w-full h-auto dark:hidden" />
-          <img src={screenshotDark} alt={screenshotAlt} class="hidden w-full h-auto dark:block" />
+          <Picture
+            src={screenshotLight}
+            alt={screenshotAlt}
+            formats={['avif', 'webp']}
+            fallbackFormat="webp"
+            widths={[400, 800, 1200, 1600]}
+            sizes="(min-width: 1024px) 800px, 100vw"
+            pictureAttributes={{ class: 'block dark:hidden' }}
+            class="w-full h-auto"
+          />
+          {screenshotDark && <Picture
+            src={screenshotDark}
+            alt={screenshotAlt}
+            formats={['avif', 'webp']}
+            fallbackFormat="webp"
+            widths={[400, 800, 1200, 1600]}
+            sizes="(min-width: 1024px) 800px, 100vw"
+            pictureAttributes={{ class: 'hidden dark:block' }}
+            class="w-full h-auto"
+          />}
         </div>
       )}
       <Card>
