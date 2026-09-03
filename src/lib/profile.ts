@@ -5,6 +5,7 @@ import giftedIcon from '../../art/gifted/icon.png';
 import gitopticIcon from '../../art/gitoptic/icon.png';
 import mamecaseIcon from '../../art/mamecase/icon.png';
 import peelIcon from '../../art/peel/icon.png';
+import playaIcon from '../../art/playa/icon.png';
 import rambleIcon from '../../art/ramble/icon.png';
 import rollpaperIcon from '../../art/rollpaper/icon.png';
 import trotterIcon from '../../art/trotter/icon.png';
@@ -45,6 +46,7 @@ export const profileData = {
   personalProjects: [
     { title: "Galactic Mail", category: "Animated Short", description: "Corporate rivalry meets interstellar delivery", url: "https://youtu.be/WacTwZljbKk", image: "https://i.ytimg.com/vi/WacTwZljbKk/mqdefault.jpg", type: "youtube" },
     { title: "Peel", category: "App", description: "Browse different", url: "/peel", image: peelIcon, type: "website" },
+    { title: "Playa", category: "App", description: "Enjoy your local music", url: "/playa", image: playaIcon, type: "website" },
     { title: "Kitsch", category: "SaaS", description: "Text to film", url: "https://kitsch.tv", image: "https://v1.screenshot.11ty.dev/https%3A%2F%2Fkitsch.tv/opengraph/", type: "website" },
     { title: "Curiomancer", category: "SaaS", description: "Let your taste guide you", url: "https://curiomancer.com", image: "https://v1.screenshot.11ty.dev/https%3A%2F%2Fcuriomancer.com/opengraph/", type: "website" },
     { title: "Mamecase", category: "App", description: "Give MAME a face", url: "/mamecase", image: mamecaseIcon, type: "website" },

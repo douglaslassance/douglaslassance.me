@@ -3,7 +3,8 @@
   import {
     FileText, Image, LayoutGrid, Tags, Plug, ShieldCheck, ListMusic,
     Map, MapPin, Columns2, Repeat2, AtSign, Send, Eye, GitPullRequest,
-    RotateCw, Monitor, Calendar, Music, Activity, Disc, Sparkles, Rss
+    RotateCw, Monitor, Calendar, Music, Activity, Disc, Sparkles, Rss,
+    Search, CloudDownload
   } from '@lucide/svelte';
 
   const icons = {
@@ -29,7 +30,9 @@
     activity: Activity,
     disc: Disc,
     sparkles: Sparkles,
-    rss: Rss
+    rss: Rss,
+    search: Search,
+    'cloud-download': CloudDownload
   };
 
   type IconKey = keyof typeof icons;
