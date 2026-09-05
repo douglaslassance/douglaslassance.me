@@ -1,6 +1,8 @@
 ---
 import AppPage from '../../components/AppPage.astro';
 import icon from '../../../art/playa/icon.png';
+import screenshotLight from '../../../art/playa/screenshot-light.png';
+import screenshotDark from '../../../art/playa/screenshot-dark.png';
 
 const description = "Playa presents the music you already own. Point it at a folder and enjoy organized files with covers and fast search.";
 
@@ -16,6 +18,9 @@ const features = [
   name="Playa"
   description={description}
   iconSrc={icon}
+  screenshotLight={screenshotLight}
+  screenshotDark={screenshotDark}
+  screenshotAlt="Playa app showing the playlists sidebar, a grid of album covers, and the playback bar"
   heroTagline="Enjoy your local music"
   features={features}
   brewCommand="brew install douglaslassance/tap/playa"
