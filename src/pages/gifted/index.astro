@@ -2,7 +2,7 @@
 import AppPage from '../../components/AppPage.astro';
 import icon from '../../../art/gifted/icon.png';
 
-const description = "Gifted plays GIFs that react to live audio. Point it at a folder of loops, plug it into any audio input, and you have an endless music video that pulses with whatever is playing.";
+const description = "Gifted is a macOS app that plays GIFs reacting to live audio. Point it at a folder of loops, plug it into any audio input, and you have an endless music video that pulses with whatever is playing.";
 
 const features = [
   { icon: 'music',     title: 'Live audio reactive', description: 'Captures any input device on your Mac and drives playback in real time.' },
@@ -20,6 +20,8 @@ const features = [
   features={features}
   brewCommand="brew install douglaslassance/tap/gifted"
   apiSlug="gifted"
+  socialTitle="Gifted, audio-reactive GIF visuals for macOS"
+  appCategory="MultimediaApplication"
 >
   <svg slot="hero-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
 </AppPage>

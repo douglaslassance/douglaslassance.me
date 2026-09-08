@@ -1,5 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Card from '$lib/components/ui/card/card.svelte';
 import FeatureCard from './AppFeatureCard.svelte';
@@ -23,6 +23,10 @@ interface Props {
   appStoreUrl?: string;
   apiSlug: string;
   proUrl?: string;
+  /** Descriptive title for search engines and social cards. The browser tab keeps the app name. */
+  socialTitle: string;
+  /** schema.org applicationCategory, e.g. MultimediaApplication. */
+  appCategory: string;
 }
 
 const {
@@ -39,10 +43,48 @@ const {
   appStoreUrl,
   apiSlug,
   proUrl,
+  socialTitle,
+  appCategory,
 } = Astro.props;
+
+// Prefer the screenshot for sharing cards; fall back to the icon for apps without one.
+// Screenshots go out as JPEG to keep the card light; icons stay PNG for transparency.
+const socialImage = await getImage(
+  screenshotLight
+    ? { src: screenshotLight, format: 'jpeg', quality: 80, width: 1200 }
+    : { src: iconSrc, format: 'png', width: 512 },
+);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name,
+  description,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+  applicationCategory: appCategory,
+  operatingSystem: 'macOS',
+  image: new URL(socialImage.src, Astro.site).href,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Douglas Lassance',
+    url: Astro.site?.href,
+  },
+  ...(appStoreUrl ? { downloadUrl: appStoreUrl } : {}),
+};
 ---
 
-<Layout title={name} description={description}>
+<Layout
+  title={name}
+  description={description}
+  socialTitle={socialTitle}
+  socialImage={socialImage.src}
+  structuredData={structuredData}
+>
   <section class="flex justify-center pt-8 desktop:pt-0">
     <div class="project-card flex items-center gap-8">
       <div class="macos-icon shrink-0">

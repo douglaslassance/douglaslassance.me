@@ -9,9 +9,24 @@ import avatarTiredImage from '../../art/avatar-tired.png';
 interface Props {
   title?: string;
   description?: string;
+  /** Descriptive title for search engines and social cards. The browser tab keeps `title`. */
+  socialTitle?: string;
+  /** Absolute or site-relative URL of the sharing image. */
+  socialImage?: string;
+  /** JSON-LD injected as-is, for pages that describe a specific entity. */
+  structuredData?: unknown;
 }
 
-const { title = profileData.name, description = profileData.bio } = Astro.props;
+const {
+  title = profileData.name,
+  description = profileData.bio,
+  socialTitle = title,
+  socialImage,
+  structuredData,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const socialImageUrl = socialImage ? new URL(socialImage, Astro.site).href : undefined;
 
 // The bio card is a Svelte island, so it takes a plain src rather than <Picture>.
 const avatarWidth = 768;
@@ -28,7 +43,27 @@ const [avatar, avatarTired] = await Promise.all([
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href={favicon.src} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={profileData.name} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={socialTitle} />
+    <meta property="og:description" content={description} />
+    {socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+    <meta name="twitter:card" content={socialImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={socialTitle} />
+    <meta name="twitter:description" content={description} />
+    {socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
     <script is:inline>
       const THEME_TTL_MS = 12 * 60 * 60 * 1000;
       const storedValue = localStorage.getItem('theme');

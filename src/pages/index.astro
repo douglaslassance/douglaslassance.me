@@ -19,9 +19,21 @@ const [personalProjects, professionalProjects] = await Promise.all([
   Promise.all(profileData.personalProjects.map(withResolvedImage)),
   Promise.all(profileData.professionalProjects.map(withResolvedImage)),
 ]);
+
+const avatarImage = await getImage({ src: profileData.avatar, format: 'png', width: 512 });
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profileData.name,
+  description: profileData.bio,
+  url: Astro.site?.href,
+  image: new URL(avatarImage.src, Astro.site).href,
+  sameAs: profileData.online.map((link) => link.url),
+};
 ---
 
-<Layout>
+<Layout socialImage={avatarImage.src} structuredData={structuredData}>
   <section class="mb-16">
     <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mb-8">Online presence</h2>
     <div class="grid grid-cols-2 desktop:grid-cols-4 gap-4 desktop:gap-7">
