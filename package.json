@@ -14,8 +14,8 @@
     "url": "git+https://github.com/douglaslassance/douglaslassance.me.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Douglas Lassance",
+  "private": true,
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/douglaslassance/douglaslassance.me/issues"
