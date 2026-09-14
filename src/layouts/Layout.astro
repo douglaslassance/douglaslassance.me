@@ -74,6 +74,23 @@ const [avatar, avatarTired] = await Promise.all([
         : window.matchMedia('(prefers-color-scheme: dark)').matches;
       document.documentElement.classList.toggle('dark', isDark);
     </script>
+    <script>
+      import posthog from 'posthog-js';
+
+      // Cookieless: no cookies and no browser storage, with visitors counted from
+      // a hash PostHog computes server side. That hash is what keeps the count
+      // stable across the full page loads this site does. It has to be switched on
+      // in Project settings under Web analytics too, or the events are discarded.
+      // The project key is a public client key meant to ship in the HTML, so it is
+      // written here rather than read from an env var the Pages build would lack.
+      posthog.init('phc_AVRzm7WHLa45SEwsc9vTat34HY7KiNf5GLdofiC9a3Er', {
+        api_host: 'https://us.i.posthog.com',
+        cookieless_mode: 'always',
+        autocapture: false,
+        capture_exceptions: false,
+        disable_session_recording: true,
+      });
+    </script>
     <style is:global>
       @keyframes card-in {
         from { opacity: 0; translate: 0 12px; }
