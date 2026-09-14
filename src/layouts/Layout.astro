@@ -102,7 +102,7 @@ const [avatar, avatarTired] = await Promise.all([
 
       // posthog-js does not attach itself to window when imported as a module,
       // which leaves no way to inspect it from the console. Expose it in dev.
-      if (import.meta.env.DEV) window.posthog = posthog;
+      if (import.meta.env.DEV) Object.assign(window, { posthog });
     </script>
     <style is:global>
       @keyframes card-in {
