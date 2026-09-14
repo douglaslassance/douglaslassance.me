@@ -15,7 +15,7 @@ export default defineConfig({
     sitemap(),
     sentry({
       org: 'douglaslassance',
-      project: 'douglaslassance',
+      project: 'douglaslassance-me',
       // Only needed at build time, to upload source maps. Absent locally, which
       // makes the plugin skip the upload and carry on.
       authToken: process.env.SENTRY_AUTH_TOKEN,
