@@ -23,9 +23,11 @@ export default defineConfig({
       // instrument and no server SDK to ship.
       enabled: { client: true, server: false },
       sourcemaps: {
-        // Send the maps to Sentry, then drop them from the build so the
-        // unminified source is not downloadable from the live site.
-        filesToDeleteAfterUpload: ['./dist/**/*.js.map'],
+        // Send the maps to Sentry, then drop every one of them from the build so
+        // the unminified source is not downloadable from the live site. Matching
+        // all of *.map rather than *.js.map matters: Astro removes its server
+        // intermediates but leaves their .mjs.map files sitting in dist.
+        filesToDeleteAfterUpload: ['./dist/**/*.map'],
       },
       // Strip the parts of the SDK this site does not use.
       bundleSizeOptimizations: {
