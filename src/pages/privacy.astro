@@ -47,6 +47,9 @@ const description = "Privacy policy for all of Douglas Lassance's apps.";
     <p class="leading-7 mt-6">
       This website is the one exception, and a deliberately narrow one. It counts page visits using PostHog, set up without cookies and without any browser storage, so nothing is kept on your device and there is no consent banner to dismiss. Visits are counted from a hash computed on PostHog's servers. No clicks, no form contents, and no session recordings are collected. It tells me which pages people read, not who reads them.
     </p>
+    <p class="leading-7 mt-6">
+      The site also reports its own JavaScript errors to Sentry, so that a page which breaks in your browser gets noticed rather than sitting broken. A report carries the error, the file and line it came from, and the page and browser it happened on. It is configured to leave out cookies, request headers, query strings, form contents, and the values of any variables in scope when the error occurred.
+    </p>
 
     <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Children</h2>
     <p class="leading-7 mt-6">
