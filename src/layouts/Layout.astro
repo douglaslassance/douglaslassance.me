@@ -83,13 +83,26 @@ const [avatar, avatarTired] = await Promise.all([
       // in Project settings under Web analytics too, or the events are discarded.
       // The project key is a public client key meant to ship in the HTML, so it is
       // written here rather than read from an env var the Pages build would lack.
+      // Everything optional is turned off explicitly rather than left to default.
+      // The project's own settings are pushed to the client at runtime, and they
+      // had heatmaps and dead click capture switched on, which this site does not
+      // want and its privacy page says it does not do.
       posthog.init('phc_AVRzm7WHLa45SEwsc9vTat34HY7KiNf5GLdofiC9a3Er', {
         api_host: 'https://us.i.posthog.com',
         cookieless_mode: 'always',
+        capture_pageview: true,
+        capture_pageleave: true,
         autocapture: false,
         capture_exceptions: false,
         disable_session_recording: true,
+        enable_heatmaps: false,
+        capture_dead_clicks: false,
+        capture_performance: false,
       });
+
+      // posthog-js does not attach itself to window when imported as a module,
+      // which leaves no way to inspect it from the console. Expose it in dev.
+      if (import.meta.env.DEV) window.posthog = posthog;
     </script>
     <style is:global>
       @keyframes card-in {
