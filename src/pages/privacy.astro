@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const lastUpdated = "September 14, 2026";
-const description = "Privacy policy for all of Douglas Lassance's apps.";
+const lastUpdated = "September 15, 2026";
+const description = "Privacy policy for Douglas Lassance's apps, website, and license sales.";
 ---
 
 <Layout title="Privacy Policy" description={description}>
@@ -11,49 +11,110 @@ const description = "Privacy policy for all of Douglas Lassance's apps.";
     <p class="text-muted-foreground text-sm mt-2">Last updated {lastUpdated}.</p>
 
     <p class="mt-8 leading-relaxed">
-      None of my apps collect personal data, use analytics or tracking, or transmit your files or library data. This page describes what data my apps handle and how. It applies to every app I publish unless its store listing says otherwise. This website is covered separately, under analytics and tracking.
+      This policy covers three things. The apps I publish, this website, and what happens when you buy a license or send me a message. Each has its own section below, because they behave very differently. The short version is that the apps collect nothing, the website counts page visits and reports its own errors, and buying a license means I hold your email address for as long as the license is valid.
     </p>
 
-    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Data stored on your device</h2>
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">The apps</h2>
     <p class="leading-7 mt-6">
+      None of my apps collect personal data, use analytics or tracking, or transmit your files or library data. This applies to every app I publish unless its store listing says otherwise.
+    </p>
+
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Data stored on your device</h3>
+    <p class="leading-7">
       Application preferences, security-scoped bookmarks, cached thumbnails, and any per-app data (such as tags, favorites, recents, or playlists) are stored locally on your Mac. They are not transmitted to me or any third party. Uninstalling an app removes its data from your device.
     </p>
 
-    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Network connections</h2>
-    <p class="leading-7 mt-6">
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Network connections</h3>
+    <p class="leading-7">
       My apps connect to the network only for the following purposes:
     </p>
     <ul class="my-6 ml-6 list-disc [&>li]:mt-2 leading-7">
       <li>
-        <strong>Software updates</strong> (non–Mac App Store builds). Apps periodically check for new versions by fetching an update feed from <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">storage.douglaslassance.me</code>. The request includes only standard HTTP metadata such as your IP address and macOS version, and is not used for tracking.
+        <strong>Software updates</strong> (non-Mac App Store builds). Apps periodically check for new versions by fetching an update feed from <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">storage.douglaslassance.me</code>. The request includes only standard HTTP metadata such as your IP address and macOS version, and is not used for tracking.
       </li>
       <li>
         <strong>Public assets and metadata.</strong> Some apps fetch publicly available assets from community sources (for example, thumbnails, cover art, or reference data) to enrich what you see. These requests include only standard HTTP metadata.
+      </li>
+      <li>
+        <strong>License checks</strong> (directly sold apps). An app holding a license key may check that the key is still valid against <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">api.douglaslassance.me</code>. The check sends the key, not your email address.
       </li>
       <li>
         <strong>In-App Purchases</strong> (Mac App Store builds). Purchases and receipt validation are handled by Apple's StoreKit framework. I never see your payment information. Apple's <a href="https://www.apple.com/legal/privacy/" class="font-medium underline underline-offset-4">privacy policy</a> applies.
       </li>
     </ul>
 
-    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Files and folders</h2>
-    <p class="leading-7 mt-6">
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Files and folders</h3>
+    <p class="leading-7">
       My apps only read files and folders that you explicitly grant access to via the macOS sandbox. Previews, waveforms, suggestions, and similar features are computed entirely on your Mac. No file content is uploaded.
     </p>
 
-    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Analytics and tracking</h2>
-    <p class="leading-7 mt-6">
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Analytics and crash reporting</h3>
+    <p class="leading-7">
       My apps do not use analytics, telemetry, crash reporting, or advertising SDKs. No usage data is collected.
     </p>
+
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">This website</h2>
     <p class="leading-7 mt-6">
-      This website is the one exception, and a deliberately narrow one. It counts page visits using PostHog, set up without cookies and without any browser storage, so nothing is kept on your device and there is no consent banner to dismiss. Visits are counted from a hash computed on PostHog's servers. No clicks, no form contents, and no session recordings are collected. It tells me which pages people read, not who reads them.
+      The website is the one place I collect anything at all, and it is a deliberately narrow exception.
+    </p>
+
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Cookies</h3>
+    <p class="leading-7">
+      None. Nothing is written to cookies or to any browser storage, which is why there is no consent banner to dismiss.
+    </p>
+
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Page visits</h3>
+    <p class="leading-7">
+      Visits are counted using PostHog, running in its cookieless mode. Rather than tagging your browser, PostHog counts a visit from a hash it computes on its own servers. Autocapture, heatmaps, dead-click capture, session recording, and performance capture are all switched off, so what is recorded is that a page was opened and when, not what you did on it. No clicks and no form contents are collected.
     </p>
     <p class="leading-7 mt-6">
-      The site also reports its own JavaScript errors to Sentry, so that a page which breaks in your browser gets noticed rather than sitting broken. A report carries the error, the file and line it came from, and the page and browser it happened on. It is configured to leave out cookies, request headers, query strings, form contents, and the values of any variables in scope when the error occurred.
+      Reaching PostHog at all means your IP address and browser user agent travel with the request, as they do with any web server. They feed that hash and an approximate location. They are not used to build a profile of you, and nothing here connects a visit to a person.
+    </p>
+
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Errors</h3>
+    <p class="leading-7">
+      The site reports its own JavaScript errors to Sentry, so that a page which breaks in your browser gets noticed rather than sitting broken. A report carries the error, the file and line it came from, and the address of the page and the browser it happened on. It does not carry cookies, form contents, or the values of any variables in scope when the error occurred.
+    </p>
+
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Hosting</h3>
+    <p class="leading-7">
+      The site is served by GitHub Pages, and the API behind the contact form and license keys runs on Cloudflare. Both see the standard request metadata any web server sees, including your IP address, as part of delivering a response.
+    </p>
+
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Buying a license and getting in touch</h2>
+
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">License purchases</h3>
+    <p class="leading-7">
+      Some apps are sold directly rather than through the Mac App Store. Payment is handled by Stripe, and I never see your card details. When a purchase completes, Stripe passes my licensing API your email address, and that address is stored alongside the license key, the Stripe identifiers for the purchase, when it happened, and whether the key is still valid. The key is then emailed to you.
+    </p>
+    <p class="leading-7 mt-6">
+      That record is what makes the key keep working, so it is kept for as long as the license is valid rather than deleted on a schedule. If you refund a purchase, the record stays but the key is marked revoked. Stripe's own <a href="https://stripe.com/privacy" class="font-medium underline underline-offset-4">privacy policy</a> covers the payment itself.
+    </p>
+
+    <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">The contact form</h3>
+    <p class="leading-7">
+      The <a href="/contact" class="font-medium underline underline-offset-4">contact form</a> asks for your email address, a subject, and a message. They are sent to me as an email, with your address set as the reply-to so that I can answer you. Nothing from the form is written to a database or kept on a server; it lives in my mailbox like any other email, for as long as it is useful to keep.
+    </p>
+
+    <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Who else handles this data</h2>
+    <p class="leading-7 mt-6">
+      Nothing described here is sold, and nothing is shared beyond the services that make it work:
+    </p>
+    <ul class="my-6 ml-6 list-disc [&>li]:mt-2 leading-7">
+      <li><strong>Stripe</strong>, for payments on directly sold apps.</li>
+      <li><strong>Cloudflare</strong>, which runs the API, stores license records, and delivers the emails it sends.</li>
+      <li><strong>GitHub</strong>, which serves this website.</li>
+      <li><strong>PostHog</strong>, which counts page visits.</li>
+      <li><strong>Sentry</strong>, which receives the site's error reports.</li>
+      <li><strong>Apple</strong>, for Mac App Store purchases and receipt validation.</li>
+    </ul>
+    <p class="leading-7">
+      Page visit and error data are kept under the retention settings on my PostHog and Sentry accounts and are not exported anywhere else.
     </p>
 
     <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Children</h2>
     <p class="leading-7 mt-6">
-      My apps are not directed at children under 13 and do not knowingly collect data from them.
+      My apps and this website are not directed at children under 13 and do not knowingly collect data from them.
     </p>
 
     <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Changes to this policy</h2>
@@ -63,7 +124,7 @@ const description = "Privacy policy for all of Douglas Lassance's apps.";
 
     <h2 class="scroll-m-20 border-b border-border pb-2 text-xl font-semibold mt-12 mb-4">Contact me</h2>
     <p class="leading-7 mt-6">
-      If you have any questions or concerns regarding this policy or your personal information, you may contact me using <a href="/contact" class="font-medium underline underline-offset-4">this form</a>.
+      If you have any questions or concerns regarding this policy or your personal information, including a request to delete a license record, you may contact me using <a href="/contact" class="font-medium underline underline-offset-4">this form</a>.
     </p>
   </article>
 </Layout>
