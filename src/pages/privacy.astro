@@ -68,12 +68,12 @@ const description = "Privacy policy for Douglas Lassance's apps, website, and li
       Visits are counted using PostHog, running in its cookieless mode. Rather than tagging your browser, PostHog counts a visit from a hash it computes on its own servers. Autocapture, heatmaps, dead-click capture, session recording, and performance capture are all switched off, so what is recorded is that a page was opened and when, not what you did on it. No clicks and no form contents are collected.
     </p>
     <p class="leading-7 mt-6">
-      Reaching PostHog at all means your IP address and browser user agent travel with the request, as they do with any web server. They feed that hash and an approximate location. They are not used to build a profile of you, and nothing here connects a visit to a person.
+      Your IP address and browser user agent reach PostHog with the request, as they do with any web server, and are what that hash is computed from. PostHog then strips the IP before anything is stored, so it is not kept on the event and no location is derived from it. Nothing here connects a visit to a person.
     </p>
 
     <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Errors</h3>
     <p class="leading-7">
-      The site reports its own JavaScript errors to Sentry, so that a page which breaks in your browser gets noticed rather than sitting broken. A report carries the error, the file and line it came from, and the address of the page and the browser it happened on. It does not carry cookies, form contents, or the values of any variables in scope when the error occurred.
+      The site reports its own JavaScript errors to Sentry, so that a page which breaks in your browser gets noticed rather than sitting broken. A report carries the error, the file and line it came from, and the address of the page and the browser it happened on. The address has its query string stripped first, and that stripping extends to the trail of pages recorded alongside the error. It does not carry cookies, request headers, form contents, or the values of any variables in scope when the error occurred.
     </p>
 
     <h3 class="scroll-m-20 text-lg font-semibold mt-8 mb-3">Hosting</h3>
