@@ -47,11 +47,13 @@ const {
   appCategory,
 } = Astro.props;
 
-// Prefer the screenshot for sharing cards; fall back to the icon for apps without one.
+// Prefer the dark screenshot for sharing cards, since it sits better against the
+// chrome most feeds wrap a card in. Fall back to the icon for apps without one.
 // Screenshots go out as JPEG to keep the card light; icons stay PNG for transparency.
+const socialScreenshot = screenshotDark ?? screenshotLight;
 const socialImage = await getImage(
-  screenshotLight
-    ? { src: screenshotLight, format: 'jpeg', quality: 80, width: 1200 }
+  socialScreenshot
+    ? { src: socialScreenshot, format: 'jpeg', quality: 80, width: 1200 }
     : { src: iconSrc, format: 'png', width: 512 },
 );
 
